@@ -1,0 +1,14 @@
+{
+  "name": "meaning-first-spanish",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local-first Spanish conjugation and vocabulary recall trainer.",
+  "scripts": {
+    "build:data": "node scripts/build-conjugations.mjs",
+    "test": "node scripts/validate-data.mjs && node scripts/smoke-test.mjs"
+  },
+  "devDependencies": {
+    "@jirimracek/conjugate-esp": "2.3.6",
+    "jsdom": "26.1.0"
+  }
+}

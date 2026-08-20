@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fffaf0" />
+    <meta
+      name="description"
+      content="A meaning-first Spanish conjugation and vocabulary recall trainer."
+    />
+    <title>De Memoria — Spanish Recall</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css?v=1" />
+    <script src="data/conjugations.js?v=1" defer></script>
+    <script src="app.js?v=1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to practice</a>
+
+    <header class="site-header">
+      <button class="brand" type="button" data-screen="conjugation" aria-label="De Memoria home">
+        <span class="brand-mark" aria-hidden="true">de</span>
+        <span><strong>De Memoria</strong><small>Spanish recall</small></span>
+      </button>
+      <nav class="main-nav" aria-label="Training areas">
+        <button class="is-active" type="button" data-screen="conjugation">Conjugations</button>
+        <button type="button" data-screen="vocabulary">Vocabulary</button>
+        <button type="button" data-screen="data">Data & backup</button>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="screen is-active" data-screen-panel="conjugation">
+        <div class="page-shell">
+          <div id="conjugation-home">
+            <header class="page-intro">
+              <p class="eyebrow">Meaning first. Recall only.</p>
+              <h1>Build the form from the idea.</h1>
+              <p>
+                See a verb, a meaning cue, and a person. Type the Spanish form without choices.
+                Misses return sooner; strong answers wait longer.
+              </p>
+            </header>
+
+            <div class="stat-strip" aria-label="Conjugation progress">
+              <div><strong id="verb-answer-total">0</strong><span>answers</span></div>
+              <div><strong id="verb-accuracy">—</strong><span>accuracy</span></div>
+              <div><strong id="solid-form-total">0</strong><span>forms at 3+</span></div>
+              <div><strong>3,500</strong><span>total forms</span></div>
+            </div>
+
+            <div class="setup-layout">
+              <section class="panel setup-panel" aria-labelledby="setup-title">
+                <div class="panel-heading">
+                  <div><p class="eyebrow">Choose the field</p><h2 id="setup-title">Start a recall session</h2></div>
+                  <span class="verified-data">100 audited verbs</span>
+                </div>
+
+                <fieldset class="control-group">
+                  <legend>Verb set</legend>
+                  <div class="segmented" id="verb-count-options">
+                    <button class="is-selected" type="button" data-verb-count="20">Core 20</button>
+                    <button type="button" data-verb-count="50">Top 50</button>
+                    <button type="button" data-verb-count="100">All 100</button>
+                  </div>
+                </fieldset>
+
+                <fieldset class="control-group">
+                  <div class="legend-row"><legend>Meaning cues</legend><button class="text-button" type="button" data-action="toggle-all-tenses">Select all</button></div>
+                  <div class="choice-grid tense-choice-grid" id="tense-options"></div>
+                </fieldset>
+
+                <fieldset class="control-group">
+                  <div class="legend-row"><legend>People</legend><button class="text-button" type="button" data-action="toggle-all-persons">Select all</button></div>
+                  <div class="choice-grid person-choice-grid" id="person-options"></div>
+                </fieldset>
+
+                <fieldset class="control-group">
+                  <legend>Session length</legend>
+                  <div class="segmented" id="session-length-options">
+                    <button type="button" data-session-length="10">10</button>
+                    <button class="is-selected" type="button" data-session-length="20">20</button>
+                    <button type="button" data-session-length="50">50</button>
+                  </div>
+                </fieldset>
+
+                <p class="form-message" id="conjugation-setup-message" role="alert" hidden></p>
+                <button class="button button-primary button-full" type="button" data-action="start-conjugation">
+                  Start recall <span aria-hidden="true">→</span>
+                </button>
+              </section>
+
+              <aside class="panel cue-guide" aria-labelledby="cue-guide-title">
+                <p class="eyebrow">Your seven anchors</p>
+                <h2 id="cue-guide-title">Think in meanings</h2>
+                <div id="cue-guide"></div>
+                <p class="guide-note">
+                  These are retrieval cues, not complete definitions of when each Spanish tense is used.
+                </p>
+              </aside>
+            </div>
+          </div>
+
+          <section class="trainer" id="conjugation-trainer" hidden aria-labelledby="conjugation-question-title">
+            <div class="trainer-topbar">
+              <button class="icon-text-button" type="button" data-action="exit-conjugation">← End session</button>
+              <div class="session-progress">
+                <span id="conjugation-progress-text">1 of 20</span>
+                <div role="progressbar" id="conjugation-progress" aria-valuemin="0" aria-valuemax="20" aria-valuenow="1"><span></span></div>
+              </div>
+              <strong id="conjugation-score">0 right</strong>
+            </div>
+
+            <article class="recall-card">
+              <div class="prompt-kicker"><span id="conjugation-cue">would</span><span id="conjugation-person">él</span></div>
+              <p class="verb-meaning" id="conjugation-meaning">to have</p>
+              <h1 id="conjugation-question-title">tener</h1>
+              <p class="prompt-instruction">Type the complete Spanish form.</p>
+
+              <form class="answer-form" id="conjugation-answer-form">
+                <label class="visually-hidden" for="conjugation-answer">Spanish conjugation</label>
+                <input id="conjugation-answer" name="answer" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" required />
+                <div class="accent-row" aria-label="Insert a Spanish character">
+                  <button type="button" data-accent="á">á</button><button type="button" data-accent="é">é</button>
+                  <button type="button" data-accent="í">í</button><button type="button" data-accent="ó">ó</button>
+                  <button type="button" data-accent="ú">ú</button><button type="button" data-accent="ü">ü</button>
+                  <button type="button" data-accent="ñ">ñ</button>
+                </div>
+                <button class="button button-primary button-full" type="submit">Check answer</button>
+              </form>
+
+              <div class="feedback" id="conjugation-feedback" hidden></div>
+              <button class="button button-primary button-full" id="conjugation-next" type="button" data-action="next-conjugation" hidden>Next prompt →</button>
+            </article>
+          </section>
+
+          <section class="session-results" id="conjugation-results" hidden>
+            <span class="result-mark" aria-hidden="true">✓</span>
+            <p class="eyebrow">Session complete</p>
+            <h1 id="conjugation-result-title">Good work.</h1>
+            <p id="conjugation-result-score"></p>
+            <div class="button-row">
+              <button class="button button-primary" type="button" data-action="repeat-conjugation">Practice again</button>
+              <button class="button button-secondary" type="button" data-action="conjugation-home">Change settings</button>
+            </div>
+            <div class="review-list" id="conjugation-review"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen" data-screen-panel="vocabulary" hidden>
+        <div class="page-shell">
+          <div id="vocabulary-home">
+            <header class="page-intro compact-intro">
+              <p class="eyebrow">Your own word bank</p>
+              <h1>Know it both ways.</h1>
+              <p>A word moves to completed after 20 consecutive correct recalls in each direction.</p>
+            </header>
+
+            <div class="stat-strip three-stats" aria-label="Vocabulary progress">
+              <div><strong id="vocab-word-total">0</strong><span>words</span></div>
+              <div><strong id="vocab-mastered-total">0</strong><span>completed</span></div>
+              <div><strong id="vocab-answer-total">0</strong><span>answers</span></div>
+            </div>
+
+            <div class="vocab-layout">
+              <aside class="panel deck-sidebar">
+                <div class="panel-heading"><div><p class="eyebrow">Collections</p><h2>Vocabulary decks</h2></div></div>
+                <form id="create-deck-form" class="compact-form">
+                  <label for="new-deck-name">New deck name</label>
+                  <div><input id="new-deck-name" name="name" type="text" maxlength="60" placeholder="e.g. Chapter 3" required /><button class="button button-primary" type="submit">Create</button></div>
+                </form>
+                <div class="deck-list" id="deck-list"></div>
+              </aside>
+
+              <section class="panel deck-workspace" id="deck-workspace" hidden>
+                <div class="deck-workspace-header">
+                  <div><p class="eyebrow">Selected deck</p><h2 id="selected-deck-name"></h2><p id="selected-deck-summary"></p></div>
+                  <div class="button-row compact-buttons">
+                    <button class="button button-primary" type="button" data-action="start-vocabulary">Practice active words</button>
+                    <button class="button button-secondary" type="button" data-action="export-deck">Export</button>
+                  </div>
+                </div>
+
+                <details class="import-box" open>
+                  <summary>Add words</summary>
+                  <form id="import-vocab-form">
+                    <label for="vocab-import">Paste one pair per line: <strong>Spanish [tab] English</strong>. Separate accepted alternatives with semicolons.</label>
+                    <textarea id="vocab-import" name="pairs" rows="7" placeholder="la meta&#9;goal; objective&#10;lograr&#9;to achieve; to accomplish" required></textarea>
+                    <div class="import-actions"><p id="vocab-import-message" role="status"></p><button class="button button-primary" type="submit">Add to deck</button></div>
+                  </form>
+                </details>
+
+                <div class="word-toolbar">
+                  <div class="segmented small-segmented" id="word-filter-options">
+                    <button class="is-selected" type="button" data-word-filter="active">Active</button>
+                    <button type="button" data-word-filter="completed">Completed</button>
+                    <button type="button" data-word-filter="all">All</button>
+                  </div>
+                  <input id="word-search" type="search" placeholder="Search this deck" aria-label="Search this deck" />
+                </div>
+                <div class="word-list" id="word-list"></div>
+              </section>
+
+              <section class="panel empty-deck-workspace" id="empty-deck-workspace">
+                <span aria-hidden="true">↗</span><h2>Create a deck to begin.</h2>
+                <p>Then paste vocabulary directly from a spreadsheet or Quizlet-style list.</p>
+              </section>
+            </div>
+          </div>
+
+          <section class="trainer" id="vocabulary-trainer" hidden aria-labelledby="vocabulary-question-title">
+            <div class="trainer-topbar">
+              <button class="icon-text-button" type="button" data-action="exit-vocabulary">← End practice</button>
+              <div class="vocab-session-status"><span id="vocabulary-deck-label"></span><strong id="vocabulary-session-score">0 / 0</strong></div>
+            </div>
+            <article class="recall-card vocab-recall-card">
+              <div class="direction-label" id="vocabulary-direction">English → Spanish</div>
+              <h1 id="vocabulary-question-title">to achieve</h1>
+              <p class="prompt-instruction">Type the translation.</p>
+              <form class="answer-form" id="vocabulary-answer-form">
+                <label class="visually-hidden" for="vocabulary-answer">Translation</label>
+                <input id="vocabulary-answer" name="answer" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" required />
+                <div class="accent-row" aria-label="Insert a Spanish character">
+                  <button type="button" data-vocab-accent="á">á</button><button type="button" data-vocab-accent="é">é</button>
+                  <button type="button" data-vocab-accent="í">í</button><button type="button" data-vocab-accent="ó">ó</button>
+                  <button type="button" data-vocab-accent="ú">ú</button><button type="button" data-vocab-accent="ü">ü</button>
+                  <button type="button" data-vocab-accent="ñ">ñ</button>
+                </div>
+                <button class="button button-primary button-full" type="submit">Check answer</button>
+              </form>
+              <div class="feedback" id="vocabulary-feedback" hidden></div>
+              <button class="button button-primary button-full" id="vocabulary-next" type="button" data-action="next-vocabulary" hidden>Next word →</button>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen" data-screen-panel="data" hidden>
+        <div class="page-shell narrow-page">
+          <header class="page-intro compact-intro">
+            <p class="eyebrow">Local by design</p>
+            <h1>Your data stays here.</h1>
+            <p>Progress and vocabulary are saved in this browser. Export a backup before clearing browser data or changing devices.</p>
+          </header>
+          <section class="panel data-panel">
+            <div><h2>Backup everything</h2><p>Includes conjugation history, vocabulary decks, and every directional streak.</p></div>
+            <div class="button-row">
+              <button class="button button-primary" type="button" data-action="export-all">Download backup</button>
+              <label class="button button-secondary file-button">Import backup<input id="backup-import" type="file" accept="application/json,.json" /></label>
+            </div>
+            <p class="form-message" id="backup-message" role="status"></p>
+          </section>
+          <section class="panel data-panel data-note">
+            <div><h2>Conjugation source</h2><p id="conjugation-source-note"></p></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Meaning-first Spanish practice. No account, analytics, or server storage.</p>
+    </footer>
+  </body>
+</html>
