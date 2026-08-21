@@ -6,7 +6,7 @@ window.SPANISH_CONJUGATIONS = {
     "orthography": "RAE 2010",
     "source": "@jirimracek/conjugate-esp 2.3.6",
     "sourceUrl": "https://github.com/jirimracek/conjugate-esp",
-    "generated": "2026-08-20"
+    "generated": "2026-08-21"
   },
   "persons": [
     {
@@ -5765,6 +5765,5706 @@ window.SPANISH_CONJUGATIONS = {
           "había usado",
           "habíamos usado",
           "habían usado"
+        ]
+      }
+    },
+    {
+      "id": "matar",
+      "infinitive": "matar",
+      "meaning": "to kill",
+      "rank": 101,
+      "forms": {
+        "now": [
+          "mato",
+          "matas",
+          "mata",
+          "matamos",
+          "matan"
+        ],
+        "past_event": [
+          "maté",
+          "mataste",
+          "mató",
+          "matamos",
+          "mataron"
+        ],
+        "background": [
+          "mataba",
+          "matabas",
+          "mataba",
+          "matábamos",
+          "mataban"
+        ],
+        "would": [
+          "mataría",
+          "matarías",
+          "mataría",
+          "mataríamos",
+          "matarían"
+        ],
+        "hope": [
+          "mate",
+          "mates",
+          "mate",
+          "matemos",
+          "maten"
+        ],
+        "has_happened": [
+          "he matado",
+          "has matado",
+          "ha matado",
+          "hemos matado",
+          "han matado"
+        ],
+        "had_happened": [
+          "había matado",
+          "habías matado",
+          "había matado",
+          "habíamos matado",
+          "habían matado"
+        ]
+      }
+    },
+    {
+      "id": "valer",
+      "infinitive": "valer",
+      "meaning": "to be worth / be valid",
+      "rank": 102,
+      "forms": {
+        "now": [
+          "valgo",
+          "vales",
+          "vale",
+          "valemos",
+          "valen"
+        ],
+        "past_event": [
+          "valí",
+          "valiste",
+          "valió",
+          "valimos",
+          "valieron"
+        ],
+        "background": [
+          "valía",
+          "valías",
+          "valía",
+          "valíamos",
+          "valían"
+        ],
+        "would": [
+          "valdría",
+          "valdrías",
+          "valdría",
+          "valdríamos",
+          "valdrían"
+        ],
+        "hope": [
+          "valga",
+          "valgas",
+          "valga",
+          "valgamos",
+          "valgan"
+        ],
+        "has_happened": [
+          "he valido",
+          "has valido",
+          "ha valido",
+          "hemos valido",
+          "han valido"
+        ],
+        "had_happened": [
+          "había valido",
+          "habías valido",
+          "había valido",
+          "habíamos valido",
+          "habían valido"
+        ]
+      }
+    },
+    {
+      "id": "olvidar",
+      "infinitive": "olvidar",
+      "meaning": "to forget",
+      "rank": 103,
+      "forms": {
+        "now": [
+          "olvido",
+          "olvidas",
+          "olvida",
+          "olvidamos",
+          "olvidan"
+        ],
+        "past_event": [
+          "olvidé",
+          "olvidaste",
+          "olvidó",
+          "olvidamos",
+          "olvidaron"
+        ],
+        "background": [
+          "olvidaba",
+          "olvidabas",
+          "olvidaba",
+          "olvidábamos",
+          "olvidaban"
+        ],
+        "would": [
+          "olvidaría",
+          "olvidarías",
+          "olvidaría",
+          "olvidaríamos",
+          "olvidarían"
+        ],
+        "hope": [
+          "olvide",
+          "olvides",
+          "olvide",
+          "olvidemos",
+          "olviden"
+        ],
+        "has_happened": [
+          "he olvidado",
+          "has olvidado",
+          "ha olvidado",
+          "hemos olvidado",
+          "han olvidado"
+        ],
+        "had_happened": [
+          "había olvidado",
+          "habías olvidado",
+          "había olvidado",
+          "habíamos olvidado",
+          "habían olvidado"
+        ]
+      }
+    },
+    {
+      "id": "enviar",
+      "infinitive": "enviar",
+      "meaning": "to send",
+      "rank": 104,
+      "forms": {
+        "now": [
+          "envío",
+          "envías",
+          "envía",
+          "enviamos",
+          "envían"
+        ],
+        "past_event": [
+          "envié",
+          "enviaste",
+          "envió",
+          "enviamos",
+          "enviaron"
+        ],
+        "background": [
+          "enviaba",
+          "enviabas",
+          "enviaba",
+          "enviábamos",
+          "enviaban"
+        ],
+        "would": [
+          "enviaría",
+          "enviarías",
+          "enviaría",
+          "enviaríamos",
+          "enviarían"
+        ],
+        "hope": [
+          "envíe",
+          "envíes",
+          "envíe",
+          "enviemos",
+          "envíen"
+        ],
+        "has_happened": [
+          "he enviado",
+          "has enviado",
+          "ha enviado",
+          "hemos enviado",
+          "han enviado"
+        ],
+        "had_happened": [
+          "había enviado",
+          "habías enviado",
+          "había enviado",
+          "habíamos enviado",
+          "habían enviado"
+        ]
+      }
+    },
+    {
+      "id": "acercar",
+      "infinitive": "acercar",
+      "meaning": "to bring closer / approach",
+      "rank": 105,
+      "forms": {
+        "now": [
+          "acerco",
+          "acercas",
+          "acerca",
+          "acercamos",
+          "acercan"
+        ],
+        "past_event": [
+          "acerqué",
+          "acercaste",
+          "acercó",
+          "acercamos",
+          "acercaron"
+        ],
+        "background": [
+          "acercaba",
+          "acercabas",
+          "acercaba",
+          "acercábamos",
+          "acercaban"
+        ],
+        "would": [
+          "acercaría",
+          "acercarías",
+          "acercaría",
+          "acercaríamos",
+          "acercarían"
+        ],
+        "hope": [
+          "acerque",
+          "acerques",
+          "acerque",
+          "acerquemos",
+          "acerquen"
+        ],
+        "has_happened": [
+          "he acercado",
+          "has acercado",
+          "ha acercado",
+          "hemos acercado",
+          "han acercado"
+        ],
+        "had_happened": [
+          "había acercado",
+          "habías acercado",
+          "había acercado",
+          "habíamos acercado",
+          "habían acercado"
+        ]
+      }
+    },
+    {
+      "id": "mover",
+      "infinitive": "mover",
+      "meaning": "to move",
+      "rank": 106,
+      "forms": {
+        "now": [
+          "muevo",
+          "mueves",
+          "mueve",
+          "movemos",
+          "mueven"
+        ],
+        "past_event": [
+          "moví",
+          "moviste",
+          "movió",
+          "movimos",
+          "movieron"
+        ],
+        "background": [
+          "movía",
+          "movías",
+          "movía",
+          "movíamos",
+          "movían"
+        ],
+        "would": [
+          "movería",
+          "moverías",
+          "movería",
+          "moveríamos",
+          "moverían"
+        ],
+        "hope": [
+          "mueva",
+          "muevas",
+          "mueva",
+          "movamos",
+          "muevan"
+        ],
+        "has_happened": [
+          "he movido",
+          "has movido",
+          "ha movido",
+          "hemos movido",
+          "han movido"
+        ],
+        "had_happened": [
+          "había movido",
+          "habías movido",
+          "había movido",
+          "habíamos movido",
+          "habían movido"
+        ]
+      }
+    },
+    {
+      "id": "comprar",
+      "infinitive": "comprar",
+      "meaning": "to buy",
+      "rank": 107,
+      "forms": {
+        "now": [
+          "compro",
+          "compras",
+          "compra",
+          "compramos",
+          "compran"
+        ],
+        "past_event": [
+          "compré",
+          "compraste",
+          "compró",
+          "compramos",
+          "compraron"
+        ],
+        "background": [
+          "compraba",
+          "comprabas",
+          "compraba",
+          "comprábamos",
+          "compraban"
+        ],
+        "would": [
+          "compraría",
+          "comprarías",
+          "compraría",
+          "compraríamos",
+          "comprarían"
+        ],
+        "hope": [
+          "compre",
+          "compres",
+          "compre",
+          "compremos",
+          "compren"
+        ],
+        "has_happened": [
+          "he comprado",
+          "has comprado",
+          "ha comprado",
+          "hemos comprado",
+          "han comprado"
+        ],
+        "had_happened": [
+          "había comprado",
+          "habías comprado",
+          "había comprado",
+          "habíamos comprado",
+          "habían comprado"
+        ]
+      }
+    },
+    {
+      "id": "regresar",
+      "infinitive": "regresar",
+      "meaning": "to return",
+      "rank": 108,
+      "forms": {
+        "now": [
+          "regreso",
+          "regresas",
+          "regresa",
+          "regresamos",
+          "regresan"
+        ],
+        "past_event": [
+          "regresé",
+          "regresaste",
+          "regresó",
+          "regresamos",
+          "regresaron"
+        ],
+        "background": [
+          "regresaba",
+          "regresabas",
+          "regresaba",
+          "regresábamos",
+          "regresaban"
+        ],
+        "would": [
+          "regresaría",
+          "regresarías",
+          "regresaría",
+          "regresaríamos",
+          "regresarían"
+        ],
+        "hope": [
+          "regrese",
+          "regreses",
+          "regrese",
+          "regresemos",
+          "regresen"
+        ],
+        "has_happened": [
+          "he regresado",
+          "has regresado",
+          "ha regresado",
+          "hemos regresado",
+          "han regresado"
+        ],
+        "had_happened": [
+          "había regresado",
+          "habías regresado",
+          "había regresado",
+          "habíamos regresado",
+          "habían regresado"
+        ]
+      }
+    },
+    {
+      "id": "echar",
+      "infinitive": "echar",
+      "meaning": "to throw / put / send away",
+      "rank": 109,
+      "forms": {
+        "now": [
+          "echo",
+          "echas",
+          "echa",
+          "echamos",
+          "echan"
+        ],
+        "past_event": [
+          "eché",
+          "echaste",
+          "echó",
+          "echamos",
+          "echaron"
+        ],
+        "background": [
+          "echaba",
+          "echabas",
+          "echaba",
+          "echábamos",
+          "echaban"
+        ],
+        "would": [
+          "echaría",
+          "echarías",
+          "echaría",
+          "echaríamos",
+          "echarían"
+        ],
+        "hope": [
+          "eche",
+          "eches",
+          "eche",
+          "echemos",
+          "echen"
+        ],
+        "has_happened": [
+          "he echado",
+          "has echado",
+          "ha echado",
+          "hemos echado",
+          "han echado"
+        ],
+        "had_happened": [
+          "había echado",
+          "habías echado",
+          "había echado",
+          "habíamos echado",
+          "habían echado"
+        ]
+      }
+    },
+    {
+      "id": "meter",
+      "infinitive": "meter",
+      "meaning": "to put in",
+      "rank": 110,
+      "forms": {
+        "now": [
+          "meto",
+          "metes",
+          "mete",
+          "metemos",
+          "meten"
+        ],
+        "past_event": [
+          "metí",
+          "metiste",
+          "metió",
+          "metimos",
+          "metieron"
+        ],
+        "background": [
+          "metía",
+          "metías",
+          "metía",
+          "metíamos",
+          "metían"
+        ],
+        "would": [
+          "metería",
+          "meterías",
+          "metería",
+          "meteríamos",
+          "meterían"
+        ],
+        "hope": [
+          "meta",
+          "metas",
+          "meta",
+          "metamos",
+          "metan"
+        ],
+        "has_happened": [
+          "he metido",
+          "has metido",
+          "ha metido",
+          "hemos metido",
+          "han metido"
+        ],
+        "had_happened": [
+          "había metido",
+          "habías metido",
+          "había metido",
+          "habíamos metido",
+          "habían metido"
+        ]
+      }
+    },
+    {
+      "id": "detener",
+      "infinitive": "detener",
+      "meaning": "to stop / detain",
+      "rank": 111,
+      "forms": {
+        "now": [
+          "detengo",
+          "detienes",
+          "detiene",
+          "detenemos",
+          "detienen"
+        ],
+        "past_event": [
+          "detuve",
+          "detuviste",
+          "detuvo",
+          "detuvimos",
+          "detuvieron"
+        ],
+        "background": [
+          "detenía",
+          "detenías",
+          "detenía",
+          "deteníamos",
+          "detenían"
+        ],
+        "would": [
+          "detendría",
+          "detendrías",
+          "detendría",
+          "detendríamos",
+          "detendrían"
+        ],
+        "hope": [
+          "detenga",
+          "detengas",
+          "detenga",
+          "detengamos",
+          "detengan"
+        ],
+        "has_happened": [
+          "he detenido",
+          "has detenido",
+          "ha detenido",
+          "hemos detenido",
+          "han detenido"
+        ],
+        "had_happened": [
+          "había detenido",
+          "habías detenido",
+          "había detenido",
+          "habíamos detenido",
+          "habían detenido"
+        ]
+      }
+    },
+    {
+      "id": "funcionar",
+      "infinitive": "funcionar",
+      "meaning": "to work / function",
+      "rank": 112,
+      "forms": {
+        "now": [
+          "funciono",
+          "funcionas",
+          "funciona",
+          "funcionamos",
+          "funcionan"
+        ],
+        "past_event": [
+          "funcioné",
+          "funcionaste",
+          "funcionó",
+          "funcionamos",
+          "funcionaron"
+        ],
+        "background": [
+          "funcionaba",
+          "funcionabas",
+          "funcionaba",
+          "funcionábamos",
+          "funcionaban"
+        ],
+        "would": [
+          "funcionaría",
+          "funcionarías",
+          "funcionaría",
+          "funcionaríamos",
+          "funcionarían"
+        ],
+        "hope": [
+          "funcione",
+          "funciones",
+          "funcione",
+          "funcionemos",
+          "funcionen"
+        ],
+        "has_happened": [
+          "he funcionado",
+          "has funcionado",
+          "ha funcionado",
+          "hemos funcionado",
+          "han funcionado"
+        ],
+        "had_happened": [
+          "había funcionado",
+          "habías funcionado",
+          "había funcionado",
+          "habíamos funcionado",
+          "habían funcionado"
+        ]
+      }
+    },
+    {
+      "id": "mostrar",
+      "infinitive": "mostrar",
+      "meaning": "to show",
+      "rank": 113,
+      "forms": {
+        "now": [
+          "muestro",
+          "muestras",
+          "muestra",
+          "mostramos",
+          "muestran"
+        ],
+        "past_event": [
+          "mostré",
+          "mostraste",
+          "mostró",
+          "mostramos",
+          "mostraron"
+        ],
+        "background": [
+          "mostraba",
+          "mostrabas",
+          "mostraba",
+          "mostrábamos",
+          "mostraban"
+        ],
+        "would": [
+          "mostraría",
+          "mostrarías",
+          "mostraría",
+          "mostraríamos",
+          "mostrarían"
+        ],
+        "hope": [
+          "muestre",
+          "muestres",
+          "muestre",
+          "mostremos",
+          "muestren"
+        ],
+        "has_happened": [
+          "he mostrado",
+          "has mostrado",
+          "ha mostrado",
+          "hemos mostrado",
+          "han mostrado"
+        ],
+        "had_happened": [
+          "había mostrado",
+          "habías mostrado",
+          "había mostrado",
+          "habíamos mostrado",
+          "habían mostrado"
+        ]
+      }
+    },
+    {
+      "id": "subir",
+      "infinitive": "subir",
+      "meaning": "to go up / upload",
+      "rank": 114,
+      "forms": {
+        "now": [
+          "subo",
+          "subes",
+          "sube",
+          "subimos",
+          "suben"
+        ],
+        "past_event": [
+          "subí",
+          "subiste",
+          "subió",
+          "subimos",
+          "subieron"
+        ],
+        "background": [
+          "subía",
+          "subías",
+          "subía",
+          "subíamos",
+          "subían"
+        ],
+        "would": [
+          "subiría",
+          "subirías",
+          "subiría",
+          "subiríamos",
+          "subirían"
+        ],
+        "hope": [
+          "suba",
+          "subas",
+          "suba",
+          "subamos",
+          "suban"
+        ],
+        "has_happened": [
+          "he subido",
+          "has subido",
+          "ha subido",
+          "hemos subido",
+          "han subido"
+        ],
+        "had_happened": [
+          "había subido",
+          "habías subido",
+          "había subido",
+          "habíamos subido",
+          "habían subido"
+        ]
+      }
+    },
+    {
+      "id": "sentar",
+      "infinitive": "sentar",
+      "meaning": "to seat",
+      "rank": 115,
+      "forms": {
+        "now": [
+          "siento",
+          "sientas",
+          "sienta",
+          "sentamos",
+          "sientan"
+        ],
+        "past_event": [
+          "senté",
+          "sentaste",
+          "sentó",
+          "sentamos",
+          "sentaron"
+        ],
+        "background": [
+          "sentaba",
+          "sentabas",
+          "sentaba",
+          "sentábamos",
+          "sentaban"
+        ],
+        "would": [
+          "sentaría",
+          "sentarías",
+          "sentaría",
+          "sentaríamos",
+          "sentarían"
+        ],
+        "hope": [
+          "siente",
+          "sientes",
+          "siente",
+          "sentemos",
+          "sienten"
+        ],
+        "has_happened": [
+          "he sentado",
+          "has sentado",
+          "ha sentado",
+          "hemos sentado",
+          "han sentado"
+        ],
+        "had_happened": [
+          "había sentado",
+          "habías sentado",
+          "había sentado",
+          "habíamos sentado",
+          "habían sentado"
+        ]
+      }
+    },
+    {
+      "id": "salvar",
+      "infinitive": "salvar",
+      "meaning": "to save",
+      "rank": 116,
+      "forms": {
+        "now": [
+          "salvo",
+          "salvas",
+          "salva",
+          "salvamos",
+          "salvan"
+        ],
+        "past_event": [
+          "salvé",
+          "salvaste",
+          "salvó",
+          "salvamos",
+          "salvaron"
+        ],
+        "background": [
+          "salvaba",
+          "salvabas",
+          "salvaba",
+          "salvábamos",
+          "salvaban"
+        ],
+        "would": [
+          "salvaría",
+          "salvarías",
+          "salvaría",
+          "salvaríamos",
+          "salvarían"
+        ],
+        "hope": [
+          "salve",
+          "salves",
+          "salve",
+          "salvemos",
+          "salven"
+        ],
+        "has_happened": [
+          "he salvado",
+          "has salvado",
+          "ha salvado",
+          "hemos salvado",
+          "han salvado"
+        ],
+        "had_happened": [
+          "había salvado",
+          "habías salvado",
+          "había salvado",
+          "habíamos salvado",
+          "habían salvado"
+        ]
+      }
+    },
+    {
+      "id": "asegurar",
+      "infinitive": "asegurar",
+      "meaning": "to assure / ensure",
+      "rank": 117,
+      "forms": {
+        "now": [
+          "aseguro",
+          "aseguras",
+          "asegura",
+          "aseguramos",
+          "aseguran"
+        ],
+        "past_event": [
+          "aseguré",
+          "aseguraste",
+          "aseguró",
+          "aseguramos",
+          "aseguraron"
+        ],
+        "background": [
+          "aseguraba",
+          "asegurabas",
+          "aseguraba",
+          "asegurábamos",
+          "aseguraban"
+        ],
+        "would": [
+          "aseguraría",
+          "asegurarías",
+          "aseguraría",
+          "aseguraríamos",
+          "asegurarían"
+        ],
+        "hope": [
+          "asegure",
+          "asegures",
+          "asegure",
+          "aseguremos",
+          "aseguren"
+        ],
+        "has_happened": [
+          "he asegurado",
+          "has asegurado",
+          "ha asegurado",
+          "hemos asegurado",
+          "han asegurado"
+        ],
+        "had_happened": [
+          "había asegurado",
+          "habías asegurado",
+          "había asegurado",
+          "habíamos asegurado",
+          "habían asegurado"
+        ]
+      }
+    },
+    {
+      "id": "quitar",
+      "infinitive": "quitar",
+      "meaning": "to remove / take away",
+      "rank": 118,
+      "forms": {
+        "now": [
+          "quito",
+          "quitas",
+          "quita",
+          "quitamos",
+          "quitan"
+        ],
+        "past_event": [
+          "quité",
+          "quitaste",
+          "quitó",
+          "quitamos",
+          "quitaron"
+        ],
+        "background": [
+          "quitaba",
+          "quitabas",
+          "quitaba",
+          "quitábamos",
+          "quitaban"
+        ],
+        "would": [
+          "quitaría",
+          "quitarías",
+          "quitaría",
+          "quitaríamos",
+          "quitarían"
+        ],
+        "hope": [
+          "quite",
+          "quites",
+          "quite",
+          "quitemos",
+          "quiten"
+        ],
+        "has_happened": [
+          "he quitado",
+          "has quitado",
+          "ha quitado",
+          "hemos quitado",
+          "han quitado"
+        ],
+        "had_happened": [
+          "había quitado",
+          "habías quitado",
+          "había quitado",
+          "habíamos quitado",
+          "habían quitado"
+        ]
+      }
+    },
+    {
+      "id": "amar",
+      "infinitive": "amar",
+      "meaning": "to love",
+      "rank": 119,
+      "forms": {
+        "now": [
+          "amo",
+          "amas",
+          "ama",
+          "amamos",
+          "aman"
+        ],
+        "past_event": [
+          "amé",
+          "amaste",
+          "amó",
+          "amamos",
+          "amaron"
+        ],
+        "background": [
+          "amaba",
+          "amabas",
+          "amaba",
+          "amábamos",
+          "amaban"
+        ],
+        "would": [
+          "amaría",
+          "amarías",
+          "amaría",
+          "amaríamos",
+          "amarían"
+        ],
+        "hope": [
+          "ame",
+          "ames",
+          "ame",
+          "amemos",
+          "amen"
+        ],
+        "has_happened": [
+          "he amado",
+          "has amado",
+          "ha amado",
+          "hemos amado",
+          "han amado"
+        ],
+        "had_happened": [
+          "había amado",
+          "habías amado",
+          "había amado",
+          "habíamos amado",
+          "habían amado"
+        ]
+      }
+    },
+    {
+      "id": "disparar",
+      "infinitive": "disparar",
+      "meaning": "to shoot / fire",
+      "rank": 120,
+      "forms": {
+        "now": [
+          "disparo",
+          "disparas",
+          "dispara",
+          "disparamos",
+          "disparan"
+        ],
+        "past_event": [
+          "disparé",
+          "disparaste",
+          "disparó",
+          "disparamos",
+          "dispararon"
+        ],
+        "background": [
+          "disparaba",
+          "disparabas",
+          "disparaba",
+          "disparábamos",
+          "disparaban"
+        ],
+        "would": [
+          "dispararía",
+          "dispararías",
+          "dispararía",
+          "dispararíamos",
+          "dispararían"
+        ],
+        "hope": [
+          "dispare",
+          "dispares",
+          "dispare",
+          "disparemos",
+          "disparen"
+        ],
+        "has_happened": [
+          "he disparado",
+          "has disparado",
+          "ha disparado",
+          "hemos disparado",
+          "han disparado"
+        ],
+        "had_happened": [
+          "había disparado",
+          "habías disparado",
+          "había disparado",
+          "habíamos disparado",
+          "habían disparado"
+        ]
+      }
+    },
+    {
+      "id": "disculpar",
+      "infinitive": "disculpar",
+      "meaning": "to excuse",
+      "rank": 121,
+      "forms": {
+        "now": [
+          "disculpo",
+          "disculpas",
+          "disculpa",
+          "disculpamos",
+          "disculpan"
+        ],
+        "past_event": [
+          "disculpé",
+          "disculpaste",
+          "disculpó",
+          "disculpamos",
+          "disculparon"
+        ],
+        "background": [
+          "disculpaba",
+          "disculpabas",
+          "disculpaba",
+          "disculpábamos",
+          "disculpaban"
+        ],
+        "would": [
+          "disculparía",
+          "disculparías",
+          "disculparía",
+          "disculparíamos",
+          "disculparían"
+        ],
+        "hope": [
+          "disculpe",
+          "disculpes",
+          "disculpe",
+          "disculpemos",
+          "disculpen"
+        ],
+        "has_happened": [
+          "he disculpado",
+          "has disculpado",
+          "ha disculpado",
+          "hemos disculpado",
+          "han disculpado"
+        ],
+        "had_happened": [
+          "había disculpado",
+          "habías disculpado",
+          "había disculpado",
+          "habíamos disculpado",
+          "habían disculpado"
+        ]
+      }
+    },
+    {
+      "id": "vender",
+      "infinitive": "vender",
+      "meaning": "to sell",
+      "rank": 122,
+      "forms": {
+        "now": [
+          "vendo",
+          "vendes",
+          "vende",
+          "vendemos",
+          "venden"
+        ],
+        "past_event": [
+          "vendí",
+          "vendiste",
+          "vendió",
+          "vendimos",
+          "vendieron"
+        ],
+        "background": [
+          "vendía",
+          "vendías",
+          "vendía",
+          "vendíamos",
+          "vendían"
+        ],
+        "would": [
+          "vendería",
+          "venderías",
+          "vendería",
+          "venderíamos",
+          "venderían"
+        ],
+        "hope": [
+          "venda",
+          "vendas",
+          "venda",
+          "vendamos",
+          "vendan"
+        ],
+        "has_happened": [
+          "he vendido",
+          "has vendido",
+          "ha vendido",
+          "hemos vendido",
+          "han vendido"
+        ],
+        "had_happened": [
+          "había vendido",
+          "habías vendido",
+          "había vendido",
+          "habíamos vendido",
+          "habían vendido"
+        ]
+      }
+    },
+    {
+      "id": "perdonar",
+      "infinitive": "perdonar",
+      "meaning": "to forgive",
+      "rank": 123,
+      "forms": {
+        "now": [
+          "perdono",
+          "perdonas",
+          "perdona",
+          "perdonamos",
+          "perdonan"
+        ],
+        "past_event": [
+          "perdoné",
+          "perdonaste",
+          "perdonó",
+          "perdonamos",
+          "perdonaron"
+        ],
+        "background": [
+          "perdonaba",
+          "perdonabas",
+          "perdonaba",
+          "perdonábamos",
+          "perdonaban"
+        ],
+        "would": [
+          "perdonaría",
+          "perdonarías",
+          "perdonaría",
+          "perdonaríamos",
+          "perdonarían"
+        ],
+        "hope": [
+          "perdone",
+          "perdones",
+          "perdone",
+          "perdonemos",
+          "perdonen"
+        ],
+        "has_happened": [
+          "he perdonado",
+          "has perdonado",
+          "ha perdonado",
+          "hemos perdonado",
+          "han perdonado"
+        ],
+        "had_happened": [
+          "había perdonado",
+          "habías perdonado",
+          "había perdonado",
+          "habíamos perdonado",
+          "habían perdonado"
+        ]
+      }
+    },
+    {
+      "id": "casar",
+      "infinitive": "casar",
+      "meaning": "to marry / wed",
+      "rank": 124,
+      "forms": {
+        "now": [
+          "caso",
+          "casas",
+          "casa",
+          "casamos",
+          "casan"
+        ],
+        "past_event": [
+          "casé",
+          "casaste",
+          "casó",
+          "casamos",
+          "casaron"
+        ],
+        "background": [
+          "casaba",
+          "casabas",
+          "casaba",
+          "casábamos",
+          "casaban"
+        ],
+        "would": [
+          "casaría",
+          "casarías",
+          "casaría",
+          "casaríamos",
+          "casarían"
+        ],
+        "hope": [
+          "case",
+          "cases",
+          "case",
+          "casemos",
+          "casen"
+        ],
+        "has_happened": [
+          "he casado",
+          "has casado",
+          "ha casado",
+          "hemos casado",
+          "han casado"
+        ],
+        "had_happened": [
+          "había casado",
+          "habías casado",
+          "había casado",
+          "habíamos casado",
+          "habían casado"
+        ]
+      }
+    },
+    {
+      "id": "robar",
+      "infinitive": "robar",
+      "meaning": "to steal",
+      "rank": 125,
+      "forms": {
+        "now": [
+          "robo",
+          "robas",
+          "roba",
+          "robamos",
+          "roban"
+        ],
+        "past_event": [
+          "robé",
+          "robaste",
+          "robó",
+          "robamos",
+          "robaron"
+        ],
+        "background": [
+          "robaba",
+          "robabas",
+          "robaba",
+          "robábamos",
+          "robaban"
+        ],
+        "would": [
+          "robaría",
+          "robarías",
+          "robaría",
+          "robaríamos",
+          "robarían"
+        ],
+        "hope": [
+          "robe",
+          "robes",
+          "robe",
+          "robemos",
+          "roben"
+        ],
+        "has_happened": [
+          "he robado",
+          "has robado",
+          "ha robado",
+          "hemos robado",
+          "han robado"
+        ],
+        "had_happened": [
+          "había robado",
+          "habías robado",
+          "había robado",
+          "habíamos robado",
+          "habían robado"
+        ]
+      }
+    },
+    {
+      "id": "prometer",
+      "infinitive": "prometer",
+      "meaning": "to promise",
+      "rank": 126,
+      "forms": {
+        "now": [
+          "prometo",
+          "prometes",
+          "promete",
+          "prometemos",
+          "prometen"
+        ],
+        "past_event": [
+          "prometí",
+          "prometiste",
+          "prometió",
+          "prometimos",
+          "prometieron"
+        ],
+        "background": [
+          "prometía",
+          "prometías",
+          "prometía",
+          "prometíamos",
+          "prometían"
+        ],
+        "would": [
+          "prometería",
+          "prometerías",
+          "prometería",
+          "prometeríamos",
+          "prometerían"
+        ],
+        "hope": [
+          "prometa",
+          "prometas",
+          "prometa",
+          "prometamos",
+          "prometan"
+        ],
+        "has_happened": [
+          "he prometido",
+          "has prometido",
+          "ha prometido",
+          "hemos prometido",
+          "han prometido"
+        ],
+        "had_happened": [
+          "había prometido",
+          "habías prometido",
+          "había prometido",
+          "habíamos prometido",
+          "habían prometido"
+        ]
+      }
+    },
+    {
+      "id": "enseñar",
+      "infinitive": "enseñar",
+      "meaning": "to teach / show",
+      "rank": 127,
+      "forms": {
+        "now": [
+          "enseño",
+          "enseñas",
+          "enseña",
+          "enseñamos",
+          "enseñan"
+        ],
+        "past_event": [
+          "enseñé",
+          "enseñaste",
+          "enseñó",
+          "enseñamos",
+          "enseñaron"
+        ],
+        "background": [
+          "enseñaba",
+          "enseñabas",
+          "enseñaba",
+          "enseñábamos",
+          "enseñaban"
+        ],
+        "would": [
+          "enseñaría",
+          "enseñarías",
+          "enseñaría",
+          "enseñaríamos",
+          "enseñarían"
+        ],
+        "hope": [
+          "enseñe",
+          "enseñes",
+          "enseñe",
+          "enseñemos",
+          "enseñen"
+        ],
+        "has_happened": [
+          "he enseñado",
+          "has enseñado",
+          "ha enseñado",
+          "hemos enseñado",
+          "han enseñado"
+        ],
+        "had_happened": [
+          "había enseñado",
+          "habías enseñado",
+          "había enseñado",
+          "habíamos enseñado",
+          "habían enseñado"
+        ]
+      }
+    },
+    {
+      "id": "sonar",
+      "infinitive": "sonar",
+      "meaning": "to sound / ring",
+      "rank": 128,
+      "forms": {
+        "now": [
+          "sueno",
+          "suenas",
+          "suena",
+          "sonamos",
+          "suenan"
+        ],
+        "past_event": [
+          "soné",
+          "sonaste",
+          "sonó",
+          "sonamos",
+          "sonaron"
+        ],
+        "background": [
+          "sonaba",
+          "sonabas",
+          "sonaba",
+          "sonábamos",
+          "sonaban"
+        ],
+        "would": [
+          "sonaría",
+          "sonarías",
+          "sonaría",
+          "sonaríamos",
+          "sonarían"
+        ],
+        "hope": [
+          "suene",
+          "suenes",
+          "suene",
+          "sonemos",
+          "suenen"
+        ],
+        "has_happened": [
+          "he sonado",
+          "has sonado",
+          "ha sonado",
+          "hemos sonado",
+          "han sonado"
+        ],
+        "had_happened": [
+          "había sonado",
+          "habías sonado",
+          "había sonado",
+          "habíamos sonado",
+          "habían sonado"
+        ]
+      }
+    },
+    {
+      "id": "imaginar",
+      "infinitive": "imaginar",
+      "meaning": "to imagine",
+      "rank": 129,
+      "forms": {
+        "now": [
+          "imagino",
+          "imaginas",
+          "imagina",
+          "imaginamos",
+          "imaginan"
+        ],
+        "past_event": [
+          "imaginé",
+          "imaginaste",
+          "imaginó",
+          "imaginamos",
+          "imaginaron"
+        ],
+        "background": [
+          "imaginaba",
+          "imaginabas",
+          "imaginaba",
+          "imaginábamos",
+          "imaginaban"
+        ],
+        "would": [
+          "imaginaría",
+          "imaginarías",
+          "imaginaría",
+          "imaginaríamos",
+          "imaginarían"
+        ],
+        "hope": [
+          "imagine",
+          "imagines",
+          "imagine",
+          "imaginemos",
+          "imaginen"
+        ],
+        "has_happened": [
+          "he imaginado",
+          "has imaginado",
+          "ha imaginado",
+          "hemos imaginado",
+          "han imaginado"
+        ],
+        "had_happened": [
+          "había imaginado",
+          "habías imaginado",
+          "había imaginado",
+          "habíamos imaginado",
+          "habían imaginado"
+        ]
+      }
+    },
+    {
+      "id": "realizar",
+      "infinitive": "realizar",
+      "meaning": "to carry out / accomplish",
+      "rank": 130,
+      "forms": {
+        "now": [
+          "realizo",
+          "realizas",
+          "realiza",
+          "realizamos",
+          "realizan"
+        ],
+        "past_event": [
+          "realicé",
+          "realizaste",
+          "realizó",
+          "realizamos",
+          "realizaron"
+        ],
+        "background": [
+          "realizaba",
+          "realizabas",
+          "realizaba",
+          "realizábamos",
+          "realizaban"
+        ],
+        "would": [
+          "realizaría",
+          "realizarías",
+          "realizaría",
+          "realizaríamos",
+          "realizarían"
+        ],
+        "hope": [
+          "realice",
+          "realices",
+          "realice",
+          "realicemos",
+          "realicen"
+        ],
+        "has_happened": [
+          "he realizado",
+          "has realizado",
+          "ha realizado",
+          "hemos realizado",
+          "han realizado"
+        ],
+        "had_happened": [
+          "había realizado",
+          "habías realizado",
+          "había realizado",
+          "habíamos realizado",
+          "habían realizado"
+        ]
+      }
+    },
+    {
+      "id": "confiar",
+      "infinitive": "confiar",
+      "meaning": "to trust",
+      "rank": 131,
+      "forms": {
+        "now": [
+          "confío",
+          "confías",
+          "confía",
+          "confiamos",
+          "confían"
+        ],
+        "past_event": [
+          "confié",
+          "confiaste",
+          "confió",
+          "confiamos",
+          "confiaron"
+        ],
+        "background": [
+          "confiaba",
+          "confiabas",
+          "confiaba",
+          "confiábamos",
+          "confiaban"
+        ],
+        "would": [
+          "confiaría",
+          "confiarías",
+          "confiaría",
+          "confiaríamos",
+          "confiarían"
+        ],
+        "hope": [
+          "confíe",
+          "confíes",
+          "confíe",
+          "confiemos",
+          "confíen"
+        ],
+        "has_happened": [
+          "he confiado",
+          "has confiado",
+          "ha confiado",
+          "hemos confiado",
+          "han confiado"
+        ],
+        "had_happened": [
+          "había confiado",
+          "habías confiado",
+          "había confiado",
+          "habíamos confiado",
+          "habían confiado"
+        ]
+      }
+    },
+    {
+      "id": "cerrar",
+      "infinitive": "cerrar",
+      "meaning": "to close",
+      "rank": 132,
+      "forms": {
+        "now": [
+          "cierro",
+          "cierras",
+          "cierra",
+          "cerramos",
+          "cierran"
+        ],
+        "past_event": [
+          "cerré",
+          "cerraste",
+          "cerró",
+          "cerramos",
+          "cerraron"
+        ],
+        "background": [
+          "cerraba",
+          "cerrabas",
+          "cerraba",
+          "cerrábamos",
+          "cerraban"
+        ],
+        "would": [
+          "cerraría",
+          "cerrarías",
+          "cerraría",
+          "cerraríamos",
+          "cerrarían"
+        ],
+        "hope": [
+          "cierre",
+          "cierres",
+          "cierre",
+          "cerremos",
+          "cierren"
+        ],
+        "has_happened": [
+          "he cerrado",
+          "has cerrado",
+          "ha cerrado",
+          "hemos cerrado",
+          "han cerrado"
+        ],
+        "had_happened": [
+          "había cerrado",
+          "habías cerrado",
+          "había cerrado",
+          "habíamos cerrado",
+          "habían cerrado"
+        ]
+      }
+    },
+    {
+      "id": "bajar",
+      "infinitive": "bajar",
+      "meaning": "to go down / lower",
+      "rank": 133,
+      "forms": {
+        "now": [
+          "bajo",
+          "bajas",
+          "baja",
+          "bajamos",
+          "bajan"
+        ],
+        "past_event": [
+          "bajé",
+          "bajaste",
+          "bajó",
+          "bajamos",
+          "bajaron"
+        ],
+        "background": [
+          "bajaba",
+          "bajabas",
+          "bajaba",
+          "bajábamos",
+          "bajaban"
+        ],
+        "would": [
+          "bajaría",
+          "bajarías",
+          "bajaría",
+          "bajaríamos",
+          "bajarían"
+        ],
+        "hope": [
+          "baje",
+          "bajes",
+          "baje",
+          "bajemos",
+          "bajen"
+        ],
+        "has_happened": [
+          "he bajado",
+          "has bajado",
+          "ha bajado",
+          "hemos bajado",
+          "han bajado"
+        ],
+        "had_happened": [
+          "había bajado",
+          "habías bajado",
+          "había bajado",
+          "habíamos bajado",
+          "habían bajado"
+        ]
+      }
+    },
+    {
+      "id": "desear",
+      "infinitive": "desear",
+      "meaning": "to wish / desire",
+      "rank": 134,
+      "forms": {
+        "now": [
+          "deseo",
+          "deseas",
+          "desea",
+          "deseamos",
+          "desean"
+        ],
+        "past_event": [
+          "deseé",
+          "deseaste",
+          "deseó",
+          "deseamos",
+          "desearon"
+        ],
+        "background": [
+          "deseaba",
+          "deseabas",
+          "deseaba",
+          "deseábamos",
+          "deseaban"
+        ],
+        "would": [
+          "desearía",
+          "desearías",
+          "desearía",
+          "desearíamos",
+          "desearían"
+        ],
+        "hope": [
+          "desee",
+          "desees",
+          "desee",
+          "deseemos",
+          "deseen"
+        ],
+        "has_happened": [
+          "he deseado",
+          "has deseado",
+          "ha deseado",
+          "hemos deseado",
+          "han deseado"
+        ],
+        "had_happened": [
+          "había deseado",
+          "habías deseado",
+          "había deseado",
+          "habíamos deseado",
+          "habían deseado"
+        ]
+      }
+    },
+    {
+      "id": "callar",
+      "infinitive": "callar",
+      "meaning": "to be quiet / silence",
+      "rank": 135,
+      "forms": {
+        "now": [
+          "callo",
+          "callas",
+          "calla",
+          "callamos",
+          "callan"
+        ],
+        "past_event": [
+          "callé",
+          "callaste",
+          "calló",
+          "callamos",
+          "callaron"
+        ],
+        "background": [
+          "callaba",
+          "callabas",
+          "callaba",
+          "callábamos",
+          "callaban"
+        ],
+        "would": [
+          "callaría",
+          "callarías",
+          "callaría",
+          "callaríamos",
+          "callarían"
+        ],
+        "hope": [
+          "calle",
+          "calles",
+          "calle",
+          "callemos",
+          "callen"
+        ],
+        "has_happened": [
+          "he callado",
+          "has callado",
+          "ha callado",
+          "hemos callado",
+          "han callado"
+        ],
+        "had_happened": [
+          "había callado",
+          "habías callado",
+          "había callado",
+          "habíamos callado",
+          "habían callado"
+        ]
+      }
+    },
+    {
+      "id": "cuidar",
+      "infinitive": "cuidar",
+      "meaning": "to care for",
+      "rank": 136,
+      "forms": {
+        "now": [
+          "cuido",
+          "cuidas",
+          "cuida",
+          "cuidamos",
+          "cuidan"
+        ],
+        "past_event": [
+          "cuidé",
+          "cuidaste",
+          "cuidó",
+          "cuidamos",
+          "cuidaron"
+        ],
+        "background": [
+          "cuidaba",
+          "cuidabas",
+          "cuidaba",
+          "cuidábamos",
+          "cuidaban"
+        ],
+        "would": [
+          "cuidaría",
+          "cuidarías",
+          "cuidaría",
+          "cuidaríamos",
+          "cuidarían"
+        ],
+        "hope": [
+          "cuide",
+          "cuides",
+          "cuide",
+          "cuidemos",
+          "cuiden"
+        ],
+        "has_happened": [
+          "he cuidado",
+          "has cuidado",
+          "ha cuidado",
+          "hemos cuidado",
+          "han cuidado"
+        ],
+        "had_happened": [
+          "había cuidado",
+          "habías cuidado",
+          "había cuidado",
+          "habíamos cuidado",
+          "habían cuidado"
+        ]
+      }
+    },
+    {
+      "id": "preparar",
+      "infinitive": "preparar",
+      "meaning": "to prepare",
+      "rank": 137,
+      "forms": {
+        "now": [
+          "preparo",
+          "preparas",
+          "prepara",
+          "preparamos",
+          "preparan"
+        ],
+        "past_event": [
+          "preparé",
+          "preparaste",
+          "preparó",
+          "preparamos",
+          "prepararon"
+        ],
+        "background": [
+          "preparaba",
+          "preparabas",
+          "preparaba",
+          "preparábamos",
+          "preparaban"
+        ],
+        "would": [
+          "prepararía",
+          "prepararías",
+          "prepararía",
+          "prepararíamos",
+          "prepararían"
+        ],
+        "hope": [
+          "prepare",
+          "prepares",
+          "prepare",
+          "preparemos",
+          "preparen"
+        ],
+        "has_happened": [
+          "he preparado",
+          "has preparado",
+          "ha preparado",
+          "hemos preparado",
+          "han preparado"
+        ],
+        "had_happened": [
+          "había preparado",
+          "habías preparado",
+          "había preparado",
+          "habíamos preparado",
+          "habían preparado"
+        ]
+      }
+    },
+    {
+      "id": "elegir",
+      "infinitive": "elegir",
+      "meaning": "to choose",
+      "rank": 138,
+      "forms": {
+        "now": [
+          "elijo",
+          "eliges",
+          "elige",
+          "elegimos",
+          "eligen"
+        ],
+        "past_event": [
+          "elegí",
+          "elegiste",
+          "eligió",
+          "elegimos",
+          "eligieron"
+        ],
+        "background": [
+          "elegía",
+          "elegías",
+          "elegía",
+          "elegíamos",
+          "elegían"
+        ],
+        "would": [
+          "elegiría",
+          "elegirías",
+          "elegiría",
+          "elegiríamos",
+          "elegirían"
+        ],
+        "hope": [
+          "elija",
+          "elijas",
+          "elija",
+          "elijamos",
+          "elijan"
+        ],
+        "has_happened": [
+          "he elegido",
+          "has elegido",
+          "ha elegido",
+          "hemos elegido",
+          "han elegido"
+        ],
+        "had_happened": [
+          "había elegido",
+          "habías elegido",
+          "había elegido",
+          "habíamos elegido",
+          "habían elegido"
+        ]
+      }
+    },
+    {
+      "id": "desaparecer",
+      "infinitive": "desaparecer",
+      "meaning": "to disappear",
+      "rank": 139,
+      "forms": {
+        "now": [
+          "desaparezco",
+          "desapareces",
+          "desaparece",
+          "desaparecemos",
+          "desaparecen"
+        ],
+        "past_event": [
+          "desaparecí",
+          "desapareciste",
+          "desapareció",
+          "desaparecimos",
+          "desaparecieron"
+        ],
+        "background": [
+          "desaparecía",
+          "desaparecías",
+          "desaparecía",
+          "desaparecíamos",
+          "desaparecían"
+        ],
+        "would": [
+          "desaparecería",
+          "desaparecerías",
+          "desaparecería",
+          "desapareceríamos",
+          "desaparecerían"
+        ],
+        "hope": [
+          "desaparezca",
+          "desaparezcas",
+          "desaparezca",
+          "desaparezcamos",
+          "desaparezcan"
+        ],
+        "has_happened": [
+          "he desaparecido",
+          "has desaparecido",
+          "ha desaparecido",
+          "hemos desaparecido",
+          "han desaparecido"
+        ],
+        "had_happened": [
+          "había desaparecido",
+          "habías desaparecido",
+          "había desaparecido",
+          "habíamos desaparecido",
+          "habían desaparecido"
+        ]
+      }
+    },
+    {
+      "id": "mentir",
+      "infinitive": "mentir",
+      "meaning": "to lie",
+      "rank": 140,
+      "forms": {
+        "now": [
+          "miento",
+          "mientes",
+          "miente",
+          "mentimos",
+          "mienten"
+        ],
+        "past_event": [
+          "mentí",
+          "mentiste",
+          "mintió",
+          "mentimos",
+          "mintieron"
+        ],
+        "background": [
+          "mentía",
+          "mentías",
+          "mentía",
+          "mentíamos",
+          "mentían"
+        ],
+        "would": [
+          "mentiría",
+          "mentirías",
+          "mentiría",
+          "mentiríamos",
+          "mentirían"
+        ],
+        "hope": [
+          "mienta",
+          "mientas",
+          "mienta",
+          "mintamos",
+          "mientan"
+        ],
+        "has_happened": [
+          "he mentido",
+          "has mentido",
+          "ha mentido",
+          "hemos mentido",
+          "han mentido"
+        ],
+        "had_happened": [
+          "había mentido",
+          "habías mentido",
+          "había mentido",
+          "habíamos mentido",
+          "habían mentido"
+        ]
+      }
+    },
+    {
+      "id": "romper",
+      "infinitive": "romper",
+      "meaning": "to break",
+      "rank": 141,
+      "forms": {
+        "now": [
+          "rompo",
+          "rompes",
+          "rompe",
+          "rompemos",
+          "rompen"
+        ],
+        "past_event": [
+          "rompí",
+          "rompiste",
+          "rompió",
+          "rompimos",
+          "rompieron"
+        ],
+        "background": [
+          "rompía",
+          "rompías",
+          "rompía",
+          "rompíamos",
+          "rompían"
+        ],
+        "would": [
+          "rompería",
+          "romperías",
+          "rompería",
+          "romperíamos",
+          "romperían"
+        ],
+        "hope": [
+          "rompa",
+          "rompas",
+          "rompa",
+          "rompamos",
+          "rompan"
+        ],
+        "has_happened": [
+          "he roto",
+          "has roto",
+          "ha roto",
+          "hemos roto",
+          "han roto"
+        ],
+        "had_happened": [
+          "había roto",
+          "habías roto",
+          "había roto",
+          "habíamos roto",
+          "habían roto"
+        ]
+      }
+    },
+    {
+      "id": "invitar",
+      "infinitive": "invitar",
+      "meaning": "to invite",
+      "rank": 142,
+      "forms": {
+        "now": [
+          "invito",
+          "invitas",
+          "invita",
+          "invitamos",
+          "invitan"
+        ],
+        "past_event": [
+          "invité",
+          "invitaste",
+          "invitó",
+          "invitamos",
+          "invitaron"
+        ],
+        "background": [
+          "invitaba",
+          "invitabas",
+          "invitaba",
+          "invitábamos",
+          "invitaban"
+        ],
+        "would": [
+          "invitaría",
+          "invitarías",
+          "invitaría",
+          "invitaríamos",
+          "invitarían"
+        ],
+        "hope": [
+          "invite",
+          "invites",
+          "invite",
+          "invitemos",
+          "inviten"
+        ],
+        "has_happened": [
+          "he invitado",
+          "has invitado",
+          "ha invitado",
+          "hemos invitado",
+          "han invitado"
+        ],
+        "had_happened": [
+          "había invitado",
+          "habías invitado",
+          "había invitado",
+          "habíamos invitado",
+          "habían invitado"
+        ]
+      }
+    },
+    {
+      "id": "obtener",
+      "infinitive": "obtener",
+      "meaning": "to obtain / get",
+      "rank": 143,
+      "forms": {
+        "now": [
+          "obtengo",
+          "obtienes",
+          "obtiene",
+          "obtenemos",
+          "obtienen"
+        ],
+        "past_event": [
+          "obtuve",
+          "obtuviste",
+          "obtuvo",
+          "obtuvimos",
+          "obtuvieron"
+        ],
+        "background": [
+          "obtenía",
+          "obtenías",
+          "obtenía",
+          "obteníamos",
+          "obtenían"
+        ],
+        "would": [
+          "obtendría",
+          "obtendrías",
+          "obtendría",
+          "obtendríamos",
+          "obtendrían"
+        ],
+        "hope": [
+          "obtenga",
+          "obtengas",
+          "obtenga",
+          "obtengamos",
+          "obtengan"
+        ],
+        "has_happened": [
+          "he obtenido",
+          "has obtenido",
+          "ha obtenido",
+          "hemos obtenido",
+          "han obtenido"
+        ],
+        "had_happened": [
+          "había obtenido",
+          "habías obtenido",
+          "había obtenido",
+          "habíamos obtenido",
+          "habían obtenido"
+        ]
+      }
+    },
+    {
+      "id": "parar",
+      "infinitive": "parar",
+      "meaning": "to stop",
+      "rank": 144,
+      "forms": {
+        "now": [
+          "paro",
+          "paras",
+          "para",
+          "paramos",
+          "paran"
+        ],
+        "past_event": [
+          "paré",
+          "paraste",
+          "paró",
+          "paramos",
+          "pararon"
+        ],
+        "background": [
+          "paraba",
+          "parabas",
+          "paraba",
+          "parábamos",
+          "paraban"
+        ],
+        "would": [
+          "pararía",
+          "pararías",
+          "pararía",
+          "pararíamos",
+          "pararían"
+        ],
+        "hope": [
+          "pare",
+          "pares",
+          "pare",
+          "paremos",
+          "paren"
+        ],
+        "has_happened": [
+          "he parado",
+          "has parado",
+          "ha parado",
+          "hemos parado",
+          "han parado"
+        ],
+        "had_happened": [
+          "había parado",
+          "habías parado",
+          "había parado",
+          "habíamos parado",
+          "habían parado"
+        ]
+      }
+    },
+    {
+      "id": "tirar",
+      "infinitive": "tirar",
+      "meaning": "to throw",
+      "rank": 145,
+      "forms": {
+        "now": [
+          "tiro",
+          "tiras",
+          "tira",
+          "tiramos",
+          "tiran"
+        ],
+        "past_event": [
+          "tiré",
+          "tiraste",
+          "tiró",
+          "tiramos",
+          "tiraron"
+        ],
+        "background": [
+          "tiraba",
+          "tirabas",
+          "tiraba",
+          "tirábamos",
+          "tiraban"
+        ],
+        "would": [
+          "tiraría",
+          "tirarías",
+          "tiraría",
+          "tiraríamos",
+          "tirarían"
+        ],
+        "hope": [
+          "tire",
+          "tires",
+          "tire",
+          "tiremos",
+          "tiren"
+        ],
+        "has_happened": [
+          "he tirado",
+          "has tirado",
+          "ha tirado",
+          "hemos tirado",
+          "han tirado"
+        ],
+        "had_happened": [
+          "había tirado",
+          "habías tirado",
+          "había tirado",
+          "habíamos tirado",
+          "habían tirado"
+        ]
+      }
+    },
+    {
+      "id": "despertar",
+      "infinitive": "despertar",
+      "meaning": "to wake / awaken",
+      "rank": 146,
+      "forms": {
+        "now": [
+          "despierto",
+          "despiertas",
+          "despierta",
+          "despertamos",
+          "despiertan"
+        ],
+        "past_event": [
+          "desperté",
+          "despertaste",
+          "despertó",
+          "despertamos",
+          "despertaron"
+        ],
+        "background": [
+          "despertaba",
+          "despertabas",
+          "despertaba",
+          "despertábamos",
+          "despertaban"
+        ],
+        "would": [
+          "despertaría",
+          "despertarías",
+          "despertaría",
+          "despertaríamos",
+          "despertarían"
+        ],
+        "hope": [
+          "despierte",
+          "despiertes",
+          "despierte",
+          "despertemos",
+          "despierten"
+        ],
+        "has_happened": [
+          "he despertado",
+          "has despertado",
+          "ha despertado",
+          "hemos despertado",
+          "han despertado"
+        ],
+        "had_happened": [
+          "había despertado",
+          "habías despertado",
+          "había despertado",
+          "habíamos despertado",
+          "habían despertado"
+        ]
+      }
+    },
+    {
+      "id": "continuar",
+      "infinitive": "continuar",
+      "meaning": "to continue",
+      "rank": 147,
+      "forms": {
+        "now": [
+          "continúo",
+          "continúas",
+          "continúa",
+          "continuamos",
+          "continúan"
+        ],
+        "past_event": [
+          "continué",
+          "continuaste",
+          "continuó",
+          "continuamos",
+          "continuaron"
+        ],
+        "background": [
+          "continuaba",
+          "continuabas",
+          "continuaba",
+          "continuábamos",
+          "continuaban"
+        ],
+        "would": [
+          "continuaría",
+          "continuarías",
+          "continuaría",
+          "continuaríamos",
+          "continuarían"
+        ],
+        "hope": [
+          "continúe",
+          "continúes",
+          "continúe",
+          "continuemos",
+          "continúen"
+        ],
+        "has_happened": [
+          "he continuado",
+          "has continuado",
+          "ha continuado",
+          "hemos continuado",
+          "han continuado"
+        ],
+        "had_happened": [
+          "había continuado",
+          "habías continuado",
+          "había continuado",
+          "habíamos continuado",
+          "habían continuado"
+        ]
+      }
+    },
+    {
+      "id": "responder",
+      "infinitive": "responder",
+      "meaning": "to answer / respond",
+      "rank": 148,
+      "forms": {
+        "now": [
+          "respondo",
+          "respondes",
+          "responde",
+          "respondemos",
+          "responden"
+        ],
+        "past_event": [
+          "respondí",
+          "respondiste",
+          "respondió",
+          "respondimos",
+          "respondieron"
+        ],
+        "background": [
+          "respondía",
+          "respondías",
+          "respondía",
+          "respondíamos",
+          "respondían"
+        ],
+        "would": [
+          "respondería",
+          "responderías",
+          "respondería",
+          "responderíamos",
+          "responderían"
+        ],
+        "hope": [
+          "responda",
+          "respondas",
+          "responda",
+          "respondamos",
+          "respondan"
+        ],
+        "has_happened": [
+          "he respondido",
+          "has respondido",
+          "ha respondido",
+          "hemos respondido",
+          "han respondido"
+        ],
+        "had_happened": [
+          "había respondido",
+          "habías respondido",
+          "había respondido",
+          "habíamos respondido",
+          "habían respondido"
+        ]
+      }
+    },
+    {
+      "id": "arreglar",
+      "infinitive": "arreglar",
+      "meaning": "to fix / arrange",
+      "rank": 149,
+      "forms": {
+        "now": [
+          "arreglo",
+          "arreglas",
+          "arregla",
+          "arreglamos",
+          "arreglan"
+        ],
+        "past_event": [
+          "arreglé",
+          "arreglaste",
+          "arregló",
+          "arreglamos",
+          "arreglaron"
+        ],
+        "background": [
+          "arreglaba",
+          "arreglabas",
+          "arreglaba",
+          "arreglábamos",
+          "arreglaban"
+        ],
+        "would": [
+          "arreglaría",
+          "arreglarías",
+          "arreglaría",
+          "arreglaríamos",
+          "arreglarían"
+        ],
+        "hope": [
+          "arregle",
+          "arregles",
+          "arregle",
+          "arreglemos",
+          "arreglen"
+        ],
+        "has_happened": [
+          "he arreglado",
+          "has arreglado",
+          "ha arreglado",
+          "hemos arreglado",
+          "han arreglado"
+        ],
+        "had_happened": [
+          "había arreglado",
+          "habías arreglado",
+          "había arreglado",
+          "habíamos arreglado",
+          "habían arreglado"
+        ]
+      }
+    },
+    {
+      "id": "probar",
+      "infinitive": "probar",
+      "meaning": "to try / test / taste",
+      "rank": 150,
+      "forms": {
+        "now": [
+          "pruebo",
+          "pruebas",
+          "prueba",
+          "probamos",
+          "prueban"
+        ],
+        "past_event": [
+          "probé",
+          "probaste",
+          "probó",
+          "probamos",
+          "probaron"
+        ],
+        "background": [
+          "probaba",
+          "probabas",
+          "probaba",
+          "probábamos",
+          "probaban"
+        ],
+        "would": [
+          "probaría",
+          "probarías",
+          "probaría",
+          "probaríamos",
+          "probarían"
+        ],
+        "hope": [
+          "pruebe",
+          "pruebes",
+          "pruebe",
+          "probemos",
+          "prueben"
+        ],
+        "has_happened": [
+          "he probado",
+          "has probado",
+          "ha probado",
+          "hemos probado",
+          "han probado"
+        ],
+        "had_happened": [
+          "había probado",
+          "habías probado",
+          "había probado",
+          "habíamos probado",
+          "habían probado"
+        ]
+      }
+    },
+    {
+      "id": "evitar",
+      "infinitive": "evitar",
+      "meaning": "to avoid / prevent",
+      "rank": 151,
+      "forms": {
+        "now": [
+          "evito",
+          "evitas",
+          "evita",
+          "evitamos",
+          "evitan"
+        ],
+        "past_event": [
+          "evité",
+          "evitaste",
+          "evitó",
+          "evitamos",
+          "evitaron"
+        ],
+        "background": [
+          "evitaba",
+          "evitabas",
+          "evitaba",
+          "evitábamos",
+          "evitaban"
+        ],
+        "would": [
+          "evitaría",
+          "evitarías",
+          "evitaría",
+          "evitaríamos",
+          "evitarían"
+        ],
+        "hope": [
+          "evite",
+          "evites",
+          "evite",
+          "evitemos",
+          "eviten"
+        ],
+        "has_happened": [
+          "he evitado",
+          "has evitado",
+          "ha evitado",
+          "hemos evitado",
+          "han evitado"
+        ],
+        "had_happened": [
+          "había evitado",
+          "habías evitado",
+          "había evitado",
+          "habíamos evitado",
+          "habían evitado"
+        ]
+      }
+    },
+    {
+      "id": "escapar",
+      "infinitive": "escapar",
+      "meaning": "to escape",
+      "rank": 152,
+      "forms": {
+        "now": [
+          "escapo",
+          "escapas",
+          "escapa",
+          "escapamos",
+          "escapan"
+        ],
+        "past_event": [
+          "escapé",
+          "escapaste",
+          "escapó",
+          "escapamos",
+          "escaparon"
+        ],
+        "background": [
+          "escapaba",
+          "escapabas",
+          "escapaba",
+          "escapábamos",
+          "escapaban"
+        ],
+        "would": [
+          "escaparía",
+          "escaparías",
+          "escaparía",
+          "escaparíamos",
+          "escaparían"
+        ],
+        "hope": [
+          "escape",
+          "escapes",
+          "escape",
+          "escapemos",
+          "escapen"
+        ],
+        "has_happened": [
+          "he escapado",
+          "has escapado",
+          "ha escapado",
+          "hemos escapado",
+          "han escapado"
+        ],
+        "had_happened": [
+          "había escapado",
+          "habías escapado",
+          "había escapado",
+          "habíamos escapado",
+          "habían escapado"
+        ]
+      }
+    },
+    {
+      "id": "mandar",
+      "infinitive": "mandar",
+      "meaning": "to order / send",
+      "rank": 153,
+      "forms": {
+        "now": [
+          "mando",
+          "mandas",
+          "manda",
+          "mandamos",
+          "mandan"
+        ],
+        "past_event": [
+          "mandé",
+          "mandaste",
+          "mandó",
+          "mandamos",
+          "mandaron"
+        ],
+        "background": [
+          "mandaba",
+          "mandabas",
+          "mandaba",
+          "mandábamos",
+          "mandaban"
+        ],
+        "would": [
+          "mandaría",
+          "mandarías",
+          "mandaría",
+          "mandaríamos",
+          "mandarían"
+        ],
+        "hope": [
+          "mande",
+          "mandes",
+          "mande",
+          "mandemos",
+          "manden"
+        ],
+        "has_happened": [
+          "he mandado",
+          "has mandado",
+          "ha mandado",
+          "hemos mandado",
+          "han mandado"
+        ],
+        "had_happened": [
+          "había mandado",
+          "habías mandado",
+          "había mandado",
+          "habíamos mandado",
+          "habían mandado"
+        ]
+      }
+    },
+    {
+      "id": "temer",
+      "infinitive": "temer",
+      "meaning": "to fear",
+      "rank": 154,
+      "forms": {
+        "now": [
+          "temo",
+          "temes",
+          "teme",
+          "tememos",
+          "temen"
+        ],
+        "past_event": [
+          "temí",
+          "temiste",
+          "temió",
+          "temimos",
+          "temieron"
+        ],
+        "background": [
+          "temía",
+          "temías",
+          "temía",
+          "temíamos",
+          "temían"
+        ],
+        "would": [
+          "temería",
+          "temerías",
+          "temería",
+          "temeríamos",
+          "temerían"
+        ],
+        "hope": [
+          "tema",
+          "temas",
+          "tema",
+          "temamos",
+          "teman"
+        ],
+        "has_happened": [
+          "he temido",
+          "has temido",
+          "ha temido",
+          "hemos temido",
+          "han temido"
+        ],
+        "had_happened": [
+          "había temido",
+          "habías temido",
+          "había temido",
+          "habíamos temido",
+          "habían temido"
+        ]
+      }
+    },
+    {
+      "id": "llorar",
+      "infinitive": "llorar",
+      "meaning": "to cry",
+      "rank": 155,
+      "forms": {
+        "now": [
+          "lloro",
+          "lloras",
+          "llora",
+          "lloramos",
+          "lloran"
+        ],
+        "past_event": [
+          "lloré",
+          "lloraste",
+          "lloró",
+          "lloramos",
+          "lloraron"
+        ],
+        "background": [
+          "lloraba",
+          "llorabas",
+          "lloraba",
+          "llorábamos",
+          "lloraban"
+        ],
+        "would": [
+          "lloraría",
+          "llorarías",
+          "lloraría",
+          "lloraríamos",
+          "llorarían"
+        ],
+        "hope": [
+          "llore",
+          "llores",
+          "llore",
+          "lloremos",
+          "lloren"
+        ],
+        "has_happened": [
+          "he llorado",
+          "has llorado",
+          "ha llorado",
+          "hemos llorado",
+          "han llorado"
+        ],
+        "had_happened": [
+          "había llorado",
+          "habías llorado",
+          "había llorado",
+          "habíamos llorado",
+          "habían llorado"
+        ]
+      }
+    },
+    {
+      "id": "actuar",
+      "infinitive": "actuar",
+      "meaning": "to act / perform",
+      "rank": 156,
+      "forms": {
+        "now": [
+          "actúo",
+          "actúas",
+          "actúa",
+          "actuamos",
+          "actúan"
+        ],
+        "past_event": [
+          "actué",
+          "actuaste",
+          "actuó",
+          "actuamos",
+          "actuaron"
+        ],
+        "background": [
+          "actuaba",
+          "actuabas",
+          "actuaba",
+          "actuábamos",
+          "actuaban"
+        ],
+        "would": [
+          "actuaría",
+          "actuarías",
+          "actuaría",
+          "actuaríamos",
+          "actuarían"
+        ],
+        "hope": [
+          "actúe",
+          "actúes",
+          "actúe",
+          "actuemos",
+          "actúen"
+        ],
+        "has_happened": [
+          "he actuado",
+          "has actuado",
+          "ha actuado",
+          "hemos actuado",
+          "han actuado"
+        ],
+        "had_happened": [
+          "había actuado",
+          "habías actuado",
+          "había actuado",
+          "habíamos actuado",
+          "habían actuado"
+        ]
+      }
+    },
+    {
+      "id": "preferir",
+      "infinitive": "preferir",
+      "meaning": "to prefer",
+      "rank": 157,
+      "forms": {
+        "now": [
+          "prefiero",
+          "prefieres",
+          "prefiere",
+          "preferimos",
+          "prefieren"
+        ],
+        "past_event": [
+          "preferí",
+          "preferiste",
+          "prefirió",
+          "preferimos",
+          "prefirieron"
+        ],
+        "background": [
+          "prefería",
+          "preferías",
+          "prefería",
+          "preferíamos",
+          "preferían"
+        ],
+        "would": [
+          "preferiría",
+          "preferirías",
+          "preferiría",
+          "preferiríamos",
+          "preferirían"
+        ],
+        "hope": [
+          "prefiera",
+          "prefieras",
+          "prefiera",
+          "prefiramos",
+          "prefieran"
+        ],
+        "has_happened": [
+          "he preferido",
+          "has preferido",
+          "ha preferido",
+          "hemos preferido",
+          "han preferido"
+        ],
+        "had_happened": [
+          "había preferido",
+          "habías preferido",
+          "había preferido",
+          "habíamos preferido",
+          "habían preferido"
+        ]
+      }
+    },
+    {
+      "id": "conducir",
+      "infinitive": "conducir",
+      "meaning": "to drive / lead",
+      "rank": 158,
+      "forms": {
+        "now": [
+          "conduzco",
+          "conduces",
+          "conduce",
+          "conducimos",
+          "conducen"
+        ],
+        "past_event": [
+          "conduje",
+          "condujiste",
+          "condujo",
+          "condujimos",
+          "condujeron"
+        ],
+        "background": [
+          "conducía",
+          "conducías",
+          "conducía",
+          "conducíamos",
+          "conducían"
+        ],
+        "would": [
+          "conduciría",
+          "conducirías",
+          "conduciría",
+          "conduciríamos",
+          "conducirían"
+        ],
+        "hope": [
+          "conduzca",
+          "conduzcas",
+          "conduzca",
+          "conduzcamos",
+          "conduzcan"
+        ],
+        "has_happened": [
+          "he conducido",
+          "has conducido",
+          "ha conducido",
+          "hemos conducido",
+          "han conducido"
+        ],
+        "had_happened": [
+          "había conducido",
+          "habías conducido",
+          "había conducido",
+          "habíamos conducido",
+          "habían conducido"
+        ]
+      }
+    },
+    {
+      "id": "cantar",
+      "infinitive": "cantar",
+      "meaning": "to sing",
+      "rank": 159,
+      "forms": {
+        "now": [
+          "canto",
+          "cantas",
+          "canta",
+          "cantamos",
+          "cantan"
+        ],
+        "past_event": [
+          "canté",
+          "cantaste",
+          "cantó",
+          "cantamos",
+          "cantaron"
+        ],
+        "background": [
+          "cantaba",
+          "cantabas",
+          "cantaba",
+          "cantábamos",
+          "cantaban"
+        ],
+        "would": [
+          "cantaría",
+          "cantarías",
+          "cantaría",
+          "cantaríamos",
+          "cantarían"
+        ],
+        "hope": [
+          "cante",
+          "cantes",
+          "cante",
+          "cantemos",
+          "canten"
+        ],
+        "has_happened": [
+          "he cantado",
+          "has cantado",
+          "ha cantado",
+          "hemos cantado",
+          "han cantado"
+        ],
+        "had_happened": [
+          "había cantado",
+          "habías cantado",
+          "había cantado",
+          "habíamos cantado",
+          "habían cantado"
+        ]
+      }
+    },
+    {
+      "id": "proteger",
+      "infinitive": "proteger",
+      "meaning": "to protect",
+      "rank": 160,
+      "forms": {
+        "now": [
+          "protejo",
+          "proteges",
+          "protege",
+          "protegemos",
+          "protegen"
+        ],
+        "past_event": [
+          "protegí",
+          "protegiste",
+          "protegió",
+          "protegimos",
+          "protegieron"
+        ],
+        "background": [
+          "protegía",
+          "protegías",
+          "protegía",
+          "protegíamos",
+          "protegían"
+        ],
+        "would": [
+          "protegería",
+          "protegerías",
+          "protegería",
+          "protegeríamos",
+          "protegerían"
+        ],
+        "hope": [
+          "proteja",
+          "protejas",
+          "proteja",
+          "protejamos",
+          "protejan"
+        ],
+        "has_happened": [
+          "he protegido",
+          "has protegido",
+          "ha protegido",
+          "hemos protegido",
+          "han protegido"
+        ],
+        "had_happened": [
+          "había protegido",
+          "habías protegido",
+          "había protegido",
+          "habíamos protegido",
+          "habían protegido"
+        ]
+      }
+    },
+    {
+      "id": "sufrir",
+      "infinitive": "sufrir",
+      "meaning": "to suffer",
+      "rank": 161,
+      "forms": {
+        "now": [
+          "sufro",
+          "sufres",
+          "sufre",
+          "sufrimos",
+          "sufren"
+        ],
+        "past_event": [
+          "sufrí",
+          "sufriste",
+          "sufrió",
+          "sufrimos",
+          "sufrieron"
+        ],
+        "background": [
+          "sufría",
+          "sufrías",
+          "sufría",
+          "sufríamos",
+          "sufrían"
+        ],
+        "would": [
+          "sufriría",
+          "sufrirías",
+          "sufriría",
+          "sufriríamos",
+          "sufrirían"
+        ],
+        "hope": [
+          "sufra",
+          "sufras",
+          "sufra",
+          "suframos",
+          "sufran"
+        ],
+        "has_happened": [
+          "he sufrido",
+          "has sufrido",
+          "ha sufrido",
+          "hemos sufrido",
+          "han sufrido"
+        ],
+        "had_happened": [
+          "había sufrido",
+          "habías sufrido",
+          "había sufrido",
+          "habíamos sufrido",
+          "habían sufrido"
+        ]
+      }
+    },
+    {
+      "id": "golpear",
+      "infinitive": "golpear",
+      "meaning": "to hit / strike",
+      "rank": 162,
+      "forms": {
+        "now": [
+          "golpeo",
+          "golpeas",
+          "golpea",
+          "golpeamos",
+          "golpean"
+        ],
+        "past_event": [
+          "golpeé",
+          "golpeaste",
+          "golpeó",
+          "golpeamos",
+          "golpearon"
+        ],
+        "background": [
+          "golpeaba",
+          "golpeabas",
+          "golpeaba",
+          "golpeábamos",
+          "golpeaban"
+        ],
+        "would": [
+          "golpearía",
+          "golpearías",
+          "golpearía",
+          "golpearíamos",
+          "golpearían"
+        ],
+        "hope": [
+          "golpee",
+          "golpees",
+          "golpee",
+          "golpeemos",
+          "golpeen"
+        ],
+        "has_happened": [
+          "he golpeado",
+          "has golpeado",
+          "ha golpeado",
+          "hemos golpeado",
+          "han golpeado"
+        ],
+        "had_happened": [
+          "había golpeado",
+          "habías golpeado",
+          "había golpeado",
+          "habíamos golpeado",
+          "habían golpeado"
+        ]
+      }
+    },
+    {
+      "id": "abandonar",
+      "infinitive": "abandonar",
+      "meaning": "to abandon / leave",
+      "rank": 163,
+      "forms": {
+        "now": [
+          "abandono",
+          "abandonas",
+          "abandona",
+          "abandonamos",
+          "abandonan"
+        ],
+        "past_event": [
+          "abandoné",
+          "abandonaste",
+          "abandonó",
+          "abandonamos",
+          "abandonaron"
+        ],
+        "background": [
+          "abandonaba",
+          "abandonabas",
+          "abandonaba",
+          "abandonábamos",
+          "abandonaban"
+        ],
+        "would": [
+          "abandonaría",
+          "abandonarías",
+          "abandonaría",
+          "abandonaríamos",
+          "abandonarían"
+        ],
+        "hope": [
+          "abandone",
+          "abandones",
+          "abandone",
+          "abandonemos",
+          "abandonen"
+        ],
+        "has_happened": [
+          "he abandonado",
+          "has abandonado",
+          "ha abandonado",
+          "hemos abandonado",
+          "han abandonado"
+        ],
+        "had_happened": [
+          "había abandonado",
+          "habías abandonado",
+          "había abandonado",
+          "habíamos abandonado",
+          "habían abandonado"
+        ]
+      }
+    },
+    {
+      "id": "caminar",
+      "infinitive": "caminar",
+      "meaning": "to walk",
+      "rank": 164,
+      "forms": {
+        "now": [
+          "camino",
+          "caminas",
+          "camina",
+          "caminamos",
+          "caminan"
+        ],
+        "past_event": [
+          "caminé",
+          "caminaste",
+          "caminó",
+          "caminamos",
+          "caminaron"
+        ],
+        "background": [
+          "caminaba",
+          "caminabas",
+          "caminaba",
+          "caminábamos",
+          "caminaban"
+        ],
+        "would": [
+          "caminaría",
+          "caminarías",
+          "caminaría",
+          "caminaríamos",
+          "caminarían"
+        ],
+        "hope": [
+          "camine",
+          "camines",
+          "camine",
+          "caminemos",
+          "caminen"
+        ],
+        "has_happened": [
+          "he caminado",
+          "has caminado",
+          "ha caminado",
+          "hemos caminado",
+          "han caminado"
+        ],
+        "had_happened": [
+          "había caminado",
+          "habías caminado",
+          "había caminado",
+          "habíamos caminado",
+          "habían caminado"
+        ]
+      }
+    },
+    {
+      "id": "recoger",
+      "infinitive": "recoger",
+      "meaning": "to pick up / collect",
+      "rank": 165,
+      "forms": {
+        "now": [
+          "recojo",
+          "recoges",
+          "recoge",
+          "recogemos",
+          "recogen"
+        ],
+        "past_event": [
+          "recogí",
+          "recogiste",
+          "recogió",
+          "recogimos",
+          "recogieron"
+        ],
+        "background": [
+          "recogía",
+          "recogías",
+          "recogía",
+          "recogíamos",
+          "recogían"
+        ],
+        "would": [
+          "recogería",
+          "recogerías",
+          "recogería",
+          "recogeríamos",
+          "recogerían"
+        ],
+        "hope": [
+          "recoja",
+          "recojas",
+          "recoja",
+          "recojamos",
+          "recojan"
+        ],
+        "has_happened": [
+          "he recogido",
+          "has recogido",
+          "ha recogido",
+          "hemos recogido",
+          "han recogido"
+        ],
+        "had_happened": [
+          "había recogido",
+          "habías recogido",
+          "había recogido",
+          "habíamos recogido",
+          "habían recogido"
+        ]
+      }
+    },
+    {
+      "id": "ocupar",
+      "infinitive": "ocupar",
+      "meaning": "to occupy / take up",
+      "rank": 166,
+      "forms": {
+        "now": [
+          "ocupo",
+          "ocupas",
+          "ocupa",
+          "ocupamos",
+          "ocupan"
+        ],
+        "past_event": [
+          "ocupé",
+          "ocupaste",
+          "ocupó",
+          "ocupamos",
+          "ocuparon"
+        ],
+        "background": [
+          "ocupaba",
+          "ocupabas",
+          "ocupaba",
+          "ocupábamos",
+          "ocupaban"
+        ],
+        "would": [
+          "ocuparía",
+          "ocuparías",
+          "ocuparía",
+          "ocuparíamos",
+          "ocuparían"
+        ],
+        "hope": [
+          "ocupe",
+          "ocupes",
+          "ocupe",
+          "ocupemos",
+          "ocupen"
+        ],
+        "has_happened": [
+          "he ocupado",
+          "has ocupado",
+          "ha ocupado",
+          "hemos ocupado",
+          "han ocupado"
+        ],
+        "had_happened": [
+          "había ocupado",
+          "habías ocupado",
+          "había ocupado",
+          "habíamos ocupado",
+          "habían ocupado"
+        ]
+      }
+    },
+    {
+      "id": "volar",
+      "infinitive": "volar",
+      "meaning": "to fly",
+      "rank": 167,
+      "forms": {
+        "now": [
+          "vuelo",
+          "vuelas",
+          "vuela",
+          "volamos",
+          "vuelan"
+        ],
+        "past_event": [
+          "volé",
+          "volaste",
+          "voló",
+          "volamos",
+          "volaron"
+        ],
+        "background": [
+          "volaba",
+          "volabas",
+          "volaba",
+          "volábamos",
+          "volaban"
+        ],
+        "would": [
+          "volaría",
+          "volarías",
+          "volaría",
+          "volaríamos",
+          "volarían"
+        ],
+        "hope": [
+          "vuele",
+          "vueles",
+          "vuele",
+          "volemos",
+          "vuelen"
+        ],
+        "has_happened": [
+          "he volado",
+          "has volado",
+          "ha volado",
+          "hemos volado",
+          "han volado"
+        ],
+        "had_happened": [
+          "había volado",
+          "habías volado",
+          "había volado",
+          "habíamos volado",
+          "habían volado"
+        ]
+      }
+    },
+    {
+      "id": "reunir",
+      "infinitive": "reunir",
+      "meaning": "to gather / bring together",
+      "rank": 168,
+      "forms": {
+        "now": [
+          "reúno",
+          "reúnes",
+          "reúne",
+          "reunimos",
+          "reúnen"
+        ],
+        "past_event": [
+          "reuní",
+          "reuniste",
+          "reunió",
+          "reunimos",
+          "reunieron"
+        ],
+        "background": [
+          "reunía",
+          "reunías",
+          "reunía",
+          "reuníamos",
+          "reunían"
+        ],
+        "would": [
+          "reuniría",
+          "reunirías",
+          "reuniría",
+          "reuniríamos",
+          "reunirían"
+        ],
+        "hope": [
+          "reúna",
+          "reúnas",
+          "reúna",
+          "reunamos",
+          "reúnan"
+        ],
+        "has_happened": [
+          "he reunido",
+          "has reunido",
+          "ha reunido",
+          "hemos reunido",
+          "han reunido"
+        ],
+        "had_happened": [
+          "había reunido",
+          "habías reunido",
+          "había reunido",
+          "habíamos reunido",
+          "habían reunido"
+        ]
+      }
+    },
+    {
+      "id": "crecer",
+      "infinitive": "crecer",
+      "meaning": "to grow",
+      "rank": 169,
+      "forms": {
+        "now": [
+          "crezco",
+          "creces",
+          "crece",
+          "crecemos",
+          "crecen"
+        ],
+        "past_event": [
+          "crecí",
+          "creciste",
+          "creció",
+          "crecimos",
+          "crecieron"
+        ],
+        "background": [
+          "crecía",
+          "crecías",
+          "crecía",
+          "crecíamos",
+          "crecían"
+        ],
+        "would": [
+          "crecería",
+          "crecerías",
+          "crecería",
+          "creceríamos",
+          "crecerían"
+        ],
+        "hope": [
+          "crezca",
+          "crezcas",
+          "crezca",
+          "crezcamos",
+          "crezcan"
+        ],
+        "has_happened": [
+          "he crecido",
+          "has crecido",
+          "ha crecido",
+          "hemos crecido",
+          "han crecido"
+        ],
+        "had_happened": [
+          "había crecido",
+          "habías crecido",
+          "había crecido",
+          "habíamos crecido",
+          "habían crecido"
+        ]
+      }
+    },
+    {
+      "id": "alcanzar",
+      "infinitive": "alcanzar",
+      "meaning": "to reach / catch up",
+      "rank": 170,
+      "forms": {
+        "now": [
+          "alcanzo",
+          "alcanzas",
+          "alcanza",
+          "alcanzamos",
+          "alcanzan"
+        ],
+        "past_event": [
+          "alcancé",
+          "alcanzaste",
+          "alcanzó",
+          "alcanzamos",
+          "alcanzaron"
+        ],
+        "background": [
+          "alcanzaba",
+          "alcanzabas",
+          "alcanzaba",
+          "alcanzábamos",
+          "alcanzaban"
+        ],
+        "would": [
+          "alcanzaría",
+          "alcanzarías",
+          "alcanzaría",
+          "alcanzaríamos",
+          "alcanzarían"
+        ],
+        "hope": [
+          "alcance",
+          "alcances",
+          "alcance",
+          "alcancemos",
+          "alcancen"
+        ],
+        "has_happened": [
+          "he alcanzado",
+          "has alcanzado",
+          "ha alcanzado",
+          "hemos alcanzado",
+          "han alcanzado"
+        ],
+        "had_happened": [
+          "había alcanzado",
+          "habías alcanzado",
+          "había alcanzado",
+          "habíamos alcanzado",
+          "habían alcanzado"
+        ]
+      }
+    },
+    {
+      "id": "devolver",
+      "infinitive": "devolver",
+      "meaning": "to return / give back",
+      "rank": 171,
+      "forms": {
+        "now": [
+          "devuelvo",
+          "devuelves",
+          "devuelve",
+          "devolvemos",
+          "devuelven"
+        ],
+        "past_event": [
+          "devolví",
+          "devolviste",
+          "devolvió",
+          "devolvimos",
+          "devolvieron"
+        ],
+        "background": [
+          "devolvía",
+          "devolvías",
+          "devolvía",
+          "devolvíamos",
+          "devolvían"
+        ],
+        "would": [
+          "devolvería",
+          "devolverías",
+          "devolvería",
+          "devolveríamos",
+          "devolverían"
+        ],
+        "hope": [
+          "devuelva",
+          "devuelvas",
+          "devuelva",
+          "devolvamos",
+          "devuelvan"
+        ],
+        "has_happened": [
+          "he devuelto",
+          "has devuelto",
+          "ha devuelto",
+          "hemos devuelto",
+          "han devuelto"
+        ],
+        "had_happened": [
+          "había devuelto",
+          "habías devuelto",
+          "había devuelto",
+          "habíamos devuelto",
+          "habían devuelto"
+        ]
+      }
+    },
+    {
+      "id": "destruir",
+      "infinitive": "destruir",
+      "meaning": "to destroy",
+      "rank": 172,
+      "forms": {
+        "now": [
+          "destruyo",
+          "destruyes",
+          "destruye",
+          "destruimos",
+          "destruyen"
+        ],
+        "past_event": [
+          "destruí",
+          "destruiste",
+          "destruyó",
+          "destruimos",
+          "destruyeron"
+        ],
+        "background": [
+          "destruía",
+          "destruías",
+          "destruía",
+          "destruíamos",
+          "destruían"
+        ],
+        "would": [
+          "destruiría",
+          "destruirías",
+          "destruiría",
+          "destruiríamos",
+          "destruirían"
+        ],
+        "hope": [
+          "destruya",
+          "destruyas",
+          "destruya",
+          "destruyamos",
+          "destruyan"
+        ],
+        "has_happened": [
+          "he destruido",
+          "has destruido",
+          "ha destruido",
+          "hemos destruido",
+          "han destruido"
+        ],
+        "had_happened": [
+          "había destruido",
+          "habías destruido",
+          "había destruido",
+          "habíamos destruido",
+          "habían destruido"
+        ]
+      }
+    },
+    {
+      "id": "entregar",
+      "infinitive": "entregar",
+      "meaning": "to deliver / hand over",
+      "rank": 173,
+      "forms": {
+        "now": [
+          "entrego",
+          "entregas",
+          "entrega",
+          "entregamos",
+          "entregan"
+        ],
+        "past_event": [
+          "entregué",
+          "entregaste",
+          "entregó",
+          "entregamos",
+          "entregaron"
+        ],
+        "background": [
+          "entregaba",
+          "entregabas",
+          "entregaba",
+          "entregábamos",
+          "entregaban"
+        ],
+        "would": [
+          "entregaría",
+          "entregarías",
+          "entregaría",
+          "entregaríamos",
+          "entregarían"
+        ],
+        "hope": [
+          "entregue",
+          "entregues",
+          "entregue",
+          "entreguemos",
+          "entreguen"
+        ],
+        "has_happened": [
+          "he entregado",
+          "has entregado",
+          "ha entregado",
+          "hemos entregado",
+          "han entregado"
+        ],
+        "had_happened": [
+          "había entregado",
+          "habías entregado",
+          "había entregado",
+          "habíamos entregado",
+          "habían entregado"
+        ]
+      }
+    },
+    {
+      "id": "acompañar",
+      "infinitive": "acompañar",
+      "meaning": "to accompany",
+      "rank": 174,
+      "forms": {
+        "now": [
+          "acompaño",
+          "acompañas",
+          "acompaña",
+          "acompañamos",
+          "acompañan"
+        ],
+        "past_event": [
+          "acompañé",
+          "acompañaste",
+          "acompañó",
+          "acompañamos",
+          "acompañaron"
+        ],
+        "background": [
+          "acompañaba",
+          "acompañabas",
+          "acompañaba",
+          "acompañábamos",
+          "acompañaban"
+        ],
+        "would": [
+          "acompañaría",
+          "acompañarías",
+          "acompañaría",
+          "acompañaríamos",
+          "acompañarían"
+        ],
+        "hope": [
+          "acompañe",
+          "acompañes",
+          "acompañe",
+          "acompañemos",
+          "acompañen"
+        ],
+        "has_happened": [
+          "he acompañado",
+          "has acompañado",
+          "ha acompañado",
+          "hemos acompañado",
+          "han acompañado"
+        ],
+        "had_happened": [
+          "había acompañado",
+          "habías acompañado",
+          "había acompañado",
+          "habíamos acompañado",
+          "habían acompañado"
+        ]
+      }
+    },
+    {
+      "id": "demostrar",
+      "infinitive": "demostrar",
+      "meaning": "to demonstrate / show",
+      "rank": 175,
+      "forms": {
+        "now": [
+          "demuestro",
+          "demuestras",
+          "demuestra",
+          "demostramos",
+          "demuestran"
+        ],
+        "past_event": [
+          "demostré",
+          "demostraste",
+          "demostró",
+          "demostramos",
+          "demostraron"
+        ],
+        "background": [
+          "demostraba",
+          "demostrabas",
+          "demostraba",
+          "demostrábamos",
+          "demostraban"
+        ],
+        "would": [
+          "demostraría",
+          "demostrarías",
+          "demostraría",
+          "demostraríamos",
+          "demostrarían"
+        ],
+        "hope": [
+          "demuestre",
+          "demuestres",
+          "demuestre",
+          "demostremos",
+          "demuestren"
+        ],
+        "has_happened": [
+          "he demostrado",
+          "has demostrado",
+          "ha demostrado",
+          "hemos demostrado",
+          "han demostrado"
+        ],
+        "had_happened": [
+          "había demostrado",
+          "habías demostrado",
+          "había demostrado",
+          "habíamos demostrado",
+          "habían demostrado"
+        ]
+      }
+    },
+    {
+      "id": "recuperar",
+      "infinitive": "recuperar",
+      "meaning": "to recover / get back",
+      "rank": 176,
+      "forms": {
+        "now": [
+          "recupero",
+          "recuperas",
+          "recupera",
+          "recuperamos",
+          "recuperan"
+        ],
+        "past_event": [
+          "recuperé",
+          "recuperaste",
+          "recuperó",
+          "recuperamos",
+          "recuperaron"
+        ],
+        "background": [
+          "recuperaba",
+          "recuperabas",
+          "recuperaba",
+          "recuperábamos",
+          "recuperaban"
+        ],
+        "would": [
+          "recuperaría",
+          "recuperarías",
+          "recuperaría",
+          "recuperaríamos",
+          "recuperarían"
+        ],
+        "hope": [
+          "recupere",
+          "recuperes",
+          "recupere",
+          "recuperemos",
+          "recuperen"
+        ],
+        "has_happened": [
+          "he recuperado",
+          "has recuperado",
+          "ha recuperado",
+          "hemos recuperado",
+          "han recuperado"
+        ],
+        "had_happened": [
+          "había recuperado",
+          "habías recuperado",
+          "había recuperado",
+          "habíamos recuperado",
+          "habían recuperado"
+        ]
+      }
+    },
+    {
+      "id": "merecer",
+      "infinitive": "merecer",
+      "meaning": "to deserve",
+      "rank": 177,
+      "forms": {
+        "now": [
+          "merezco",
+          "mereces",
+          "merece",
+          "merecemos",
+          "merecen"
+        ],
+        "past_event": [
+          "merecí",
+          "mereciste",
+          "mereció",
+          "merecimos",
+          "merecieron"
+        ],
+        "background": [
+          "merecía",
+          "merecías",
+          "merecía",
+          "merecíamos",
+          "merecían"
+        ],
+        "would": [
+          "merecería",
+          "merecerías",
+          "merecería",
+          "mereceríamos",
+          "merecerían"
+        ],
+        "hope": [
+          "merezca",
+          "merezcas",
+          "merezca",
+          "merezcamos",
+          "merezcan"
+        ],
+        "has_happened": [
+          "he merecido",
+          "has merecido",
+          "ha merecido",
+          "hemos merecido",
+          "han merecido"
+        ],
+        "had_happened": [
+          "había merecido",
+          "habías merecido",
+          "había merecido",
+          "habíamos merecido",
+          "habían merecido"
+        ]
+      }
+    },
+    {
+      "id": "bailar",
+      "infinitive": "bailar",
+      "meaning": "to dance",
+      "rank": 178,
+      "forms": {
+        "now": [
+          "bailo",
+          "bailas",
+          "baila",
+          "bailamos",
+          "bailan"
+        ],
+        "past_event": [
+          "bailé",
+          "bailaste",
+          "bailó",
+          "bailamos",
+          "bailaron"
+        ],
+        "background": [
+          "bailaba",
+          "bailabas",
+          "bailaba",
+          "bailábamos",
+          "bailaban"
+        ],
+        "would": [
+          "bailaría",
+          "bailarías",
+          "bailaría",
+          "bailaríamos",
+          "bailarían"
+        ],
+        "hope": [
+          "baile",
+          "bailes",
+          "baile",
+          "bailemos",
+          "bailen"
+        ],
+        "has_happened": [
+          "he bailado",
+          "has bailado",
+          "ha bailado",
+          "hemos bailado",
+          "han bailado"
+        ],
+        "had_happened": [
+          "había bailado",
+          "habías bailado",
+          "había bailado",
+          "habíamos bailado",
+          "habían bailado"
+        ]
+      }
+    },
+    {
+      "id": "incluir",
+      "infinitive": "incluir",
+      "meaning": "to include",
+      "rank": 179,
+      "forms": {
+        "now": [
+          "incluyo",
+          "incluyes",
+          "incluye",
+          "incluimos",
+          "incluyen"
+        ],
+        "past_event": [
+          "incluí",
+          "incluiste",
+          "incluyó",
+          "incluimos",
+          "incluyeron"
+        ],
+        "background": [
+          "incluía",
+          "incluías",
+          "incluía",
+          "incluíamos",
+          "incluían"
+        ],
+        "would": [
+          "incluiría",
+          "incluirías",
+          "incluiría",
+          "incluiríamos",
+          "incluirían"
+        ],
+        "hope": [
+          "incluya",
+          "incluyas",
+          "incluya",
+          "incluyamos",
+          "incluyan"
+        ],
+        "has_happened": [
+          "he incluido",
+          "has incluido",
+          "ha incluido",
+          "hemos incluido",
+          "han incluido"
+        ],
+        "had_happened": [
+          "había incluido",
+          "habías incluido",
+          "había incluido",
+          "habíamos incluido",
+          "habían incluido"
+        ]
+      }
+    },
+    {
+      "id": "reír",
+      "infinitive": "reír",
+      "meaning": "to laugh",
+      "rank": 180,
+      "forms": {
+        "now": [
+          "río",
+          "ríes",
+          "ríe",
+          "reímos",
+          "ríen"
+        ],
+        "past_event": [
+          "reí",
+          "reíste",
+          "rio",
+          "reímos",
+          "rieron"
+        ],
+        "background": [
+          "reía",
+          "reías",
+          "reía",
+          "reíamos",
+          "reían"
+        ],
+        "would": [
+          "reiría",
+          "reirías",
+          "reiría",
+          "reiríamos",
+          "reirían"
+        ],
+        "hope": [
+          "ría",
+          "rías",
+          "ría",
+          "riamos",
+          "rían"
+        ],
+        "has_happened": [
+          "he reído",
+          "has reído",
+          "ha reído",
+          "hemos reído",
+          "han reído"
+        ],
+        "had_happened": [
+          "había reído",
+          "habías reído",
+          "había reído",
+          "habíamos reído",
+          "habían reído"
+        ]
+      }
+    },
+    {
+      "id": "cortar",
+      "infinitive": "cortar",
+      "meaning": "to cut",
+      "rank": 181,
+      "forms": {
+        "now": [
+          "corto",
+          "cortas",
+          "corta",
+          "cortamos",
+          "cortan"
+        ],
+        "past_event": [
+          "corté",
+          "cortaste",
+          "cortó",
+          "cortamos",
+          "cortaron"
+        ],
+        "background": [
+          "cortaba",
+          "cortabas",
+          "cortaba",
+          "cortábamos",
+          "cortaban"
+        ],
+        "would": [
+          "cortaría",
+          "cortarías",
+          "cortaría",
+          "cortaríamos",
+          "cortarían"
+        ],
+        "hope": [
+          "corte",
+          "cortes",
+          "corte",
+          "cortemos",
+          "corten"
+        ],
+        "has_happened": [
+          "he cortado",
+          "has cortado",
+          "ha cortado",
+          "hemos cortado",
+          "han cortado"
+        ],
+        "had_happened": [
+          "había cortado",
+          "habías cortado",
+          "había cortado",
+          "habíamos cortado",
+          "habían cortado"
+        ]
+      }
+    },
+    {
+      "id": "formar",
+      "infinitive": "formar",
+      "meaning": "to form / train",
+      "rank": 182,
+      "forms": {
+        "now": [
+          "formo",
+          "formas",
+          "forma",
+          "formamos",
+          "forman"
+        ],
+        "past_event": [
+          "formé",
+          "formaste",
+          "formó",
+          "formamos",
+          "formaron"
+        ],
+        "background": [
+          "formaba",
+          "formabas",
+          "formaba",
+          "formábamos",
+          "formaban"
+        ],
+        "would": [
+          "formaría",
+          "formarías",
+          "formaría",
+          "formaríamos",
+          "formarían"
+        ],
+        "hope": [
+          "forme",
+          "formes",
+          "forme",
+          "formemos",
+          "formen"
+        ],
+        "has_happened": [
+          "he formado",
+          "has formado",
+          "ha formado",
+          "hemos formado",
+          "han formado"
+        ],
+        "had_happened": [
+          "había formado",
+          "habías formado",
+          "había formado",
+          "habíamos formado",
+          "habían formado"
+        ]
+      }
+    },
+    {
+      "id": "resolver",
+      "infinitive": "resolver",
+      "meaning": "to solve / resolve",
+      "rank": 183,
+      "forms": {
+        "now": [
+          "resuelvo",
+          "resuelves",
+          "resuelve",
+          "resolvemos",
+          "resuelven"
+        ],
+        "past_event": [
+          "resolví",
+          "resolviste",
+          "resolvió",
+          "resolvimos",
+          "resolvieron"
+        ],
+        "background": [
+          "resolvía",
+          "resolvías",
+          "resolvía",
+          "resolvíamos",
+          "resolvían"
+        ],
+        "would": [
+          "resolvería",
+          "resolverías",
+          "resolvería",
+          "resolveríamos",
+          "resolverían"
+        ],
+        "hope": [
+          "resuelva",
+          "resuelvas",
+          "resuelva",
+          "resolvamos",
+          "resuelvan"
+        ],
+        "has_happened": [
+          "he resuelto",
+          "has resuelto",
+          "ha resuelto",
+          "hemos resuelto",
+          "han resuelto"
+        ],
+        "had_happened": [
+          "había resuelto",
+          "habías resuelto",
+          "había resuelto",
+          "habíamos resuelto",
+          "habían resuelto"
+        ]
+      }
+    },
+    {
+      "id": "guardar",
+      "infinitive": "guardar",
+      "meaning": "to keep / save",
+      "rank": 184,
+      "forms": {
+        "now": [
+          "guardo",
+          "guardas",
+          "guarda",
+          "guardamos",
+          "guardan"
+        ],
+        "past_event": [
+          "guardé",
+          "guardaste",
+          "guardó",
+          "guardamos",
+          "guardaron"
+        ],
+        "background": [
+          "guardaba",
+          "guardabas",
+          "guardaba",
+          "guardábamos",
+          "guardaban"
+        ],
+        "would": [
+          "guardaría",
+          "guardarías",
+          "guardaría",
+          "guardaríamos",
+          "guardarían"
+        ],
+        "hope": [
+          "guarde",
+          "guardes",
+          "guarde",
+          "guardemos",
+          "guarden"
+        ],
+        "has_happened": [
+          "he guardado",
+          "has guardado",
+          "ha guardado",
+          "hemos guardado",
+          "han guardado"
+        ],
+        "had_happened": [
+          "había guardado",
+          "habías guardado",
+          "había guardado",
+          "habíamos guardado",
+          "habían guardado"
+        ]
+      }
+    },
+    {
+      "id": "observar",
+      "infinitive": "observar",
+      "meaning": "to observe",
+      "rank": 185,
+      "forms": {
+        "now": [
+          "observo",
+          "observas",
+          "observa",
+          "observamos",
+          "observan"
+        ],
+        "past_event": [
+          "observé",
+          "observaste",
+          "observó",
+          "observamos",
+          "observaron"
+        ],
+        "background": [
+          "observaba",
+          "observabas",
+          "observaba",
+          "observábamos",
+          "observaban"
+        ],
+        "would": [
+          "observaría",
+          "observarías",
+          "observaría",
+          "observaríamos",
+          "observarían"
+        ],
+        "hope": [
+          "observe",
+          "observes",
+          "observe",
+          "observemos",
+          "observen"
+        ],
+        "has_happened": [
+          "he observado",
+          "has observado",
+          "ha observado",
+          "hemos observado",
+          "han observado"
+        ],
+        "had_happened": [
+          "había observado",
+          "habías observado",
+          "había observado",
+          "habíamos observado",
+          "habían observado"
+        ]
+      }
+    },
+    {
+      "id": "negar",
+      "infinitive": "negar",
+      "meaning": "to deny / refuse",
+      "rank": 186,
+      "forms": {
+        "now": [
+          "niego",
+          "niegas",
+          "niega",
+          "negamos",
+          "niegan"
+        ],
+        "past_event": [
+          "negué",
+          "negaste",
+          "negó",
+          "negamos",
+          "negaron"
+        ],
+        "background": [
+          "negaba",
+          "negabas",
+          "negaba",
+          "negábamos",
+          "negaban"
+        ],
+        "would": [
+          "negaría",
+          "negarías",
+          "negaría",
+          "negaríamos",
+          "negarían"
+        ],
+        "hope": [
+          "niegue",
+          "niegues",
+          "niegue",
+          "neguemos",
+          "nieguen"
+        ],
+        "has_happened": [
+          "he negado",
+          "has negado",
+          "ha negado",
+          "hemos negado",
+          "han negado"
+        ],
+        "had_happened": [
+          "había negado",
+          "habías negado",
+          "había negado",
+          "habíamos negado",
+          "habían negado"
+        ]
+      }
+    },
+    {
+      "id": "averiguar",
+      "infinitive": "averiguar",
+      "meaning": "to find out / investigate",
+      "rank": 187,
+      "forms": {
+        "now": [
+          "averiguo",
+          "averiguas",
+          "averigua",
+          "averiguamos",
+          "averiguan"
+        ],
+        "past_event": [
+          "averigüé",
+          "averiguaste",
+          "averiguó",
+          "averiguamos",
+          "averiguaron"
+        ],
+        "background": [
+          "averiguaba",
+          "averiguabas",
+          "averiguaba",
+          "averiguábamos",
+          "averiguaban"
+        ],
+        "would": [
+          "averiguaría",
+          "averiguarías",
+          "averiguaría",
+          "averiguaríamos",
+          "averiguarían"
+        ],
+        "hope": [
+          "averigüe",
+          "averigües",
+          "averigüe",
+          "averigüemos",
+          "averigüen"
+        ],
+        "has_happened": [
+          "he averiguado",
+          "has averiguado",
+          "ha averiguado",
+          "hemos averiguado",
+          "han averiguado"
+        ],
+        "had_happened": [
+          "había averiguado",
+          "habías averiguado",
+          "había averiguado",
+          "habíamos averiguado",
+          "habían averiguado"
+        ]
+      }
+    },
+    {
+      "id": "esconder",
+      "infinitive": "esconder",
+      "meaning": "to hide",
+      "rank": 188,
+      "forms": {
+        "now": [
+          "escondo",
+          "escondes",
+          "esconde",
+          "escondemos",
+          "esconden"
+        ],
+        "past_event": [
+          "escondí",
+          "escondiste",
+          "escondió",
+          "escondimos",
+          "escondieron"
+        ],
+        "background": [
+          "escondía",
+          "escondías",
+          "escondía",
+          "escondíamos",
+          "escondían"
+        ],
+        "would": [
+          "escondería",
+          "esconderías",
+          "escondería",
+          "esconderíamos",
+          "esconderían"
+        ],
+        "hope": [
+          "esconda",
+          "escondas",
+          "esconda",
+          "escondamos",
+          "escondan"
+        ],
+        "has_happened": [
+          "he escondido",
+          "has escondido",
+          "ha escondido",
+          "hemos escondido",
+          "han escondido"
+        ],
+        "had_happened": [
+          "había escondido",
+          "habías escondido",
+          "había escondido",
+          "habíamos escondido",
+          "habían escondido"
+        ]
+      }
+    },
+    {
+      "id": "soltar",
+      "infinitive": "soltar",
+      "meaning": "to let go / release",
+      "rank": 189,
+      "forms": {
+        "now": [
+          "suelto",
+          "sueltas",
+          "suelta",
+          "soltamos",
+          "sueltan"
+        ],
+        "past_event": [
+          "solté",
+          "soltaste",
+          "soltó",
+          "soltamos",
+          "soltaron"
+        ],
+        "background": [
+          "soltaba",
+          "soltabas",
+          "soltaba",
+          "soltábamos",
+          "soltaban"
+        ],
+        "would": [
+          "soltaría",
+          "soltarías",
+          "soltaría",
+          "soltaríamos",
+          "soltarían"
+        ],
+        "hope": [
+          "suelte",
+          "sueltes",
+          "suelte",
+          "soltemos",
+          "suelten"
+        ],
+        "has_happened": [
+          "he soltado",
+          "has soltado",
+          "ha soltado",
+          "hemos soltado",
+          "han soltado"
+        ],
+        "had_happened": [
+          "había soltado",
+          "habías soltado",
+          "había soltado",
+          "habíamos soltado",
+          "habían soltado"
+        ]
+      }
+    },
+    {
+      "id": "gritar",
+      "infinitive": "gritar",
+      "meaning": "to shout",
+      "rank": 190,
+      "forms": {
+        "now": [
+          "grito",
+          "gritas",
+          "grita",
+          "gritamos",
+          "gritan"
+        ],
+        "past_event": [
+          "grité",
+          "gritaste",
+          "gritó",
+          "gritamos",
+          "gritaron"
+        ],
+        "background": [
+          "gritaba",
+          "gritabas",
+          "gritaba",
+          "gritábamos",
+          "gritaban"
+        ],
+        "would": [
+          "gritaría",
+          "gritarías",
+          "gritaría",
+          "gritaríamos",
+          "gritarían"
+        ],
+        "hope": [
+          "grite",
+          "grites",
+          "grite",
+          "gritemos",
+          "griten"
+        ],
+        "has_happened": [
+          "he gritado",
+          "has gritado",
+          "ha gritado",
+          "hemos gritado",
+          "han gritado"
+        ],
+        "had_happened": [
+          "había gritado",
+          "habías gritado",
+          "había gritado",
+          "habíamos gritado",
+          "habían gritado"
+        ]
+      }
+    },
+    {
+      "id": "agradecer",
+      "infinitive": "agradecer",
+      "meaning": "to thank / be grateful",
+      "rank": 191,
+      "forms": {
+        "now": [
+          "agradezco",
+          "agradeces",
+          "agradece",
+          "agradecemos",
+          "agradecen"
+        ],
+        "past_event": [
+          "agradecí",
+          "agradeciste",
+          "agradeció",
+          "agradecimos",
+          "agradecieron"
+        ],
+        "background": [
+          "agradecía",
+          "agradecías",
+          "agradecía",
+          "agradecíamos",
+          "agradecían"
+        ],
+        "would": [
+          "agradecería",
+          "agradecerías",
+          "agradecería",
+          "agradeceríamos",
+          "agradecerían"
+        ],
+        "hope": [
+          "agradezca",
+          "agradezcas",
+          "agradezca",
+          "agradezcamos",
+          "agradezcan"
+        ],
+        "has_happened": [
+          "he agradecido",
+          "has agradecido",
+          "ha agradecido",
+          "hemos agradecido",
+          "han agradecido"
+        ],
+        "had_happened": [
+          "había agradecido",
+          "habías agradecido",
+          "había agradecido",
+          "habíamos agradecido",
+          "habían agradecido"
+        ]
+      }
+    },
+    {
+      "id": "disfrutar",
+      "infinitive": "disfrutar",
+      "meaning": "to enjoy",
+      "rank": 192,
+      "forms": {
+        "now": [
+          "disfruto",
+          "disfrutas",
+          "disfruta",
+          "disfrutamos",
+          "disfrutan"
+        ],
+        "past_event": [
+          "disfruté",
+          "disfrutaste",
+          "disfrutó",
+          "disfrutamos",
+          "disfrutaron"
+        ],
+        "background": [
+          "disfrutaba",
+          "disfrutabas",
+          "disfrutaba",
+          "disfrutábamos",
+          "disfrutaban"
+        ],
+        "would": [
+          "disfrutaría",
+          "disfrutarías",
+          "disfrutaría",
+          "disfrutaríamos",
+          "disfrutarían"
+        ],
+        "hope": [
+          "disfrute",
+          "disfrutes",
+          "disfrute",
+          "disfrutemos",
+          "disfruten"
+        ],
+        "has_happened": [
+          "he disfrutado",
+          "has disfrutado",
+          "ha disfrutado",
+          "hemos disfrutado",
+          "han disfrutado"
+        ],
+        "had_happened": [
+          "había disfrutado",
+          "habías disfrutado",
+          "había disfrutado",
+          "habíamos disfrutado",
+          "habían disfrutado"
+        ]
+      }
+    },
+    {
+      "id": "odiar",
+      "infinitive": "odiar",
+      "meaning": "to hate",
+      "rank": 193,
+      "forms": {
+        "now": [
+          "odio",
+          "odias",
+          "odia",
+          "odiamos",
+          "odian"
+        ],
+        "past_event": [
+          "odié",
+          "odiaste",
+          "odió",
+          "odiamos",
+          "odiaron"
+        ],
+        "background": [
+          "odiaba",
+          "odiabas",
+          "odiaba",
+          "odiábamos",
+          "odiaban"
+        ],
+        "would": [
+          "odiaría",
+          "odiarías",
+          "odiaría",
+          "odiaríamos",
+          "odiarían"
+        ],
+        "hope": [
+          "odie",
+          "odies",
+          "odie",
+          "odiemos",
+          "odien"
+        ],
+        "has_happened": [
+          "he odiado",
+          "has odiado",
+          "ha odiado",
+          "hemos odiado",
+          "han odiado"
+        ],
+        "had_happened": [
+          "había odiado",
+          "habías odiado",
+          "había odiado",
+          "habíamos odiado",
+          "habían odiado"
+        ]
+      }
+    },
+    {
+      "id": "acordar",
+      "infinitive": "acordar",
+      "meaning": "to agree / decide",
+      "rank": 194,
+      "forms": {
+        "now": [
+          "acuerdo",
+          "acuerdas",
+          "acuerda",
+          "acordamos",
+          "acuerdan"
+        ],
+        "past_event": [
+          "acordé",
+          "acordaste",
+          "acordó",
+          "acordamos",
+          "acordaron"
+        ],
+        "background": [
+          "acordaba",
+          "acordabas",
+          "acordaba",
+          "acordábamos",
+          "acordaban"
+        ],
+        "would": [
+          "acordaría",
+          "acordarías",
+          "acordaría",
+          "acordaríamos",
+          "acordarían"
+        ],
+        "hope": [
+          "acuerde",
+          "acuerdes",
+          "acuerde",
+          "acordemos",
+          "acuerden"
+        ],
+        "has_happened": [
+          "he acordado",
+          "has acordado",
+          "ha acordado",
+          "hemos acordado",
+          "han acordado"
+        ],
+        "had_happened": [
+          "había acordado",
+          "habías acordado",
+          "había acordado",
+          "habíamos acordado",
+          "habían acordado"
+        ]
+      }
+    },
+    {
+      "id": "construir",
+      "infinitive": "construir",
+      "meaning": "to build",
+      "rank": 195,
+      "forms": {
+        "now": [
+          "construyo",
+          "construyes",
+          "construye",
+          "construimos",
+          "construyen"
+        ],
+        "past_event": [
+          "construí",
+          "construiste",
+          "construyó",
+          "construimos",
+          "construyeron"
+        ],
+        "background": [
+          "construía",
+          "construías",
+          "construía",
+          "construíamos",
+          "construían"
+        ],
+        "would": [
+          "construiría",
+          "construirías",
+          "construiría",
+          "construiríamos",
+          "construirían"
+        ],
+        "hope": [
+          "construya",
+          "construyas",
+          "construya",
+          "construyamos",
+          "construyan"
+        ],
+        "has_happened": [
+          "he construido",
+          "has construido",
+          "ha construido",
+          "hemos construido",
+          "han construido"
+        ],
+        "had_happened": [
+          "había construido",
+          "habías construido",
+          "había construido",
+          "habíamos construido",
+          "habían construido"
+        ]
+      }
+    },
+    {
+      "id": "manejar",
+      "infinitive": "manejar",
+      "meaning": "to drive / manage",
+      "rank": 196,
+      "forms": {
+        "now": [
+          "manejo",
+          "manejas",
+          "maneja",
+          "manejamos",
+          "manejan"
+        ],
+        "past_event": [
+          "manejé",
+          "manejaste",
+          "manejó",
+          "manejamos",
+          "manejaron"
+        ],
+        "background": [
+          "manejaba",
+          "manejabas",
+          "manejaba",
+          "manejábamos",
+          "manejaban"
+        ],
+        "would": [
+          "manejaría",
+          "manejarías",
+          "manejaría",
+          "manejaríamos",
+          "manejarían"
+        ],
+        "hope": [
+          "maneje",
+          "manejes",
+          "maneje",
+          "manejemos",
+          "manejen"
+        ],
+        "has_happened": [
+          "he manejado",
+          "has manejado",
+          "ha manejado",
+          "hemos manejado",
+          "han manejado"
+        ],
+        "had_happened": [
+          "había manejado",
+          "habías manejado",
+          "había manejado",
+          "habíamos manejado",
+          "habían manejado"
+        ]
+      }
+    },
+    {
+      "id": "compartir",
+      "infinitive": "compartir",
+      "meaning": "to share",
+      "rank": 197,
+      "forms": {
+        "now": [
+          "comparto",
+          "compartes",
+          "comparte",
+          "compartimos",
+          "comparten"
+        ],
+        "past_event": [
+          "compartí",
+          "compartiste",
+          "compartió",
+          "compartimos",
+          "compartieron"
+        ],
+        "background": [
+          "compartía",
+          "compartías",
+          "compartía",
+          "compartíamos",
+          "compartían"
+        ],
+        "would": [
+          "compartiría",
+          "compartirías",
+          "compartiría",
+          "compartiríamos",
+          "compartirían"
+        ],
+        "hope": [
+          "comparta",
+          "compartas",
+          "comparta",
+          "compartamos",
+          "compartan"
+        ],
+        "has_happened": [
+          "he compartido",
+          "has compartido",
+          "ha compartido",
+          "hemos compartido",
+          "han compartido"
+        ],
+        "had_happened": [
+          "había compartido",
+          "habías compartido",
+          "había compartido",
+          "habíamos compartido",
+          "habían compartido"
+        ]
+      }
+    },
+    {
+      "id": "repetir",
+      "infinitive": "repetir",
+      "meaning": "to repeat",
+      "rank": 198,
+      "forms": {
+        "now": [
+          "repito",
+          "repites",
+          "repite",
+          "repetimos",
+          "repiten"
+        ],
+        "past_event": [
+          "repetí",
+          "repetiste",
+          "repitió",
+          "repetimos",
+          "repitieron"
+        ],
+        "background": [
+          "repetía",
+          "repetías",
+          "repetía",
+          "repetíamos",
+          "repetían"
+        ],
+        "would": [
+          "repetiría",
+          "repetirías",
+          "repetiría",
+          "repetiríamos",
+          "repetirían"
+        ],
+        "hope": [
+          "repita",
+          "repitas",
+          "repita",
+          "repitamos",
+          "repitan"
+        ],
+        "has_happened": [
+          "he repetido",
+          "has repetido",
+          "ha repetido",
+          "hemos repetido",
+          "han repetido"
+        ],
+        "had_happened": [
+          "había repetido",
+          "habías repetido",
+          "había repetido",
+          "habíamos repetido",
+          "habían repetido"
+        ]
+      }
+    },
+    {
+      "id": "viajar",
+      "infinitive": "viajar",
+      "meaning": "to travel",
+      "rank": 199,
+      "forms": {
+        "now": [
+          "viajo",
+          "viajas",
+          "viaja",
+          "viajamos",
+          "viajan"
+        ],
+        "past_event": [
+          "viajé",
+          "viajaste",
+          "viajó",
+          "viajamos",
+          "viajaron"
+        ],
+        "background": [
+          "viajaba",
+          "viajabas",
+          "viajaba",
+          "viajábamos",
+          "viajaban"
+        ],
+        "would": [
+          "viajaría",
+          "viajarías",
+          "viajaría",
+          "viajaríamos",
+          "viajarían"
+        ],
+        "hope": [
+          "viaje",
+          "viajes",
+          "viaje",
+          "viajemos",
+          "viajen"
+        ],
+        "has_happened": [
+          "he viajado",
+          "has viajado",
+          "ha viajado",
+          "hemos viajado",
+          "han viajado"
+        ],
+        "had_happened": [
+          "había viajado",
+          "habías viajado",
+          "había viajado",
+          "habíamos viajado",
+          "habían viajado"
+        ]
+      }
+    },
+    {
+      "id": "limpiar",
+      "infinitive": "limpiar",
+      "meaning": "to clean",
+      "rank": 200,
+      "forms": {
+        "now": [
+          "limpio",
+          "limpias",
+          "limpia",
+          "limpiamos",
+          "limpian"
+        ],
+        "past_event": [
+          "limpié",
+          "limpiaste",
+          "limpió",
+          "limpiamos",
+          "limpiaron"
+        ],
+        "background": [
+          "limpiaba",
+          "limpiabas",
+          "limpiaba",
+          "limpiábamos",
+          "limpiaban"
+        ],
+        "would": [
+          "limpiaría",
+          "limpiarías",
+          "limpiaría",
+          "limpiaríamos",
+          "limpiarían"
+        ],
+        "hope": [
+          "limpie",
+          "limpies",
+          "limpie",
+          "limpiemos",
+          "limpien"
+        ],
+        "has_happened": [
+          "he limpiado",
+          "has limpiado",
+          "ha limpiado",
+          "hemos limpiado",
+          "han limpiado"
+        ],
+        "had_happened": [
+          "había limpiado",
+          "habías limpiado",
+          "había limpiado",
+          "habíamos limpiado",
+          "habían limpiado"
         ]
       }
     }

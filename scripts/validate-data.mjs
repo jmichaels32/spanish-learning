@@ -13,8 +13,8 @@ vm.runInNewContext(await readFile(dataPath, "utf8"), sandbox);
 const data = sandbox.window.SPANISH_CONJUGATIONS;
 
 assert.ok(data, "Conjugation data did not load.");
-assert.equal(data.verbs.length, 100, "Expected exactly 100 verbs.");
-assert.equal(new Set(data.verbs.map((verb) => verb.id)).size, 100, "Verb ids must be unique.");
+assert.equal(data.verbs.length, 200, "Expected exactly 200 verbs.");
+assert.equal(new Set(data.verbs.map((verb) => verb.id)).size, 200, "Verb ids must be unique.");
 assert.equal(data.persons.length, 5, "Expected five Latin American person groups.");
 assert.equal(data.tenses.length, 7, "Expected seven meaning-based tenses.");
 
@@ -55,6 +55,14 @@ const checks = {
   "escribir.has_happened": ["he escrito", "has escrito", "ha escrito", "hemos escrito", "han escrito"],
   "abrir.has_happened": ["he abierto", "has abierto", "ha abierto", "hemos abierto", "han abierto"],
   "volver.has_happened": ["he vuelto", "has vuelto", "ha vuelto", "hemos vuelto", "han vuelto"],
+  "valer.would": ["valdría", "valdrías", "valdría", "valdríamos", "valdrían"],
+  "enviar.now": ["envío", "envías", "envía", "enviamos", "envían"],
+  "detener.past_event": ["detuve", "detuviste", "detuvo", "detuvimos", "detuvieron"],
+  "conducir.past_event": ["conduje", "condujiste", "condujo", "condujimos", "condujeron"],
+  "incluir.past_event": ["incluí", "incluiste", "incluyó", "incluimos", "incluyeron"],
+  "resolver.has_happened": ["he resuelto", "has resuelto", "ha resuelto", "hemos resuelto", "han resuelto"],
+  "construir.hope": ["construya", "construyas", "construya", "construyamos", "construyan"],
+  "repetir.past_event": ["repetí", "repetiste", "repitió", "repetimos", "repitieron"],
 };
 
 for (const [key, expected] of Object.entries(checks)) {

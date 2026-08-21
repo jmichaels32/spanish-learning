@@ -16,12 +16,12 @@ The source project documents 14,456 tested verbs, 97 conjugation models, irregul
 
 `npm test` verifies:
 
-- exactly 100 unique verbs
+- exactly 200 unique verbs
 - all seven requested forms for every verb
 - all five Latin American person groups for every form
-- 3,500 nonempty, markup-free answers
+- 7,000 nonempty, markup-free answers
 - hand-specified paradigms for high-risk irregulars and participles
-- browser-level conjugation and vocabulary recall flows
+- browser-level conjugation, Tier 2 unlocking, and vocabulary recall flows
 - vocabulary completion only after 20 consecutive correct answers in each direction
 - a later vocabulary miss returning a completed word to active practice
 
@@ -29,8 +29,8 @@ The source project documents 14,456 tested verbs, 97 conjugation models, irregul
 
 On August 20, 2026, all generated forms were compared with the independently maintained [Fred Jehle Spanish Verb Database](https://github.com/ghidinelli/fred-jehle-spanish-verbs):
 
-- 3,360 forms available in both datasets matched exactly
-- 140 forms were not available for comparison in that dataset
+- 6,405 forms available in both datasets matched exactly
+- 595 forms were not available for comparison in that dataset
 - 0 compared forms disagreed
 
 This comparison is an additional audit, not a runtime or build dependency.
@@ -43,10 +43,11 @@ This comparison is an additional audit, not a runtime or build dependency.
 
 ## Frequency coverage estimate
 
-The app describes the current curriculum as covering roughly 70% of verb use. This estimate comes from comparing the 100 curriculum lemmas with the open `frequency.csv` dataset in [`doozan/spanish_data`](https://github.com/doozan/spanish_data), derived from subtitle frequency data and tagged by part of speech:
+The app describes the full curriculum as covering roughly 78% of verb use. This estimate comes from comparing its 200 lemmas with the open `frequency.csv` dataset in [`doozan/spanish_data`](https://github.com/doozan/spanish_data), derived from subtitle frequency data and tagged by part of speech:
 
-- Current curated 100: 70.1% of verb tokens in that dataset
-- Strict corpus top 100: 77.2% of verb tokens in that dataset
-- Current curriculum overlap with the strict top 100: 79 verbs
+- Tier 1 curated 100: 70.1% of verb tokens in that dataset
+- Full curated 200: 78.1% of verb tokens in that dataset
+- Strict corpus top 200: 84.7% of verb tokens in that dataset
+- Full curriculum overlap with the strict top 200: 180 verbs
 
-Coverage varies with corpus, dialect, genre, and whether auxiliaries or syntactically unusual verbs are treated as drill targets. The percentage is therefore presented as an estimate, not a universal language statistic.
+The strict list's advantage is driven heavily by auxiliary `haber`, which alone contributes about 5.3 percentage points in this corpus but is intentionally unsuitable for the app's ordinary five-person lexical drill. Coverage varies with corpus, dialect, genre, and whether auxiliaries or syntactically unusual verbs are treated as drill targets. The percentage is therefore presented as an estimate, not a universal language statistic.

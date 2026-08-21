@@ -10,12 +10,16 @@
   const STORAGE_KEY = "de-memoria-spanish-v1";
   const VOCAB_MASTERY_STREAK = 20;
   const CONJUGATION_SOLID_STREAK = 3;
+  const TIER_1_VERB_COUNT = 100;
   const ALL_TENSE_IDS = corpus.tenses.map((tense) => tense.id);
   const ALL_PERSON_IDS = corpus.persons.map((person) => person.id);
+  const FORMS_PER_VERB = ALL_TENSE_IDS.length * ALL_PERSON_IDS.length;
+  const TIER_1_FORM_COUNT = TIER_1_VERB_COUNT * FORMS_PER_VERB;
+  const TOTAL_FORM_COUNT = corpus.verbs.length * FORMS_PER_VERB;
 
   const defaultState = {
     version: 1,
-    conjugation: { items: {}, totalAnswers: 0, totalCorrect: 0 },
+    conjugation: { items: {}, totalAnswers: 0, totalCorrect: 0, tier2Unlocked: false },
     vocabulary: { decks: [], stats: {}, totalAnswers: 0, totalCorrect: 0 },
     settings: {
       verbCount: 20,
@@ -54,6 +58,10 @@
     verbAnswerTotal: document.querySelector("#verb-answer-total"),
     verbAccuracy: document.querySelector("#verb-accuracy"),
     solidFormTotal: document.querySelector("#solid-form-total"),
+    totalFormTotal: document.querySelector("#total-form-total"),
+    verifiedVerbTotal: document.querySelector("#verified-verb-total"),
+    tier2Button: document.querySelector("[data-verb-count='200']"),
+    tier2Status: document.querySelector("#tier-2-status"),
     tenseOptions: document.querySelector("#tense-options"),
     personOptions: document.querySelector("#person-options"),
     cueGuide: document.querySelector("#cue-guide"),
@@ -101,6 +109,7 @@
     statsSolidForms: document.querySelector("#stats-solid-forms"),
     statsOverallAccuracy: document.querySelector("#stats-overall-accuracy"),
     statsVerbsPracticed: document.querySelector("#stats-verbs-practiced"),
+    statsTierStatus: document.querySelector("#stats-tier-status"),
     hardestCombinations: document.querySelector("#hardest-combinations"),
     verbStatsSearch: document.querySelector("#verb-stats-search"),
     verbStatsSort: document.querySelector("#verb-stats-sort"),
@@ -122,12 +131,16 @@
 
   function normalizeState(value) {
     const settings = value.settings ?? {};
+    const conjugationItems = value.conjugation?.items ?? {};
+    const tier2Unlocked = Boolean(value.conjugation?.tier2Unlocked) || tier1SolidCount(conjugationItems) === TIER_1_FORM_COUNT;
+    const requestedVerbCount = Number(settings.verbCount);
     return {
       version: 1,
       conjugation: {
-        items: value.conjugation?.items ?? {},
+        items: conjugationItems,
         totalAnswers: Number(value.conjugation?.totalAnswers) || 0,
         totalCorrect: Number(value.conjugation?.totalCorrect) || 0,
+        tier2Unlocked,
       },
       vocabulary: {
         decks: Array.isArray(value.vocabulary?.decks) ? value.vocabulary.decks : [],
@@ -136,7 +149,7 @@
         totalCorrect: Number(value.vocabulary?.totalCorrect) || 0,
       },
       settings: {
-        verbCount: [20, 50, 100].includes(Number(settings.verbCount)) ? Number(settings.verbCount) : 20,
+        verbCount: [20, 50, 100, 200].includes(requestedVerbCount) && (requestedVerbCount !== 200 || tier2Unlocked) ? requestedVerbCount : 20,
         sessionLength: [10, 20, 50].includes(Number(settings.sessionLength)) ? Number(settings.sessionLength) : 20,
         tenses: validSelection(settings.tenses, ALL_TENSE_IDS),
         persons: validSelection(settings.persons, ALL_PERSON_IDS),
@@ -217,12 +230,32 @@
     };
   }
 
+  function tier1SolidCount(items = savedState.conjugation.items) {
+    let solid = 0;
+    corpus.verbs.slice(0, TIER_1_VERB_COUNT).forEach((verb) => {
+      ALL_TENSE_IDS.forEach((tenseId) => {
+        ALL_PERSON_IDS.forEach((personId) => {
+          if (Number(items[`${verb.id}:${tenseId}:${personId}`]?.streak) >= CONJUGATION_SOLID_STREAK) solid += 1;
+        });
+      });
+    });
+    return solid;
+  }
+
   function renderConjugationHome() {
     const conjugation = savedState.conjugation;
     const solid = Object.values(conjugation.items).filter((stats) => Number(stats.streak) >= CONJUGATION_SOLID_STREAK).length;
     elements.verbAnswerTotal.textContent = conjugation.totalAnswers.toLocaleString();
     elements.verbAccuracy.textContent = percent(conjugation.totalCorrect, conjugation.totalAnswers);
     elements.solidFormTotal.textContent = solid.toLocaleString();
+    elements.totalFormTotal.textContent = TOTAL_FORM_COUNT.toLocaleString();
+    elements.verifiedVerbTotal.textContent = `${corpus.verbs.length} audited verbs`;
+    const tier1Solid = tier1SolidCount();
+    elements.tier2Button.disabled = !conjugation.tier2Unlocked;
+    elements.tier2Button.textContent = conjugation.tier2Unlocked ? "All 200" : "All 200 🔒";
+    elements.tier2Status.textContent = conjugation.tier2Unlocked
+      ? "Tier 2 is unlocked. All 200 keeps difficult Tier 1 forms in review while introducing verbs 101–200."
+      : `Tier 2 unlocks permanently when all Tier 1 combinations reach a 3-answer streak · ${tier1Solid.toLocaleString()}/${TIER_1_FORM_COUNT.toLocaleString()} solid.`;
 
     elements.tenseOptions.innerHTML = corpus.tenses.map((tense) => {
       const selected = savedState.settings.tenses.includes(tense.id);
@@ -355,8 +388,10 @@
     };
     savedState.conjugation.totalAnswers += 1;
     savedState.conjugation.totalCorrect += correct ? 1 : 0;
+    const tier2JustUnlocked = !savedState.conjugation.tier2Unlocked && tier1SolidCount() === TIER_1_FORM_COUNT;
+    if (tier2JustUnlocked) savedState.conjugation.tier2Unlocked = true;
     saveState();
-    return savedState.conjugation.items[item.id];
+    return { stats: savedState.conjugation.items[item.id], tier2JustUnlocked };
   }
 
   function answerConjugation(value) {
@@ -366,7 +401,7 @@
     const selected = normalizeAnswer(value);
     const correct = selected === normalizeAnswer(item.correct);
     const accentOnly = !correct && withoutDiacritics(selected) === withoutDiacritics(item.correct);
-    const stats = recordConjugation(correct);
+    const { stats, tier2JustUnlocked } = recordConjugation(correct);
     conjugationSession.answered += 1;
     conjugationSession.score += correct ? 1 : 0;
     conjugationSession.answers.push({ item, selected: value.trim(), correct, accentOnly });
@@ -375,7 +410,9 @@
     elements.conjugationFeedback.hidden = false;
     elements.conjugationFeedback.classList.add(correct ? "is-correct" : accentOnly ? "is-accent" : "is-wrong");
     elements.conjugationFeedback.innerHTML = correct
-      ? `<strong>Correct.</strong><span>This exact form is now at a ${stats.streak}-answer streak.</span>`
+      ? tier2JustUnlocked
+        ? `<strong>Tier 2 unlocked.</strong><span>All 3,500 Tier 1 combinations are solid. Verbs 101–200 are now available permanently.</span>`
+        : `<strong>Correct.</strong><span>This exact form is now at a ${stats.streak}-answer streak.</span>`
       : accentOnly
         ? `<strong>Almost — the written accent matters.</strong><span>Correct answer: <b>${h(item.correct)}</b>. This counts as a miss.</span>`
         : `<strong>Not quite.</strong><span>Correct answer: <b>${h(item.correct)}</b>.</span>`;
@@ -447,10 +484,13 @@
       .filter((item) => item.stats.attempts > 0);
     const solidForms = practicedItems.filter((item) => item.stats.streak >= CONJUGATION_SOLID_STREAK).length;
     const practicedVerbIds = new Set(practicedItems.map((item) => item.verb.id));
-    elements.statsPracticedForms.textContent = `${practicedItems.length}/3,500`;
+    elements.statsPracticedForms.textContent = `${practicedItems.length.toLocaleString()}/${TOTAL_FORM_COUNT.toLocaleString()}`;
     elements.statsSolidForms.textContent = solidForms.toLocaleString();
     elements.statsOverallAccuracy.textContent = percent(savedState.conjugation.totalCorrect, savedState.conjugation.totalAnswers);
-    elements.statsVerbsPracticed.textContent = `${practicedVerbIds.size}/100`;
+    elements.statsVerbsPracticed.textContent = `${practicedVerbIds.size}/${corpus.verbs.length}`;
+    elements.statsTierStatus.textContent = savedState.conjugation.tier2Unlocked
+      ? "Tier 2 unlocked permanently · verbs 101–200 are available in practice."
+      : `Tier 2 locked · ${tier1SolidCount().toLocaleString()}/${TIER_1_FORM_COUNT.toLocaleString()} Tier 1 combinations are solid.`;
 
     const hardest = [...practicedItems]
       .sort((left, right) => {
@@ -487,7 +527,11 @@
       return left.verb.rank - right.verb.rank;
     });
     elements.verbStatsList.innerHTML = rows.length
-      ? rows.map(({ verb, attempts, correct, accuracy, practicedForms, solidForms }) => `<article class="verb-stats-row"><div class="verb-name-cell"><span class="verb-rank">${verb.rank}</span><div><strong>${h(verb.infinitive)}</strong><small>${h(verb.meaning)}</small></div></div><div class="metric-cell"><strong>${practicedForms}/35</strong><small>unique forms</small></div><div class="metric-cell"><strong>${accuracy === null ? "—" : `${Math.round(accuracy * 100)}%`}</strong><small>${attempts ? `${correct}/${attempts} answers` : "not started"}</small></div><div class="metric-cell"><strong>${solidForms}/35</strong><small>streak 3+</small></div></article>`).join("")
+      ? rows.map(({ verb, attempts, correct, accuracy, practicedForms, solidForms }) => {
+          const tier2Locked = verb.rank > TIER_1_VERB_COUNT && !savedState.conjugation.tier2Unlocked;
+          const tierLabel = verb.rank <= TIER_1_VERB_COUNT ? "Tier 1" : tier2Locked ? "Tier 2 · locked" : "Tier 2";
+          return `<article class="verb-stats-row${tier2Locked ? " is-locked" : ""}"><div class="verb-name-cell"><span class="verb-rank">${verb.rank}</span><div><strong>${h(verb.infinitive)} <em class="tier-label">${tierLabel}</em></strong><small>${h(verb.meaning)}</small></div></div><div class="metric-cell"><strong>${practicedForms}/35</strong><small>unique forms</small></div><div class="metric-cell"><strong>${accuracy === null ? "—" : `${Math.round(accuracy * 100)}%`}</strong><small>${attempts ? `${correct}/${attempts} answers` : "not started"}</small></div><div class="metric-cell"><strong>${solidForms}/35</strong><small>streak 3+</small></div></article>`;
+        }).join("")
       : '<p class="empty-list">No verbs match that search.</p>';
   }
 
@@ -835,6 +879,7 @@
 
     const verbCountButton = event.target.closest("[data-verb-count]");
     if (verbCountButton) {
+      if (Number(verbCountButton.dataset.verbCount) === 200 && !savedState.conjugation.tier2Unlocked) return;
       savedState.settings.verbCount = Number(verbCountButton.dataset.verbCount);
       saveState();
       renderConjugationHome();

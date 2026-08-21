@@ -10,9 +10,9 @@
     />
     <title>De Memoria — Spanish Recall</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=1" />
-    <script src="data/conjugations.js?v=1" defer></script>
-    <script src="app.js?v=1" defer></script>
+    <link rel="stylesheet" href="styles.css?v=2" />
+    <script src="data/conjugations.js?v=2" defer></script>
+    <script src="app.js?v=2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to practice</a>
@@ -47,23 +47,25 @@
               <div><strong id="verb-answer-total">0</strong><span>answers</span></div>
               <div><strong id="verb-accuracy">—</strong><span>accuracy</span></div>
               <div><strong id="solid-form-total">0</strong><span>forms at 3+</span></div>
-              <div><strong>3,500</strong><span>total forms</span></div>
+              <div><strong id="total-form-total">7,000</strong><span>total forms</span></div>
             </div>
 
             <div class="setup-layout">
               <section class="panel setup-panel" aria-labelledby="setup-title">
                 <div class="panel-heading">
                   <div><p class="eyebrow">Choose the field</p><h2 id="setup-title">Start a recall session</h2></div>
-                  <span class="verified-data">100 audited verbs</span>
+                  <span class="verified-data" id="verified-verb-total">200 audited verbs</span>
                 </div>
 
                 <fieldset class="control-group">
                   <legend>Verb set</legend>
-                  <div class="segmented" id="verb-count-options">
+                  <div class="segmented four-options" id="verb-count-options">
                     <button class="is-selected" type="button" data-verb-count="20">Core 20</button>
                     <button type="button" data-verb-count="50">Top 50</button>
-                    <button type="button" data-verb-count="100">All 100</button>
+                    <button type="button" data-verb-count="100">Tier 1</button>
+                    <button type="button" data-verb-count="200" disabled>All 200 🔒</button>
                   </div>
+                  <p class="tier-status" id="tier-2-status"></p>
                 </fieldset>
 
                 <fieldset class="control-group">
@@ -255,13 +257,14 @@
           <section class="panel coverage-panel" aria-labelledby="coverage-title">
             <div>
               <p class="eyebrow">Curriculum coverage</p>
-              <h2 id="coverage-title">100 practical verbs · about 70% of verb use</h2>
+              <h2 id="coverage-title">200 practical verbs · about 78% of verb use</h2>
               <p>
-                In an open subtitle-derived frequency corpus, this curated set accounts for roughly 70% of verb tokens.
-                A strict corpus top 100 reaches about 77%. Results vary by country, medium, and topic, so this is an estimate—not a universal promise.
+                In an open subtitle-derived frequency corpus, this curated set accounts for roughly 78% of verb tokens.
+                A strict corpus top 200 reaches about 85%, but includes auxiliaries and verbs that produce misleading person-by-person drills. Results vary by country, medium, and topic.
               </p>
+              <p class="stats-tier-status" id="stats-tier-status"></p>
             </div>
-            <div class="coverage-number"><strong>100</strong><span>current verbs</span></div>
+            <div class="coverage-number"><strong>200</strong><span>audited verbs</span></div>
           </section>
 
           <section class="panel stats-panel" aria-labelledby="hardest-title">
@@ -274,7 +277,7 @@
 
           <section class="panel stats-panel" aria-labelledby="verb-curriculum-title">
             <div class="stats-heading verb-stats-heading">
-              <div><p class="eyebrow">Complete curriculum</p><h2 id="verb-curriculum-title">All 100 verbs</h2></div>
+              <div><p class="eyebrow">Complete curriculum</p><h2 id="verb-curriculum-title">All 200 verbs</h2></div>
               <div class="stats-tools">
                 <input id="verb-stats-search" type="search" placeholder="Search verbs" aria-label="Search verbs" />
                 <select id="verb-stats-sort" aria-label="Sort verbs">

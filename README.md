@@ -7,7 +7,9 @@ A dependency-free, local-first Spanish recall trainer. It has two focused modes:
 
 ## Conjugation curriculum
 
-The app contains 100 practical verbs and 3,500 explicit forms: seven meaning cues × five Latin American person groups × 100 verbs.
+The app contains 200 practical verbs and 7,000 explicit forms: seven meaning cues × five Latin American person groups × 200 verbs.
+
+Verbs 1–100 are Tier 1. Tier 2 (verbs 101–200) is already installed but remains locked until every Tier 1 verb–cue–person combination has a streak of three correct answers. The unlock is permanent; **All 200** then introduces Tier 2 while retaining difficult Tier 1 forms for review.
 
 | Meaning cue | Grammatical form |
 | --- | --- |
@@ -23,7 +25,7 @@ The cues are memory anchors, not complete definitions of tense usage. Practice u
 
 Questions are recall-only. An answer must include correct accent marks. Missing accents receive a specific “almost” message but count as incorrect. Selection prioritizes unseen forms and misses, then gradually reduces repetition as streaks improve.
 
-The **Stats** screen exposes that working record: overall accuracy, attempted and solid combinations, the hardest practiced verb–cue–person combinations, and a searchable table of all 100 curriculum verbs.
+The **Stats** screen exposes that working record: overall accuracy, attempted and solid combinations, the hardest practiced verb–cue–person combinations, and a searchable table of all 200 curriculum verbs with Tier 2 lock status.
 
 ## Vocabulary decks
 
@@ -58,6 +60,6 @@ npm run build:data
 npm test
 ```
 
-The generator uses the Latin American-compatible `canarias` person system from `@jirimracek/conjugate-esp`, then collapses identical `ustedes`/`ellos` forms into one learning group. Tests validate all 3,500 fields and spot-check high-risk irregular paradigms.
+The generator uses the Latin American-compatible `canarias` person system from `@jirimracek/conjugate-esp`, then collapses identical `ustedes`/`ellos` forms into one learning group. Tests validate all 7,000 fields and spot-check high-risk irregular paradigms.
 
 See [DATA_AUDIT.md](DATA_AUDIT.md) for the accuracy checks and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for source details.

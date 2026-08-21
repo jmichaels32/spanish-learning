@@ -33,9 +33,11 @@ await new Promise((resolveLoad, rejectLoad) => {
 });
 
 const { document } = dom.window;
-assert.equal(dom.window.SPANISH_CONJUGATIONS.verbs.length, 100);
+assert.equal(dom.window.SPANISH_CONJUGATIONS.verbs.length, 200);
 assert.equal(document.querySelectorAll("[data-tense]").length, 7);
 assert.equal(document.querySelectorAll("[data-person]").length, 5);
+assert.equal(document.querySelector("[data-verb-count='200']").disabled, true);
+assert.match(document.querySelector("#tier-2-status").textContent, /0\/3,500 solid/);
 
 document.querySelector("[data-action='toggle-all-tenses']").click();
 document.querySelector("[data-tense='would']").click();
@@ -50,11 +52,46 @@ const answerInput = document.querySelector("#conjugation-answer");
 answerInput.value = verb.forms.would[2];
 document.querySelector("#conjugation-answer-form").dispatchEvent(new dom.window.Event("submit", { bubbles: true, cancelable: true }));
 assert.match(document.querySelector("#conjugation-feedback").textContent, /Correct/);
+document.querySelector("[data-action='exit-conjugation']").click();
 
 document.querySelector(".main-nav [data-screen='stats']").click();
-assert.equal(document.querySelectorAll(".verb-stats-row").length, 100);
-assert.match(document.querySelector("#stats-practiced-forms").textContent, /1\/3,500/);
+assert.equal(document.querySelectorAll(".verb-stats-row").length, 200);
+assert.equal(document.querySelectorAll(".verb-stats-row.is-locked").length, 100);
+assert.match(document.querySelector("#stats-practiced-forms").textContent, /1\/7,000/);
 assert.match(document.querySelector("#hardest-combinations").textContent, new RegExp(verbId));
+assert.match(document.querySelector("#stats-tier-status").textContent, /Tier 2 locked/);
+
+const completedItems = {};
+for (const completedVerb of dom.window.SPANISH_CONJUGATIONS.verbs.slice(0, 100)) {
+  for (const tense of dom.window.SPANISH_CONJUGATIONS.tenses) {
+    for (const person of dom.window.SPANISH_CONJUGATIONS.persons) {
+      completedItems[`${completedVerb.id}:${tense.id}:${person.id}`] = { attempts: 3, correct: 3, streak: 3, lastSeen: 1 };
+    }
+  }
+}
+const completedBackup = {
+  version: 1,
+  conjugation: { items: completedItems, totalAnswers: 10500, totalCorrect: 10500, tier2Unlocked: false },
+  vocabulary: { decks: [], stats: {}, totalAnswers: 0, totalCorrect: 0 },
+  settings: { verbCount: 100, sessionLength: 20 },
+};
+dom.window.confirm = () => true;
+const backupInput = document.querySelector("#backup-import");
+Object.defineProperty(backupInput, "files", { configurable: true, value: [{ text: async () => JSON.stringify(completedBackup) }] });
+backupInput.dispatchEvent(new dom.window.Event("change", { bubbles: true }));
+await new Promise((resolveImport) => setTimeout(resolveImport, 20));
+assert.equal(document.querySelector("[data-verb-count='200']").disabled, false);
+assert.match(document.querySelector("#tier-2-status").textContent, /Tier 2 is unlocked/);
+document.querySelector(".main-nav [data-screen='stats']").click();
+assert.match(document.querySelector("#stats-tier-status").textContent, /Tier 2 unlocked permanently/);
+
+document.querySelector(".main-nav [data-screen='conjugation']").click();
+document.querySelector("[data-verb-count='200']").click();
+document.querySelector("[data-action='start-conjugation']").click();
+const tier2VerbId = document.querySelector("#conjugation-question-title").textContent;
+const tier2Verb = dom.window.SPANISH_CONJUGATIONS.verbs.find((candidate) => candidate.id === tier2VerbId);
+assert.ok(tier2Verb.rank > 100, "Unlocked practice should introduce an unseen Tier 2 verb before solid Tier 1 forms.");
+document.querySelector("[data-action='exit-conjugation']").click();
 
 document.querySelector(".main-nav [data-screen='vocabulary']").click();
 const deckName = document.querySelector("#new-deck-name");
