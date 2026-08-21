@@ -97,6 +97,14 @@
     vocabularyAnswer: document.querySelector("#vocabulary-answer"),
     vocabularyFeedback: document.querySelector("#vocabulary-feedback"),
     vocabularyNext: document.querySelector("#vocabulary-next"),
+    statsPracticedForms: document.querySelector("#stats-practiced-forms"),
+    statsSolidForms: document.querySelector("#stats-solid-forms"),
+    statsOverallAccuracy: document.querySelector("#stats-overall-accuracy"),
+    statsVerbsPracticed: document.querySelector("#stats-verbs-practiced"),
+    hardestCombinations: document.querySelector("#hardest-combinations"),
+    verbStatsSearch: document.querySelector("#verb-stats-search"),
+    verbStatsSort: document.querySelector("#verb-stats-sort"),
+    verbStatsList: document.querySelector("#verb-stats-list"),
     backupImport: document.querySelector("#backup-import"),
     backupMessage: document.querySelector("#backup-message"),
     conjugationSourceNote: document.querySelector("#conjugation-source-note"),
@@ -195,6 +203,7 @@
     elements.navButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.screen === name));
     if (name === "conjugation" && !conjugationSession.active) renderConjugationHome();
     if (name === "vocabulary" && !vocabularySession.active) renderVocabularyHome();
+    if (name === "stats") renderStats();
     window.scrollTo({ top: 0, behavior: "instant" });
   }
 
@@ -403,6 +412,83 @@
     elements.conjugationResults.hidden = true;
     elements.conjugationHome.hidden = false;
     renderConjugationHome();
+  }
+
+  function allConjugationItems() {
+    return corpus.verbs.flatMap((verb) => corpus.tenses.flatMap((tense) => corpus.persons.map((person, personIndex) => ({
+      id: `${verb.id}:${tense.id}:${person.id}`,
+      verb,
+      tense,
+      person,
+      correct: verb.forms[tense.id][personIndex],
+    }))));
+  }
+
+  function verbPerformance(verb) {
+    const items = corpus.tenses.flatMap((tense) => corpus.persons.map((person) => ({
+      id: `${verb.id}:${tense.id}:${person.id}`,
+      stats: getConjugationStats(`${verb.id}:${tense.id}:${person.id}`),
+    })));
+    const attempts = items.reduce((total, item) => total + item.stats.attempts, 0);
+    const correct = items.reduce((total, item) => total + item.stats.correct, 0);
+    return {
+      verb,
+      attempts,
+      correct,
+      accuracy: attempts ? correct / attempts : null,
+      practicedForms: items.filter((item) => item.stats.attempts > 0).length,
+      solidForms: items.filter((item) => item.stats.streak >= CONJUGATION_SOLID_STREAK).length,
+    };
+  }
+
+  function renderStats() {
+    const practicedItems = allConjugationItems()
+      .map((item) => ({ ...item, stats: getConjugationStats(item.id) }))
+      .filter((item) => item.stats.attempts > 0);
+    const solidForms = practicedItems.filter((item) => item.stats.streak >= CONJUGATION_SOLID_STREAK).length;
+    const practicedVerbIds = new Set(practicedItems.map((item) => item.verb.id));
+    elements.statsPracticedForms.textContent = `${practicedItems.length}/3,500`;
+    elements.statsSolidForms.textContent = solidForms.toLocaleString();
+    elements.statsOverallAccuracy.textContent = percent(savedState.conjugation.totalCorrect, savedState.conjugation.totalAnswers);
+    elements.statsVerbsPracticed.textContent = `${practicedVerbIds.size}/100`;
+
+    const hardest = [...practicedItems]
+      .sort((left, right) => {
+        const leftAccuracy = left.stats.correct / left.stats.attempts;
+        const rightAccuracy = right.stats.correct / right.stats.attempts;
+        return leftAccuracy - rightAccuracy
+          || left.stats.streak - right.stats.streak
+          || right.stats.attempts - left.stats.attempts
+          || left.verb.rank - right.verb.rank;
+      })
+      .slice(0, 20);
+    elements.hardestCombinations.innerHTML = hardest.length
+      ? hardest.map((item) => {
+          const accuracy = Math.round((item.stats.correct / item.stats.attempts) * 100);
+          return `<article class="hardest-item"><div><strong>${h(item.verb.infinitive)} · ${h(item.tense.cue)} · ${h(item.person.label)}</strong><span>Answer: ${h(item.correct)} · streak ${item.stats.streak}</span></div><small>${accuracy}%<br>${item.stats.correct}/${item.stats.attempts}</small></article>`;
+        }).join("")
+      : '<p class="empty-list">Complete a conjugation session to build your difficulty ranking.</p>';
+    renderVerbStats();
+  }
+
+  function renderVerbStats() {
+    const query = normalizeAnswer(elements.verbStatsSearch.value);
+    const sort = elements.verbStatsSort.value;
+    const rows = corpus.verbs.map(verbPerformance).filter(({ verb }) => normalizeAnswer(`${verb.infinitive} ${verb.meaning}`).includes(query));
+    rows.sort((left, right) => {
+      if (sort === "name") return left.verb.infinitive.localeCompare(right.verb.infinitive, "es");
+      if (sort === "progress") return right.solidForms - left.solidForms || right.practicedForms - left.practicedForms || left.verb.rank - right.verb.rank;
+      if (sort === "difficulty") {
+        if (left.accuracy === null && right.accuracy !== null) return 1;
+        if (left.accuracy !== null && right.accuracy === null) return -1;
+        if (left.accuracy !== right.accuracy) return (left.accuracy ?? 1) - (right.accuracy ?? 1);
+        return left.solidForms - right.solidForms || right.attempts - left.attempts || left.verb.rank - right.verb.rank;
+      }
+      return left.verb.rank - right.verb.rank;
+    });
+    elements.verbStatsList.innerHTML = rows.length
+      ? rows.map(({ verb, attempts, correct, accuracy, practicedForms, solidForms }) => `<article class="verb-stats-row"><div class="verb-name-cell"><span class="verb-rank">${verb.rank}</span><div><strong>${h(verb.infinitive)}</strong><small>${h(verb.meaning)}</small></div></div><div class="metric-cell"><strong>${practicedForms}/35</strong><small>unique forms</small></div><div class="metric-cell"><strong>${accuracy === null ? "—" : `${Math.round(accuracy * 100)}%`}</strong><small>${attempts ? `${correct}/${attempts} answers` : "not started"}</small></div><div class="metric-cell"><strong>${solidForms}/35</strong><small>streak 3+</small></div></article>`).join("")
+      : '<p class="empty-list">No verbs match that search.</p>';
   }
 
   function selectedDeck() {
@@ -830,6 +916,8 @@
   });
 
   elements.wordSearch.addEventListener("input", renderWordList);
+  elements.verbStatsSearch.addEventListener("input", renderVerbStats);
+  elements.verbStatsSort.addEventListener("change", renderVerbStats);
   elements.backupImport.addEventListener("change", () => {
     const [file] = elements.backupImport.files;
     if (file) importBackup(file);

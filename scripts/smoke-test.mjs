@@ -51,7 +51,12 @@ answerInput.value = verb.forms.would[2];
 document.querySelector("#conjugation-answer-form").dispatchEvent(new dom.window.Event("submit", { bubbles: true, cancelable: true }));
 assert.match(document.querySelector("#conjugation-feedback").textContent, /Correct/);
 
-document.querySelector("[data-screen='vocabulary']").click();
+document.querySelector(".main-nav [data-screen='stats']").click();
+assert.equal(document.querySelectorAll(".verb-stats-row").length, 100);
+assert.match(document.querySelector("#stats-practiced-forms").textContent, /1\/3,500/);
+assert.match(document.querySelector("#hardest-combinations").textContent, new RegExp(verbId));
+
+document.querySelector(".main-nav [data-screen='vocabulary']").click();
 const deckName = document.querySelector("#new-deck-name");
 deckName.value = "Smoke deck";
 document.querySelector("#create-deck-form").dispatchEvent(new dom.window.Event("submit", { bubbles: true, cancelable: true }));

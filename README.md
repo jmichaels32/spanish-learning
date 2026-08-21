@@ -23,6 +23,8 @@ The cues are memory anchors, not complete definitions of tense usage. Practice u
 
 Questions are recall-only. An answer must include correct accent marks. Missing accents receive a specific “almost” message but count as incorrect. Selection prioritizes unseen forms and misses, then gradually reduces repetition as streaks improve.
 
+The **Stats** screen exposes that working record: overall accuracy, attempted and solid combinations, the hardest practiced verb–cue–person combinations, and a searchable table of all 100 curriculum verbs.
+
 ## Vocabulary decks
 
 Create a deck and paste tab-separated pairs, one per line:

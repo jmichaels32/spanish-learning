@@ -40,3 +40,13 @@ This comparison is an additional audit, not a runtime or build dependency.
 - `vos` and `vosotros` are intentionally excluded from this first Latin American curriculum.
 - Typically impersonal or syntactically inverted targets such as `haber`, `gustar`, and `ocurrir` are excluded from the drill list even though some are frequent words. This avoids presenting uncommon person–verb pairings as ordinary usage.
 - The English cues (“now,” “background,” “hope,” and so on) are retrieval anchors. The interface explicitly avoids presenting them as exhaustive rules for tense choice.
+
+## Frequency coverage estimate
+
+The app describes the current curriculum as covering roughly 70% of verb use. This estimate comes from comparing the 100 curriculum lemmas with the open `frequency.csv` dataset in [`doozan/spanish_data`](https://github.com/doozan/spanish_data), derived from subtitle frequency data and tagged by part of speech:
+
+- Current curated 100: 70.1% of verb tokens in that dataset
+- Strict corpus top 100: 77.2% of verb tokens in that dataset
+- Current curriculum overlap with the strict top 100: 79 verbs
+
+Coverage varies with corpus, dialect, genre, and whether auxiliaries or syntactically unusual verbs are treated as drill targets. The percentage is therefore presented as an estimate, not a universal language statistic.

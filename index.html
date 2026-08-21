@@ -25,6 +25,7 @@
       <nav class="main-nav" aria-label="Training areas">
         <button class="is-active" type="button" data-screen="conjugation">Conjugations</button>
         <button type="button" data-screen="vocabulary">Vocabulary</button>
+        <button type="button" data-screen="stats">Stats</button>
         <button type="button" data-screen="data">Data & backup</button>
       </nav>
     </header>
@@ -232,6 +233,60 @@
               <div class="feedback" id="vocabulary-feedback" hidden></div>
               <button class="button button-primary button-full" id="vocabulary-next" type="button" data-action="next-vocabulary" hidden>Next word →</button>
             </article>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen" data-screen-panel="stats" hidden>
+        <div class="page-shell">
+          <header class="page-intro compact-intro">
+            <p class="eyebrow">Your working record</p>
+            <h1>See what needs work.</h1>
+            <p>Every verb, meaning cue, and person combination has its own history. Difficult combinations rise to the top of practice and this page.</p>
+          </header>
+
+          <div class="stat-strip" aria-label="Conjugation statistics">
+            <div><strong id="stats-practiced-forms">0</strong><span>forms attempted</span></div>
+            <div><strong id="stats-solid-forms">0</strong><span>forms at 3+</span></div>
+            <div><strong id="stats-overall-accuracy">—</strong><span>accuracy</span></div>
+            <div><strong id="stats-verbs-practiced">0</strong><span>verbs practiced</span></div>
+          </div>
+
+          <section class="panel coverage-panel" aria-labelledby="coverage-title">
+            <div>
+              <p class="eyebrow">Curriculum coverage</p>
+              <h2 id="coverage-title">100 practical verbs · about 70% of verb use</h2>
+              <p>
+                In an open subtitle-derived frequency corpus, this curated set accounts for roughly 70% of verb tokens.
+                A strict corpus top 100 reaches about 77%. Results vary by country, medium, and topic, so this is an estimate—not a universal promise.
+              </p>
+            </div>
+            <div class="coverage-number"><strong>100</strong><span>current verbs</span></div>
+          </section>
+
+          <section class="panel stats-panel" aria-labelledby="hardest-title">
+            <div class="stats-heading">
+              <div><p class="eyebrow">Adaptive priority</p><h2 id="hardest-title">Hardest practiced combinations</h2></div>
+              <p>Lowest lifetime accuracy first, then broken streaks and repeated misses.</p>
+            </div>
+            <div class="hardest-list" id="hardest-combinations"></div>
+          </section>
+
+          <section class="panel stats-panel" aria-labelledby="verb-curriculum-title">
+            <div class="stats-heading verb-stats-heading">
+              <div><p class="eyebrow">Complete curriculum</p><h2 id="verb-curriculum-title">All 100 verbs</h2></div>
+              <div class="stats-tools">
+                <input id="verb-stats-search" type="search" placeholder="Search verbs" aria-label="Search verbs" />
+                <select id="verb-stats-sort" aria-label="Sort verbs">
+                  <option value="curriculum">Curriculum order</option>
+                  <option value="difficulty">Hardest first</option>
+                  <option value="progress">Most solid forms</option>
+                  <option value="name">Name A–Z</option>
+                </select>
+              </div>
+            </div>
+            <div class="verb-table-header" aria-hidden="true"><span>Verb</span><span>Practiced</span><span>Accuracy</span><span>Solid forms</span></div>
+            <div class="verb-stats-list" id="verb-stats-list"></div>
           </section>
         </div>
       </section>
