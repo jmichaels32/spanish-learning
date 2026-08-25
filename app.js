@@ -12,6 +12,11 @@
   const VOCAB_MASTERY_STREAK = 20;
   const CONJUGATION_SOLID_STREAK = 3;
   const VERBS_PER_TIER = 100;
+  const TIER_CORRECT_PER_VERB = 5;
+  const TIER_TENSE_COVERAGE = 3;
+  const TIER_PERSON_COVERAGE = 3;
+  const TIER_RECENT_WINDOW = 200;
+  const TIER_RECENT_ACCURACY = 0.9;
   const TOTAL_TIERS = Math.ceil(corpus.verbs.length / VERBS_PER_TIER);
   const ALL_TENSE_IDS = corpus.tenses.map((tense) => tense.id);
   const ALL_PERSON_IDS = corpus.persons.map((person) => person.id);
@@ -20,15 +25,15 @@
   const TOTAL_FORM_COUNT = corpus.verbs.length * FORMS_PER_VERB;
 
   const defaultState = {
-    version: 2,
-    conjugation: { items: {}, totalAnswers: 0, totalCorrect: 0, highestUnlockedTier: 1 },
-    vocabulary: { decks: [], stats: {}, totalAnswers: 0, totalCorrect: 0 },
+    version: 3,
+    conjugation: { items: {}, recentByTier: {}, totalAnswers: 0, totalCorrect: 0, highestUnlockedTier: 1 },
+    vocabulary: { decks: [{ id: "main-vocabulary", name: "My vocabulary", createdAt: 0, words: [] }], stats: {}, totalAnswers: 0, totalCorrect: 0 },
     settings: {
       verbCount: 20,
       sessionLength: 20,
       tenses: ALL_TENSE_IDS,
       persons: ALL_PERSON_IDS,
-      selectedDeckId: null,
+      selectedDeckId: "main-vocabulary",
       wordFilter: "active",
       curriculumCutoff: 55,
       curriculumScope: 2000,
@@ -100,11 +105,13 @@
     vocabWordTotal: document.querySelector("#vocab-word-total"),
     vocabMasteredTotal: document.querySelector("#vocab-mastered-total"),
     vocabAnswerTotal: document.querySelector("#vocab-answer-total"),
-    deckList: document.querySelector("#deck-list"),
     deckWorkspace: document.querySelector("#deck-workspace"),
-    emptyDeckWorkspace: document.querySelector("#empty-deck-workspace"),
-    selectedDeckName: document.querySelector("#selected-deck-name"),
     selectedDeckSummary: document.querySelector("#selected-deck-summary"),
+    vocabEnglish: document.querySelector("#vocab-english"),
+    vocabSpanish: document.querySelector("#vocab-spanish"),
+    vocabAddMessage: document.querySelector("#vocab-add-message"),
+    googleTranslateLink: document.querySelector("#google-translate-link"),
+    pasteTranslation: document.querySelector("#paste-translation"),
     vocabImport: document.querySelector("#vocab-import"),
     vocabImportMessage: document.querySelector("#vocab-import-message"),
     wordSearch: document.querySelector("#word-search"),
@@ -157,34 +164,39 @@
   function normalizeState(value) {
     const settings = value.settings ?? {};
     const conjugationItems = value.conjugation?.items ?? {};
+    const recentByTier = Object.fromEntries(Array.from({ length: TOTAL_TIERS }, (_, index) => {
+      const tier = index + 1;
+      const recent = Array.isArray(value.conjugation?.recentByTier?.[tier]) ? value.conjugation.recentByTier[tier] : [];
+      return [tier, recent.slice(-TIER_RECENT_WINDOW).map(Boolean)];
+    }));
     const legacyTier = value.conjugation?.tier2Unlocked ? 2 : 1;
     let highestUnlockedTier = Math.min(TOTAL_TIERS, Math.max(1, Number(value.conjugation?.highestUnlockedTier) || legacyTier));
-    while (highestUnlockedTier < TOTAL_TIERS && tierSolidCount(highestUnlockedTier, conjugationItems) === FORMS_PER_TIER) {
+    while (highestUnlockedTier < TOTAL_TIERS && (
+      tierSolidCount(highestUnlockedTier, conjugationItems) === FORMS_PER_TIER
+      || tierUnlockProgress(highestUnlockedTier, conjugationItems, recentByTier).complete
+    )) {
       highestUnlockedTier += 1;
     }
     const requestedVerbCount = Number(settings.verbCount);
     const requestedCurriculumCutoff = Number(settings.curriculumCutoff);
     const allowedVerbCounts = [20, 50, ...Array.from({ length: highestUnlockedTier }, (_, index) => (index + 1) * VERBS_PER_TIER)];
+    const vocabulary = normalizeVocabularyState(value.vocabulary);
     return {
-      version: 2,
+      version: 3,
       conjugation: {
         items: conjugationItems,
+        recentByTier,
         totalAnswers: Number(value.conjugation?.totalAnswers) || 0,
         totalCorrect: Number(value.conjugation?.totalCorrect) || 0,
         highestUnlockedTier,
       },
-      vocabulary: {
-        decks: Array.isArray(value.vocabulary?.decks) ? value.vocabulary.decks : [],
-        stats: value.vocabulary?.stats ?? {},
-        totalAnswers: Number(value.vocabulary?.totalAnswers) || 0,
-        totalCorrect: Number(value.vocabulary?.totalCorrect) || 0,
-      },
+      vocabulary,
       settings: {
         verbCount: allowedVerbCounts.includes(requestedVerbCount) ? requestedVerbCount : 20,
         sessionLength: [10, 20, 50].includes(Number(settings.sessionLength)) ? Number(settings.sessionLength) : 20,
         tenses: validSelection(settings.tenses, ALL_TENSE_IDS),
         persons: validSelection(settings.persons, ALL_PERSON_IDS),
-        selectedDeckId: settings.selectedDeckId ?? null,
+        selectedDeckId: "main-vocabulary",
         wordFilter: ["active", "completed", "all"].includes(settings.wordFilter) ? settings.wordFilter : "active",
         curriculumCutoff: Number.isFinite(requestedCurriculumCutoff) ? Math.min(100, Math.max(0, requestedCurriculumCutoff)) : 55,
         curriculumScope: [1000, 2000].includes(Number(settings.curriculumScope)) ? Number(settings.curriculumScope) : 2000,
@@ -195,6 +207,34 @@
   function validSelection(saved, validValues) {
     if (!Array.isArray(saved)) return [...validValues];
     return [...new Set(saved.filter((value) => validValues.includes(value)))];
+  }
+
+  function normalizeVocabularyState(value = {}) {
+    const sourceDecks = Array.isArray(value.decks) ? value.decks : [];
+    const sourceStats = value.stats ?? {};
+    const words = [];
+    const stats = {};
+    const usedIds = new Set();
+    sourceDecks.forEach((deck, deckIndex) => {
+      if (!Array.isArray(deck.words)) return;
+      deck.words.forEach((word, wordIndex) => {
+        const spanish = Array.isArray(word.spanish) ? word.spanish.map(String).filter(Boolean) : [];
+        const english = Array.isArray(word.english) ? word.english.map(String).filter(Boolean) : [];
+        if (!spanish.length || !english.length) return;
+        const baseId = String(word.id || `word-${deckIndex}-${wordIndex}`);
+        const id = usedIds.has(baseId) ? `${deck.id || deckIndex}-${baseId}` : baseId;
+        usedIds.add(id);
+        words.push({ id, spanish, english, createdAt: Number(word.createdAt) || Date.now() });
+        const oldStats = sourceStats[`${deck.id}:${word.id}`];
+        if (oldStats) stats[`main-vocabulary:${id}`] = oldStats;
+      });
+    });
+    return {
+      decks: [{ id: "main-vocabulary", name: "My vocabulary", createdAt: 0, words }],
+      stats,
+      totalAnswers: Number(value.totalAnswers) || 0,
+      totalCorrect: Number(value.totalCorrect) || 0,
+    };
   }
 
   function saveState() {
@@ -276,6 +316,47 @@
     return solid;
   }
 
+  function tierUnlockProgress(tierNumber, items = savedState.conjugation.items, recentByTier = savedState.conjugation.recentByTier) {
+    const start = (tierNumber - 1) * VERBS_PER_TIER;
+    const verbs = corpus.verbs.slice(start, start + VERBS_PER_TIER);
+    const readyVerbs = verbs.filter((verb) => {
+      let correct = 0;
+      const tenses = new Set();
+      const persons = new Set();
+      ALL_TENSE_IDS.forEach((tenseId) => {
+        ALL_PERSON_IDS.forEach((personId) => {
+          const itemCorrect = Number(items[`${verb.id}:${tenseId}:${personId}`]?.correct) || 0;
+          correct += itemCorrect;
+          if (itemCorrect > 0) {
+            tenses.add(tenseId);
+            persons.add(personId);
+          }
+        });
+      });
+      return correct >= TIER_CORRECT_PER_VERB
+        && tenses.size >= TIER_TENSE_COVERAGE
+        && persons.size >= TIER_PERSON_COVERAGE;
+    }).length;
+    const recent = recentByTier[tierNumber] ?? [];
+    const recentCorrect = recent.filter(Boolean).length;
+    const recentAccuracy = recent.length ? recentCorrect / recent.length : 0;
+    return {
+      readyVerbs,
+      recentAnswers: recent.length,
+      recentCorrect,
+      recentAccuracy,
+      complete: readyVerbs === verbs.length
+        && recent.length === TIER_RECENT_WINDOW
+        && recentAccuracy >= TIER_RECENT_ACCURACY,
+    };
+  }
+
+  function tierProgressText(tierNumber) {
+    const progress = tierUnlockProgress(tierNumber);
+    const accuracy = progress.recentAnswers ? `${Math.round(progress.recentAccuracy * 100)}%` : "—";
+    return `${progress.readyVerbs}/${VERBS_PER_TIER} verbs ready · recent ${progress.recentAnswers}/${TIER_RECENT_WINDOW} at ${accuracy}. Each verb needs ${TIER_CORRECT_PER_VERB} correct across ${TIER_TENSE_COVERAGE} cues and ${TIER_PERSON_COVERAGE} people; recent accuracy needs 90%.`;
+  }
+
   function renderConjugationHome() {
     const conjugation = savedState.conjugation;
     const solid = Object.values(conjugation.items).filter((stats) => Number(stats.streak) >= CONJUGATION_SOLID_STREAK).length;
@@ -297,10 +378,12 @@
     ].join("");
     elements.verbCountSelect.value = String(savedState.settings.verbCount);
     if (highestTier === TOTAL_TIERS) {
-      elements.tierStatus.textContent = `Tier ${TOTAL_TIERS} is unlocked permanently. The full ${corpus.verbs.length.toLocaleString()}-verb curriculum is available.`;
+      const finalProgress = tierUnlockProgress(TOTAL_TIERS);
+      elements.tierStatus.textContent = finalProgress.complete
+        ? `Tier ${TOTAL_TIERS} is complete. The full ${corpus.verbs.length.toLocaleString()}-verb curriculum remains available.`
+        : `Tier ${TOTAL_TIERS} is unlocked permanently · ${tierProgressText(TOTAL_TIERS)}`;
     } else {
-      const solid = tierSolidCount(highestTier);
-      elements.tierStatus.textContent = `Tier ${highestTier + 1} unlocks permanently when all Tier ${highestTier} combinations reach a 3-answer streak · ${solid.toLocaleString()}/${FORMS_PER_TIER.toLocaleString()} solid.`;
+      elements.tierStatus.textContent = `Tier ${highestTier + 1} unlock progress · ${tierProgressText(highestTier)}`;
     }
 
     elements.tenseOptions.innerHTML = corpus.tenses.map((tense) => {
@@ -434,8 +517,13 @@
     };
     savedState.conjugation.totalAnswers += 1;
     savedState.conjugation.totalCorrect += correct ? 1 : 0;
+    const answeredTier = Math.ceil(item.verb.rank / VERBS_PER_TIER);
+    const recent = savedState.conjugation.recentByTier[answeredTier] ?? [];
+    recent.push(correct);
+    savedState.conjugation.recentByTier[answeredTier] = recent.slice(-TIER_RECENT_WINDOW);
     const completedTier = savedState.conjugation.highestUnlockedTier;
-    const unlockedTier = completedTier < TOTAL_TIERS && tierSolidCount(completedTier) === FORMS_PER_TIER
+    const completedProgress = tierUnlockProgress(completedTier);
+    const unlockedTier = completedTier < TOTAL_TIERS && completedProgress.complete
       ? completedTier + 1
       : null;
     if (unlockedTier) savedState.conjugation.highestUnlockedTier = unlockedTier;
@@ -460,7 +548,7 @@
     elements.conjugationFeedback.classList.add(correct ? "is-correct" : accentOnly ? "is-accent" : "is-wrong");
     elements.conjugationFeedback.innerHTML = correct
       ? unlockedTier
-        ? `<strong>Tier ${unlockedTier} unlocked.</strong><span>All ${FORMS_PER_TIER.toLocaleString()} Tier ${unlockedTier - 1} combinations are solid. The top ${(unlockedTier * VERBS_PER_TIER).toLocaleString()} verbs are now available permanently.</span>`
+        ? `<strong>Tier ${unlockedTier} unlocked.</strong><span>All ${VERBS_PER_TIER} prior-tier verbs met the recall-coverage target and recent accuracy reached ${Math.round(TIER_RECENT_ACCURACY * 100)}%. The top ${(unlockedTier * VERBS_PER_TIER).toLocaleString()} verbs are now available permanently.</span>`
         : `<strong>Correct.</strong><span>This exact form is now at a ${stats.streak}-answer streak.</span>`
       : accentOnly
         ? `<strong>Almost — the written accent matters.</strong><span>Correct answer: <b>${h(item.correct)}</b>. This counts as a miss.</span>`
@@ -538,9 +626,10 @@
     elements.statsOverallAccuracy.textContent = percent(savedState.conjugation.totalCorrect, savedState.conjugation.totalAnswers);
     elements.statsVerbsPracticed.textContent = `${practicedVerbIds.size}/${corpus.verbs.length}`;
     const highestTier = savedState.conjugation.highestUnlockedTier;
-    elements.statsTierStatus.textContent = highestTier === TOTAL_TIERS
-      ? `Tier ${TOTAL_TIERS} unlocked permanently · the full ${corpus.verbs.length.toLocaleString()}-verb curriculum is available.`
-      : `Tier ${highestTier} unlocked permanently · ${tierSolidCount(highestTier).toLocaleString()}/${FORMS_PER_TIER.toLocaleString()} Tier ${highestTier} combinations are solid toward Tier ${highestTier + 1}.`;
+    const highestProgress = tierUnlockProgress(highestTier);
+    elements.statsTierStatus.textContent = highestTier === TOTAL_TIERS && highestProgress.complete
+      ? `Tier ${TOTAL_TIERS} complete · the full ${corpus.verbs.length.toLocaleString()}-verb curriculum remains available.`
+      : `Tier ${highestTier} unlocked permanently · ${tierProgressText(highestTier)}`;
 
     const hardest = [...practicedItems]
       .sort((left, right) => {
@@ -666,7 +755,7 @@
   }
 
   function selectedDeck() {
-    return savedState.vocabulary.decks.find((deck) => deck.id === savedState.settings.selectedDeckId) ?? null;
+    return savedState.vocabulary.decks[0] ?? null;
   }
 
   function getDirectionStats(deckId, wordId, direction) {
@@ -694,32 +783,14 @@
     return { words, mastered };
   }
 
-  function ensureSelectedDeck() {
-    if (!selectedDeck() && savedState.vocabulary.decks.length) {
-      savedState.settings.selectedDeckId = savedState.vocabulary.decks[0].id;
-      saveState();
-    }
-  }
-
   function renderVocabularyHome() {
-    ensureSelectedDeck();
     const totals = vocabularyTotals();
     elements.vocabWordTotal.textContent = totals.words.toLocaleString();
     elements.vocabMasteredTotal.textContent = totals.mastered.toLocaleString();
     elements.vocabAnswerTotal.textContent = savedState.vocabulary.totalAnswers.toLocaleString();
-    elements.deckList.innerHTML = savedState.vocabulary.decks.length
-      ? savedState.vocabulary.decks.map((deck) => {
-          const mastered = deck.words.filter((word) => wordIsMastered(deck.id, word.id)).length;
-          return `<button class="deck-button${deck.id === savedState.settings.selectedDeckId ? " is-selected" : ""}" type="button" data-deck-id="${h(deck.id)}"><strong>${h(deck.name)}</strong><span>${deck.words.length} words · ${mastered} completed</span></button>`;
-        }).join("")
-      : '<p class="empty-list">No decks yet.</p>';
-
     const deck = selectedDeck();
-    elements.deckWorkspace.hidden = !deck;
-    elements.emptyDeckWorkspace.hidden = Boolean(deck);
     if (!deck) return;
     const mastered = deck.words.filter((word) => wordIsMastered(deck.id, word.id)).length;
-    elements.selectedDeckName.textContent = deck.name;
     elements.selectedDeckSummary.textContent = `${deck.words.length} words · ${mastered} completed · ${deck.words.length - mastered} active`;
     const practiceButton = elements.deckWorkspace.querySelector("[data-action='start-vocabulary']");
     practiceButton.disabled = deck.words.length === 0;
@@ -749,18 +820,55 @@
       : '<p class="empty-list">No words in this view.</p>';
   }
 
-  function createDeck(name) {
-    const cleanName = String(name).trim();
-    if (!cleanName) return;
-    const deck = { id: randomId("deck"), name: cleanName, createdAt: Date.now(), words: [] };
-    savedState.vocabulary.decks.push(deck);
-    savedState.settings.selectedDeckId = deck.id;
-    saveState();
-    renderVocabularyHome();
-  }
-
   function parseAliases(value) {
     return unique(value.split(";").map((part) => part.trim()).filter(Boolean));
+  }
+
+  function addVocabularyWord(englishValue, spanishValue) {
+    const deck = selectedDeck();
+    const english = parseAliases(englishValue);
+    const spanish = parseAliases(spanishValue);
+    if (!deck || !english.length || !spanish.length) return false;
+    const existing = deck.words.find((word) => normalizeAnswer(word.spanish[0]) === normalizeAnswer(spanish[0])
+      && normalizeAnswer(word.english[0]) === normalizeAnswer(english[0]));
+    if (existing) {
+      existing.spanish = unique([...existing.spanish, ...spanish]);
+      existing.english = unique([...existing.english, ...english]);
+      elements.vocabAddMessage.textContent = "That card already existed; accepted alternatives were merged.";
+    } else {
+      deck.words.unshift({ id: randomId("word"), spanish, english, createdAt: Date.now() });
+      elements.vocabAddMessage.textContent = `Added ${spanish[0]} ↔ ${english[0]}.`;
+    }
+    saveState();
+    elements.vocabEnglish.value = "";
+    elements.vocabSpanish.value = "";
+    updateGoogleTranslateLink();
+    renderVocabularyHome();
+    elements.vocabEnglish.focus();
+    return true;
+  }
+
+  function updateGoogleTranslateLink() {
+    const text = elements.vocabEnglish.value.trim();
+    const url = new URL("https://translate.google.com/");
+    url.searchParams.set("sl", "en");
+    url.searchParams.set("tl", "es");
+    if (text) url.searchParams.set("text", text);
+    url.searchParams.set("op", "translate");
+    elements.googleTranslateLink.href = url.toString();
+  }
+
+  async function pasteTranslation() {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (!text.trim()) throw new Error("Clipboard is empty.");
+      elements.vocabSpanish.value = text.trim();
+      elements.vocabAddMessage.textContent = "Translation pasted. Check it, then add the card.";
+      elements.vocabSpanish.focus();
+    } catch {
+      elements.vocabAddMessage.textContent = "Clipboard access was unavailable. Press and hold in the Spanish field to paste.";
+      elements.vocabSpanish.focus();
+    }
   }
 
   function parseVocabulary(text) {
@@ -803,7 +911,7 @@
       }
     });
     saveState();
-    elements.vocabImportMessage.textContent = `${added} added${merged ? ` · ${merged} duplicate${merged === 1 ? "" : "s"} merged` : ""}${parsed.invalid.length ? ` · lines ${parsed.invalid.join(", ")} skipped` : ""}.`;
+    elements.vocabImportMessage.textContent = `${added} added to My vocabulary${merged ? ` · ${merged} duplicate${merged === 1 ? "" : "s"} merged` : ""}${parsed.invalid.length ? ` · lines ${parsed.invalid.join(", ")} skipped` : ""}.`;
     if (added || merged) elements.vocabImport.value = "";
     renderVocabularyHome();
   }
@@ -811,7 +919,7 @@
   function removeWord(wordId) {
     const deck = selectedDeck();
     const word = deck?.words.find((candidate) => candidate.id === wordId);
-    if (!deck || !word || !window.confirm(`Remove “${word.spanish[0]}” from ${deck.name}?`)) return;
+    if (!deck || !word || !window.confirm(`Remove “${word.spanish[0]}” from My vocabulary?`)) return;
     deck.words = deck.words.filter((candidate) => candidate.id !== wordId);
     delete savedState.vocabulary.stats[`${deck.id}:${word.id}`];
     saveState();
@@ -858,7 +966,7 @@
     vocabularySession.locked = false;
     const deck = selectedDeck();
     const englishToSpanish = question.direction === "en_es";
-    elements.vocabularyDeckLabel.textContent = deck.name;
+    elements.vocabularyDeckLabel.textContent = "My vocabulary";
     elements.vocabularySessionScore.textContent = `${vocabularySession.score} / ${vocabularySession.answered}`;
     elements.vocabularyDirection.textContent = englishToSpanish ? "English → Spanish" : "Spanish → English";
     elements.vocabularyQuestionTitle.textContent = (englishToSpanish ? question.word.english : question.word.spanish)[0];
@@ -937,10 +1045,6 @@
     input.setSelectionRange(start + text.length, start + text.length);
   }
 
-  function safeFilename(value) {
-    return String(value).normalize("NFD").replace(/\p{Diacritic}/gu, "").replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase() || "vocabulary";
-  }
-
   function downloadFile(filename, content, type) {
     const url = URL.createObjectURL(new Blob([content], { type }));
     const anchor = document.createElement("a");
@@ -956,7 +1060,7 @@
     const deck = selectedDeck();
     if (!deck) return;
     const text = deck.words.map((word) => `${word.spanish.join("; ")}\t${word.english.join("; ")}`).join("\n");
-    downloadFile(`${safeFilename(deck.name)}.txt`, text, "text/plain;charset=utf-8");
+    downloadFile("my-vocabulary.txt", text, "text/plain;charset=utf-8");
   }
 
   function exportAllData() {
@@ -1064,14 +1168,6 @@
       return;
     }
 
-    const deckButton = event.target.closest("[data-deck-id]");
-    if (deckButton) {
-      savedState.settings.selectedDeckId = deckButton.dataset.deckId;
-      saveState();
-      renderVocabularyHome();
-      return;
-    }
-
     const filterButton = event.target.closest("[data-word-filter]");
     if (filterButton) {
       savedState.settings.wordFilter = filterButton.dataset.wordFilter;
@@ -1094,11 +1190,9 @@
     answerVocabulary(elements.vocabularyAnswer.value);
   });
 
-  document.querySelector("#create-deck-form").addEventListener("submit", (event) => {
+  document.querySelector("#add-word-form").addEventListener("submit", (event) => {
     event.preventDefault();
-    const input = event.currentTarget.elements.name;
-    createDeck(input.value);
-    input.value = "";
+    addVocabularyWord(elements.vocabEnglish.value, elements.vocabSpanish.value);
   });
 
   document.querySelector("#import-vocab-form").addEventListener("submit", (event) => {
@@ -1107,6 +1201,8 @@
   });
 
   elements.wordSearch.addEventListener("input", renderWordList);
+  elements.vocabEnglish.addEventListener("input", updateGoogleTranslateLink);
+  elements.pasteTranslation.addEventListener("click", pasteTranslation);
   elements.verbCountSelect.addEventListener("change", () => {
     const requested = Number(elements.verbCountSelect.value);
     if (requested <= savedState.conjugation.highestUnlockedTier * VERBS_PER_TIER) {

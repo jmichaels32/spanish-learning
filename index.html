@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles.css?v=4" />
     <script src="data/conjugations.js?v=4" defer></script>
     <script src="data/curriculum-analysis.js?v=4" defer></script>
-    <script src="app.js?v=4" defer></script>
+    <script src="app.js?v=5" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to practice</a>
@@ -162,31 +162,39 @@
               <div><strong id="vocab-answer-total">0</strong><span>answers</span></div>
             </div>
 
-            <div class="vocab-layout">
-              <aside class="panel deck-sidebar">
-                <div class="panel-heading"><div><p class="eyebrow">Collections</p><h2>Vocabulary decks</h2></div></div>
-                <form id="create-deck-form" class="compact-form">
-                  <label for="new-deck-name">New deck name</label>
-                  <div><input id="new-deck-name" name="name" type="text" maxlength="60" placeholder="e.g. Chapter 3" required /><button class="button button-primary" type="submit">Create</button></div>
-                </form>
-                <div class="deck-list" id="deck-list"></div>
-              </aside>
-
-              <section class="panel deck-workspace" id="deck-workspace" hidden>
+            <div class="vocabulary-bank">
+              <section class="panel deck-workspace" id="deck-workspace">
                 <div class="deck-workspace-header">
-                  <div><p class="eyebrow">Selected deck</p><h2 id="selected-deck-name"></h2><p id="selected-deck-summary"></p></div>
+                  <div><p class="eyebrow">One permanent collection</p><h2>My vocabulary</h2><p id="selected-deck-summary"></p></div>
                   <div class="button-row compact-buttons">
                     <button class="button button-primary" type="button" data-action="start-vocabulary">Practice active words</button>
-                    <button class="button button-secondary" type="button" data-action="export-deck">Export</button>
+                    <button class="button button-secondary" type="button" data-action="export-deck">Export words</button>
                   </div>
                 </div>
 
-                <details class="import-box" open>
-                  <summary>Add words</summary>
+                <form class="single-word-form" id="add-word-form">
+                  <div class="single-word-heading"><p class="eyebrow">Create a card</p><h3>Add one word</h3></div>
+                  <label for="vocab-english">English</label>
+                  <input id="vocab-english" name="english" type="text" autocomplete="off" placeholder="e.g. lighthouse" required />
+                  <label for="vocab-spanish">Spanish</label>
+                  <div class="translation-field">
+                    <input id="vocab-spanish" name="spanish" type="text" autocomplete="off" autocapitalize="none" placeholder="e.g. el faro" required />
+                    <button class="button button-secondary" id="paste-translation" type="button">Paste</button>
+                  </div>
+                  <div class="translation-actions">
+                    <a class="text-button" id="google-translate-link" href="https://translate.google.com/?sl=en&amp;tl=es&amp;op=translate" target="_blank" rel="noreferrer">Translate with Google ↗</a>
+                    <span>Choose the translation you want, copy it, then paste it here.</span>
+                  </div>
+                  <button class="button button-primary" type="submit">Add card</button>
+                  <p id="vocab-add-message" role="status"></p>
+                </form>
+
+                <details class="import-box">
+                  <summary>Bulk import</summary>
                   <form id="import-vocab-form">
                     <label for="vocab-import">Paste one pair per line: <strong>Spanish [tab] English</strong>. Separate accepted alternatives with semicolons.</label>
                     <textarea id="vocab-import" name="pairs" rows="7" placeholder="la meta&#9;goal; objective&#10;lograr&#9;to achieve; to accomplish" required></textarea>
-                    <div class="import-actions"><p id="vocab-import-message" role="status"></p><button class="button button-primary" type="submit">Add to deck</button></div>
+                    <div class="import-actions"><p id="vocab-import-message" role="status"></p><button class="button button-primary" type="submit">Add words</button></div>
                   </form>
                 </details>
 
@@ -196,14 +204,9 @@
                     <button type="button" data-word-filter="completed">Completed</button>
                     <button type="button" data-word-filter="all">All</button>
                   </div>
-                  <input id="word-search" type="search" placeholder="Search this deck" aria-label="Search this deck" />
+                  <input id="word-search" type="search" placeholder="Search vocabulary" aria-label="Search vocabulary" />
                 </div>
                 <div class="word-list" id="word-list"></div>
-              </section>
-
-              <section class="panel empty-deck-workspace" id="empty-deck-workspace">
-                <span aria-hidden="true">↗</span><h2>Create a deck to begin.</h2>
-                <p>Then paste vocabulary directly from a spreadsheet or Quizlet-style list.</p>
               </section>
             </div>
           </div>
@@ -255,7 +258,7 @@
               <p class="eyebrow">Curriculum coverage</p>
               <h2 id="coverage-title">Twenty tiers · 100 verbs at a time</h2>
               <p>
-                Tier 1 starts with the highest-ranked 100. Each permanent unlock adds another 100 while retaining difficult earlier forms in the practice pool, through a theoretical maximum of 2,000 verbs.
+                Tier 1 starts with the highest-ranked 100. Each permanent unlock adds another 100 while retaining difficult earlier forms. Unlocks require broad recall across every new verb plus 90% recent accuracy, through a theoretical maximum of 2,000 verbs.
               </p>
               <p class="stats-tier-status" id="stats-tier-status"></p>
             </div>
@@ -357,7 +360,7 @@
             <p>Progress and vocabulary are saved in this browser. Export a backup before clearing browser data or changing devices.</p>
           </header>
           <section class="panel data-panel">
-            <div><h2>Backup everything</h2><p>Includes conjugation history, vocabulary decks, and every directional streak.</p></div>
+            <div><h2>Backup everything</h2><p>Includes conjugation history, your vocabulary collection, and every directional streak.</p></div>
             <div class="button-row">
               <button class="button button-primary" type="button" data-action="export-all">Download backup</button>
               <label class="button button-secondary file-button">Import backup<input id="backup-import" type="file" accept="application/json,.json" /></label>

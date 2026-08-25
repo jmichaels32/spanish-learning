@@ -3,13 +3,13 @@
 A dependency-free, local-first Spanish recall trainer. It has two focused modes:
 
 - **Conjugations:** meaning cue + person + infinitive → typed Spanish form
-- **Vocabulary:** bidirectional typed translation using personal decks
+- **Vocabulary:** bidirectional typed translation using one personal word collection
 
 ## Conjugation curriculum
 
 The app contains 2,000 scored, full-grid-compatible verbs and 70,000 explicit forms: seven meaning cues × five Latin American person groups × 2,000 verbs.
 
-The curriculum has 20 cumulative tiers of 100. Tier 1 is the top 100, Tier 2 is the top 200, and so on through Tier 20 (top 2,000). The next tier unlocks when every verb–cue–person combination in the current 100-verb block has a streak of three correct answers. Unlocks are permanent; each larger pool retains difficult earlier forms for review.
+The curriculum has 20 cumulative tiers of 100. Tier 1 is the top 100, Tier 2 is the top 200, and so on through Tier 20 (top 2,000). A verb becomes tier-ready after five correct recalls spanning at least three meaning cues and three person groups. The next tier unlocks when all 100 verbs are ready and accuracy across the latest 200 answers from that tier is at least 90%. Unlocks are permanent; each larger pool retains difficult earlier forms for review.
 
 | Meaning cue | Grammatical form |
 | --- | --- |
@@ -29,9 +29,11 @@ The **Stats** screen exposes that working record: overall accuracy, attempted an
 
 Its **Curriculum cutoff lab** explains the ranking used by all 20 tiers with a transparent exploratory formula: multi-context frequency (35 points), CEFR-graded learner exposure (30), conjugation-pattern value (20), five-person drill suitability (10), and distinctiveness (5). Special-construction or defective verbs that would make the complete grid misleading are recorded as exclusions and replaced by the next eligible scored verbs.
 
-## Vocabulary decks
+## Vocabulary collection
 
-Create a deck and paste tab-separated pairs, one per line:
+Add cards individually with an English prompt and the Spanish translation you want to learn. The Google Translate helper opens a prefilled English → Spanish translation in a new tab; copy the preferred result, return, and use the **Paste** button. The public app does not call Google Cloud Translation directly because its [official API requires project authentication/API credentials](https://docs.cloud.google.com/translate/docs/authentication) and [metered billing](https://cloud.google.com/products/translate/pricing), which should not be embedded in a public static site.
+
+The collapsible bulk importer also accepts tab-separated pairs, one per line:
 
 ```text
 la meta	goal; objective
@@ -39,6 +41,8 @@ lograr	to achieve; to accomplish
 ```
 
 Semicolons define accepted alternatives. A word is completed only after reaching 20 consecutive correct answers independently in both directions—at least 40 correct recalls. A later review miss resets the tested direction and returns the word to active practice.
+
+Backups made by older versions are migrated automatically: words from every former deck are combined into **My vocabulary**, with directional progress preserved.
 
 ## Run locally
 

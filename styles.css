@@ -895,6 +895,83 @@ h2 {
   font-size: 13px;
 }
 
+.vocabulary-bank {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.single-word-form {
+  display: grid;
+  grid-template-columns: 95px minmax(0, 1fr);
+  gap: 12px 18px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: clamp(18px, 3vw, 28px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.single-word-heading {
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+
+.single-word-heading h3,
+.single-word-heading p {
+  margin-bottom: 0;
+}
+
+.single-word-heading h3 {
+  margin-top: 3px;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.single-word-form > input,
+.translation-field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.translation-field {
+  display: flex;
+  gap: 8px;
+}
+
+.translation-field .button {
+  flex: 0 0 auto;
+  min-height: 48px;
+}
+
+.translation-actions {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 14px;
+  align-items: center;
+}
+
+.translation-actions span,
+#vocab-add-message {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.single-word-form > .button,
+#vocab-add-message {
+  grid-column: 2;
+  justify-self: start;
+}
+
 .compact-buttons {
   flex: 0 0 auto;
 }
@@ -1935,6 +2012,17 @@ h2 {
   .import-actions,
   .stats-tools {
     display: grid;
+  }
+
+  .single-word-form {
+    grid-template-columns: 1fr;
+  }
+
+  .single-word-form > *,
+  .translation-actions,
+  .single-word-form > .button,
+  #vocab-add-message {
+    grid-column: 1;
   }
 
   .compact-buttons .button,

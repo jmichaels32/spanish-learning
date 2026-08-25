@@ -22,6 +22,7 @@ The source project documents 14,456 tested verbs, 97 conjugation models, irregul
 - 70,000 nonempty, markup-free canonical answers, plus validated accepted alternatives
 - hand-specified paradigms for high-risk irregulars and participles
 - browser-level conjugation, sequential tier unlocking/migration, and vocabulary recall flows
+- tier gates requiring five correct recalls across three cues and three people for every verb, plus 90% accuracy in a 200-answer rolling window
 - exactly 2,000 uniquely ranked curriculum candidates with complete component scores and English glosses
 - vocabulary completion only after 20 consecutive correct answers in each direction
 - a later vocabulary miss returning a completed word to active practice
