@@ -8,9 +8,12 @@ import { fileURLToPath } from "node:url";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const dataPath = resolve(scriptDirectory, "../data/conjugations.js");
+const analysisPath = resolve(scriptDirectory, "../data/curriculum-analysis.js");
 const sandbox = { window: {} };
 vm.runInNewContext(await readFile(dataPath, "utf8"), sandbox);
+vm.runInNewContext(await readFile(analysisPath, "utf8"), sandbox);
 const data = sandbox.window.SPANISH_CONJUGATIONS;
+const analysis = sandbox.window.SPANISH_CURRICULUM_ANALYSIS;
 
 assert.ok(data, "Conjugation data did not load.");
 assert.equal(data.verbs.length, 200, "Expected exactly 200 verbs.");
@@ -70,4 +73,19 @@ for (const [key, expected] of Object.entries(checks)) {
   assert.deepEqual(Array.from(byVerb[verb][tense]), expected, `Unexpected forms for ${key}.`);
 }
 
-console.log(`Validated ${data.verbs.length} verbs, ${data.tenses.length} tenses, and ${data.verbs.length * 7 * 5} forms.`);
+assert.ok(analysis, "Curriculum analysis data did not load.");
+assert.equal(analysis.candidates.length, 2000, "Expected exactly 2,000 scored candidates.");
+assert.equal(new Set(analysis.candidates.map((candidate) => candidate.lemma)).size, 2000, "Candidate lemmas must be unique.");
+assert.deepEqual([...analysis.candidates.map((candidate) => candidate.sourceRank)].sort((left, right) => left - right), Array.from({ length: 2000 }, (_, index) => index + 1));
+for (const candidate of analysis.candidates) {
+  assert.ok(candidate.meaning && candidate.meaning !== "meaning unavailable", `${candidate.lemma} must have an English gloss.`);
+  assert.ok(candidate.score >= 0 && candidate.score <= 100, `${candidate.lemma} score is outside 0–100.`);
+  const componentTotal = Object.values(candidate.scores).reduce((sum, value) => sum + value, 0);
+  assert.ok(Math.abs(componentTotal - candidate.score) <= 0.21, `${candidate.lemma} components do not sum to its score.`);
+}
+const scoredByLemma = Object.fromEntries(analysis.candidates.map((candidate) => [candidate.lemma, candidate]));
+assert.ok(scoredByLemma.viajar.score > scoredByLemma.averiguar.score, "Learner evidence should prioritize viajar over averiguar.");
+assert.ok(scoredByLemma.limpiar.score > scoredByLemma.disculpar.score, "The combined score should prioritize limpiar over disculpar.");
+assert.ok(scoredByLemma.haber.scores.fit < scoredByLemma.hablar.scores.fit, "Special-construction verbs should receive a drill-fit penalty.");
+
+console.log(`Validated ${data.verbs.length} training verbs, ${data.verbs.length * 7 * 5} forms, and ${analysis.candidates.length} scored candidates.`);

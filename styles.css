@@ -1156,6 +1156,320 @@ h2 {
   padding: clamp(22px, 4vw, 38px);
 }
 
+.curriculum-lab {
+  margin-bottom: 24px;
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.curriculum-lab-heading {
+  align-items: end;
+}
+
+.lab-intro {
+  max-width: 720px;
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.curriculum-scope {
+  flex: 0 0 220px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.score-formula {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 26px;
+}
+
+.score-formula span {
+  padding: 12px;
+  color: var(--muted);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.score-formula strong {
+  display: block;
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.cutoff-controls {
+  display: grid;
+  grid-template-columns: 150px minmax(180px, 1fr) minmax(180px, auto);
+  gap: 18px;
+  align-items: center;
+}
+
+.cutoff-controls label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.cutoff-controls label strong {
+  margin-left: 5px;
+  color: var(--terracotta-dark);
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.cutoff-controls input {
+  width: 100%;
+  accent-color: var(--terracotta);
+}
+
+.cutoff-controls p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  text-align: right;
+}
+
+.histogram-wrap {
+  margin-top: 18px;
+  padding: 18px 18px 10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.score-histogram {
+  display: grid;
+  height: 190px;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 3px;
+  align-items: end;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.histogram-bar {
+  position: relative;
+  min-height: 2px;
+  padding: 0;
+  background: #c8c4b5;
+  border: 0;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  transition: height 160ms ease, background 160ms ease;
+}
+
+.histogram-bar.is-included {
+  background: var(--terracotta);
+}
+
+.histogram-bar span {
+  position: absolute;
+  right: 50%;
+  bottom: calc(100% + 4px);
+  display: none;
+  min-width: 64px;
+  padding: 5px 7px;
+  color: var(--paper);
+  background: var(--ink);
+  border-radius: 6px;
+  font-size: 9px;
+  text-align: center;
+  transform: translateX(50%);
+  z-index: 2;
+}
+
+.histogram-bar:hover span,
+.histogram-bar:focus span {
+  display: block;
+}
+
+.histogram-axis {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 6px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.lab-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.lab-summary div {
+  padding: 11px 13px;
+  background: rgb(93 101 67 / 6%);
+  border-radius: 9px;
+}
+
+.lab-summary strong,
+.lab-summary span {
+  display: block;
+}
+
+.lab-summary strong {
+  font-size: 14px;
+}
+
+.lab-summary span {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.method-details {
+  margin: 18px 0 24px;
+  padding: 13px 15px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.method-details summary {
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.method-details div {
+  padding-top: 8px;
+}
+
+.method-details p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.candidate-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 190px auto;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.candidate-toolbar > input,
+.candidate-toolbar select {
+  height: 44px;
+  padding: 8px 12px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12px;
+}
+
+.cutoff-check {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 11px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.cutoff-check input {
+  accent-color: var(--terracotta);
+}
+
+.candidate-table-header,
+.candidate-row {
+  display: grid;
+  grid-template-columns: minmax(230px, 1.5fr) 64px repeat(5, minmax(58px, 0.52fr));
+  gap: 10px;
+  align-items: center;
+}
+
+.candidate-table-header {
+  padding: 0 10px 8px;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.candidate-row {
+  min-height: 68px;
+  padding: 9px 10px;
+  border-top: 1px solid var(--line);
+}
+
+.candidate-row.is-above-cutoff {
+  background: rgb(201 76 47 / 3%);
+}
+
+.candidate-word strong,
+.candidate-word small,
+.candidate-word em {
+  display: block;
+}
+
+.candidate-word strong {
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.candidate-word small {
+  overflow: hidden;
+  margin-top: 1px;
+  color: var(--muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.candidate-word em {
+  margin-top: 3px;
+  color: var(--olive);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.candidate-score {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.candidate-component strong,
+.candidate-component small {
+  display: block;
+}
+
+.candidate-component strong {
+  font-size: 11px;
+}
+
+.candidate-component small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.curriculum-more {
+  width: 100%;
+  margin-top: 14px;
+}
+
 .stats-heading {
   display: flex;
   align-items: flex-start;
@@ -1474,6 +1788,49 @@ h2 {
     grid-template-columns: 1fr repeat(3, auto);
     gap: 12px;
   }
+
+  .curriculum-scope {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .score-formula {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cutoff-controls {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .cutoff-controls p {
+    text-align: left;
+  }
+
+  .lab-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .candidate-toolbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .candidate-toolbar > input {
+    grid-column: 1 / -1;
+  }
+
+  .candidate-table-header {
+    display: none;
+  }
+
+  .candidate-row {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+
+  .candidate-word {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 500px) {
@@ -1597,6 +1954,32 @@ h2 {
 
   .verb-name-cell {
     grid-column: 1 / -1;
+  }
+
+  .score-formula {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .candidate-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .candidate-toolbar > input {
+    grid-column: auto;
+  }
+
+  .cutoff-check {
+    min-height: 38px;
+    padding: 0;
+  }
+
+  .score-histogram {
+    height: 150px;
+    gap: 2px;
+  }
+
+  .candidate-row {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

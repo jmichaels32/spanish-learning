@@ -10,9 +10,10 @@
     />
     <title>De Memoria — Spanish Recall</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=2" />
-    <script src="data/conjugations.js?v=2" defer></script>
-    <script src="app.js?v=2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=3" />
+    <script src="data/conjugations.js?v=3" defer></script>
+    <script src="data/curriculum-analysis.js?v=3" defer></script>
+    <script src="app.js?v=3" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to practice</a>
@@ -265,6 +266,64 @@
               <p class="stats-tier-status" id="stats-tier-status"></p>
             </div>
             <div class="coverage-number"><strong>200</strong><span>audited verbs</span></div>
+          </section>
+
+          <section class="panel curriculum-lab" aria-labelledby="curriculum-lab-title">
+            <div class="stats-heading curriculum-lab-heading">
+              <div>
+                <p class="eyebrow">Exploratory ranking</p>
+                <h2 id="curriculum-lab-title">Curriculum cutoff lab</h2>
+                <p class="lab-intro">Explore 2,000 valid verb candidates before changing the training curriculum. Scores are evidence-backed estimates, not objective language facts.</p>
+              </div>
+              <div class="segmented small-segmented curriculum-scope" aria-label="Candidate pool size">
+                <button type="button" data-curriculum-scope="1000">Top 1,000</button>
+                <button class="is-selected" type="button" data-curriculum-scope="2000">Top 2,000</button>
+              </div>
+            </div>
+
+            <div class="score-formula" aria-label="Score formula">
+              <span><strong>35</strong> multi-context frequency</span>
+              <span><strong>30</strong> learner exposure</span>
+              <span><strong>20</strong> conjugation value</span>
+              <span><strong>10</strong> drill fit</span>
+              <span><strong>5</strong> distinctiveness</span>
+            </div>
+
+            <div class="cutoff-controls">
+              <label for="curriculum-cutoff">Score cutoff <strong id="curriculum-cutoff-value">55</strong></label>
+              <input id="curriculum-cutoff" type="range" min="0" max="100" value="55" step="1" />
+              <p id="curriculum-cutoff-summary"></p>
+            </div>
+
+            <div class="histogram-wrap">
+              <div class="score-histogram" id="score-histogram" aria-label="Histogram of pedagogical scores"></div>
+              <div class="histogram-axis" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+            </div>
+
+            <div class="lab-summary" id="curriculum-lab-summary"></div>
+
+            <details class="method-details">
+              <summary>How the score is calculated</summary>
+              <div>
+                <p><strong>Frequency:</strong> conversational subtitle frequency plus the ESCOW web corpus. <strong>Learner exposure:</strong> early-weighted A1–C1 appearances in ELELex textbooks and simplified readers.</p>
+                <p><strong>Conjugation value:</strong> measured differences from a regular paradigm. <strong>Drill fit:</strong> explicit penalties for auxiliaries, impersonal verbs, and verbs normally used in special constructions. <strong>Distinctiveness:</strong> a small penalty for manually documented near-synonyms.</p>
+                <p>Candidate scope is based on <a href="https://github.com/doozan/spanish_data" target="_blank" rel="noreferrer">subtitle frequency</a>. Learner evidence comes from <a href="https://cental.uclouvain.be/cefrlex/elelex/" target="_blank" rel="noreferrer">ELELex</a>; web frequency comes from <a href="https://github.com/LCR-ADS-Lab/TAALES_ES" target="_blank" rel="noreferrer">TAALES Español / ESCOW</a>. Missing learner evidence scores zero. The complete generated dataset and formula are inspectable in the repository.</p>
+              </div>
+            </details>
+
+            <div class="candidate-toolbar">
+              <input id="curriculum-search" type="search" placeholder="Search 2,000 verbs or meanings" aria-label="Search curriculum candidates" />
+              <select id="curriculum-sort" aria-label="Sort curriculum candidates">
+                <option value="score">Pedagogical score</option>
+                <option value="source">Conversation frequency</option>
+                <option value="learner">Learner exposure</option>
+                <option value="name">Name A–Z</option>
+              </select>
+              <label class="cutoff-check"><input id="curriculum-above-cutoff" type="checkbox" /> Above cutoff only</label>
+            </div>
+            <div class="candidate-table-header" aria-hidden="true"><span>Verb</span><span>Total</span><span>Freq /35</span><span>Learner /30</span><span>Pattern /20</span><span>Fit /10</span><span>Distinct /5</span></div>
+            <div class="candidate-list" id="curriculum-candidate-list"></div>
+            <button class="button button-secondary curriculum-more" id="curriculum-show-more" type="button">Show 200 more</button>
           </section>
 
           <section class="panel stats-panel" aria-labelledby="hardest-title">

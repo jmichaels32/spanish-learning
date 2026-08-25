@@ -22,6 +22,7 @@ The source project documents 14,456 tested verbs, 97 conjugation models, irregul
 - 7,000 nonempty, markup-free answers
 - hand-specified paradigms for high-risk irregulars and participles
 - browser-level conjugation, Tier 2 unlocking, and vocabulary recall flows
+- exactly 2,000 uniquely ranked curriculum candidates with complete component scores and English glosses
 - vocabulary completion only after 20 consecutive correct answers in each direction
 - a later vocabulary miss returning a completed word to active practice
 
@@ -51,3 +52,15 @@ The app describes the full curriculum as covering roughly 78% of verb use. This 
 - Full curriculum overlap with the strict top 200: 180 verbs
 
 The strict list's advantage is driven heavily by auxiliary `haber`, which alone contributes about 5.3 percentage points in this corpus but is intentionally unsuitable for the app's ordinary five-person lexical drill. Coverage varies with corpus, dialect, genre, and whether auxiliaries or syntactically unusual verbs are treated as drill targets. The percentage is therefore presented as an estimate, not a universal language statistic.
+
+## Exploratory pedagogical score
+
+`scripts/build-curriculum-analysis.mjs` produces a review dataset of 2,000 valid verb lemmas. It does not automatically change the 200 training verbs. The candidate pool starts from subtitle frequency, rejects lemmas for which the conjugator cannot produce all requested forms, and assigns up to 100 points:
+
+- **35 frequency:** 55% subtitle-frequency signal and 45% ESCOW web-corpus signal, log normalized within the candidate pool
+- **30 learner exposure:** A1–C1 verb appearances in ELELex textbooks and simplified readers, with earlier levels weighted more heavily
+- **20 conjugation value:** number and breadth of forms that differ from the regular `-ar`, `-er`, or `-ir` paradigm
+- **10 drill fit:** normally 10, with documented penalties for auxiliaries, impersonal/weather verbs, special experiencer constructions, and strongly pronominal uses
+- **5 distinctiveness:** normally 5, with a small explicit penalty for members of manually listed near-synonym groups
+
+The UI exposes every component, evidence notes, current curriculum rank, conversational rank, histogram bin, and cutoff result. This score is a decision aid, not an objective measure of when a verb “should” be learned. In particular, regular but concrete verbs can rank below irregular verbs because conjugation-pattern value is deliberately worth 20 points. Missing ELELex evidence receives zero learner-exposure points rather than an inferred value.

@@ -5,6 +5,7 @@
   "description": "A local-first Spanish conjugation and vocabulary recall trainer.",
   "scripts": {
     "build:data": "node scripts/build-conjugations.mjs",
+    "build:curriculum": "node scripts/build-curriculum-analysis.mjs",
     "test": "node scripts/validate-data.mjs && node scripts/smoke-test.mjs"
   },
   "devDependencies": {

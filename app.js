@@ -2,6 +2,7 @@
   "use strict";
 
   const corpus = window.SPANISH_CONJUGATIONS;
+  const curriculumAnalysis = window.SPANISH_CURRICULUM_ANALYSIS;
   if (!corpus?.verbs?.length) {
     document.body.innerHTML = "<main class='page-shell'><h1>Training data unavailable</h1><p>Refresh the page and make sure data/conjugations.js is present.</p></main>";
     return;
@@ -28,10 +29,20 @@
       persons: ALL_PERSON_IDS,
       selectedDeckId: null,
       wordFilter: "active",
+      curriculumCutoff: 55,
+      curriculumScope: 2000,
     },
   };
 
   let savedState = loadState();
+  const curriculumLabState = {
+    scope: savedState.settings.curriculumScope,
+    cutoff: savedState.settings.curriculumCutoff,
+    query: "",
+    sort: "score",
+    aboveCutoff: false,
+    visible: 200,
+  };
   const conjugationSession = {
     active: false,
     target: 20,
@@ -114,6 +125,16 @@
     verbStatsSearch: document.querySelector("#verb-stats-search"),
     verbStatsSort: document.querySelector("#verb-stats-sort"),
     verbStatsList: document.querySelector("#verb-stats-list"),
+    curriculumCutoff: document.querySelector("#curriculum-cutoff"),
+    curriculumCutoffValue: document.querySelector("#curriculum-cutoff-value"),
+    curriculumCutoffSummary: document.querySelector("#curriculum-cutoff-summary"),
+    curriculumHistogram: document.querySelector("#score-histogram"),
+    curriculumLabSummary: document.querySelector("#curriculum-lab-summary"),
+    curriculumSearch: document.querySelector("#curriculum-search"),
+    curriculumSort: document.querySelector("#curriculum-sort"),
+    curriculumAboveCutoff: document.querySelector("#curriculum-above-cutoff"),
+    curriculumCandidateList: document.querySelector("#curriculum-candidate-list"),
+    curriculumShowMore: document.querySelector("#curriculum-show-more"),
     backupImport: document.querySelector("#backup-import"),
     backupMessage: document.querySelector("#backup-message"),
     conjugationSourceNote: document.querySelector("#conjugation-source-note"),
@@ -134,6 +155,7 @@
     const conjugationItems = value.conjugation?.items ?? {};
     const tier2Unlocked = Boolean(value.conjugation?.tier2Unlocked) || tier1SolidCount(conjugationItems) === TIER_1_FORM_COUNT;
     const requestedVerbCount = Number(settings.verbCount);
+    const requestedCurriculumCutoff = Number(settings.curriculumCutoff);
     return {
       version: 1,
       conjugation: {
@@ -155,6 +177,8 @@
         persons: validSelection(settings.persons, ALL_PERSON_IDS),
         selectedDeckId: settings.selectedDeckId ?? null,
         wordFilter: ["active", "completed", "all"].includes(settings.wordFilter) ? settings.wordFilter : "active",
+        curriculumCutoff: Number.isFinite(requestedCurriculumCutoff) ? Math.min(100, Math.max(0, requestedCurriculumCutoff)) : 55,
+        curriculumScope: [1000, 2000].includes(Number(settings.curriculumScope)) ? Number(settings.curriculumScope) : 2000,
       },
     };
   }
@@ -508,7 +532,73 @@
           return `<article class="hardest-item"><div><strong>${h(item.verb.infinitive)} · ${h(item.tense.cue)} · ${h(item.person.label)}</strong><span>Answer: ${h(item.correct)} · streak ${item.stats.streak}</span></div><small>${accuracy}%<br>${item.stats.correct}/${item.stats.attempts}</small></article>`;
         }).join("")
       : '<p class="empty-list">Complete a conjugation session to build your difficulty ranking.</p>';
+    renderCurriculumLab();
     renderVerbStats();
+  }
+
+  function renderCurriculumLab() {
+    if (!curriculumAnalysis?.candidates?.length) {
+      elements.curriculumCandidateList.innerHTML = '<p class="empty-list">Curriculum analysis data is unavailable.</p>';
+      elements.curriculumShowMore.hidden = true;
+      return;
+    }
+    const pool = curriculumAnalysis.candidates.filter((candidate) => candidate.sourceRank <= curriculumLabState.scope);
+    const included = pool.filter((candidate) => candidate.score >= curriculumLabState.cutoff);
+    const sortedScores = pool.map((candidate) => candidate.score).sort((left, right) => left - right);
+    const median = sortedScores[Math.floor(sortedScores.length / 2)];
+    const currentIncluded = included.filter((candidate) => candidate.currentRank !== null).length;
+    const learnerEvidence = pool.filter((candidate) => candidate.cefr).length;
+
+    elements.curriculumCutoff.value = curriculumLabState.cutoff;
+    elements.curriculumCutoffValue.textContent = curriculumLabState.cutoff;
+    elements.curriculumCutoffSummary.textContent = `${included.length.toLocaleString()} at or above · ${(pool.length - included.length).toLocaleString()} below`;
+    document.querySelectorAll("[data-curriculum-scope]").forEach((button) => {
+      button.classList.toggle("is-selected", Number(button.dataset.curriculumScope) === curriculumLabState.scope);
+    });
+
+    const bins = Array.from({ length: 20 }, (_, index) => ({ low: index * 5, high: index * 5 + 5, count: 0 }));
+    pool.forEach((candidate) => { bins[Math.min(19, Math.floor(candidate.score / 5))].count += 1; });
+    const maxBin = Math.max(...bins.map((bin) => bin.count));
+    elements.curriculumHistogram.innerHTML = bins.map((bin) => {
+      const includedBin = bin.high > curriculumLabState.cutoff;
+      const height = Math.max(1, (bin.count / maxBin) * 100);
+      return `<button class="histogram-bar${includedBin ? " is-included" : ""}" type="button" data-histogram-cutoff="${bin.low}" style="height:${height}%" aria-label="Scores ${bin.low} to ${bin.high}: ${bin.count} verbs"><span>${bin.low}–${bin.high}<br>${bin.count} verbs</span></button>`;
+    }).join("");
+    elements.curriculumLabSummary.innerHTML = [
+      [pool.length.toLocaleString(), "candidate verbs"],
+      [median.toFixed(1), "median score"],
+      [`${currentIncluded}/200`, "current set above"],
+      [`${learnerEvidence.toLocaleString()}/${pool.length.toLocaleString()}`, "with learner evidence"],
+    ].map(([value, label]) => `<div><strong>${value}</strong><span>${label}</span></div>`).join("");
+
+    const query = normalizeAnswer(curriculumLabState.query);
+    const rows = pool.filter((candidate) => {
+      if (curriculumLabState.aboveCutoff && candidate.score < curriculumLabState.cutoff) return false;
+      return !query || normalizeAnswer(`${candidate.lemma} ${candidate.meaning}`).includes(query);
+    });
+    rows.sort((left, right) => {
+      if (curriculumLabState.sort === "source") return left.sourceRank - right.sourceRank;
+      if (curriculumLabState.sort === "learner") return right.scores.learner - left.scores.learner || right.score - left.score;
+      if (curriculumLabState.sort === "name") return left.lemma.localeCompare(right.lemma, "es");
+      return right.score - left.score || left.sourceRank - right.sourceRank;
+    });
+    const visibleRows = rows.slice(0, curriculumLabState.visible);
+    elements.curriculumCandidateList.innerHTML = visibleRows.length ? visibleRows.map((candidate) => {
+      const current = candidate.currentRank === null ? "" : ` · current #${candidate.currentRank}`;
+      const redundancy = candidate.redundantWith ? ` · overlaps ${candidate.redundantWith}` : "";
+      const level = candidate.cefr ? `${candidate.cefr} · ${candidate.learnerDocuments} docs` : "no ELELex evidence";
+      return `<article class="candidate-row${candidate.score >= curriculumLabState.cutoff ? " is-above-cutoff" : ""}">
+        <div class="candidate-word"><strong>${h(candidate.lemma)}</strong><small>${h(candidate.meaning)}</small><em>score #${candidate.scoreRank} · conversation #${candidate.sourceRank}${current}</em></div>
+        <strong class="candidate-score">${candidate.score.toFixed(1)}</strong>
+        <div class="candidate-component" title="Subtitle and ESCOW web frequency"><strong>${candidate.scores.frequency.toFixed(1)}</strong><small>frequency</small></div>
+        <div class="candidate-component" title="${h(level)}"><strong>${candidate.scores.learner.toFixed(1)}</strong><small>${h(candidate.cefr ?? "no data")}</small></div>
+        <div class="candidate-component" title="${candidate.changedForms}/35 forms differ from a regular paradigm; model ${h(candidate.model)}"><strong>${candidate.scores.pattern.toFixed(1)}</strong><small>${candidate.changedForms} changed</small></div>
+        <div class="candidate-component" title="${h(candidate.fitNote)}"><strong>${candidate.scores.fit.toFixed(1)}</strong><small>drill fit</small></div>
+        <div class="candidate-component" title="Distinctiveness${h(redundancy)}"><strong>${candidate.scores.distinct.toFixed(1)}</strong><small>${candidate.redundantWith ? `vs ${h(candidate.redundantWith)}` : "distinct"}</small></div>
+      </article>`;
+    }).join("") : '<p class="empty-list">No candidates match these filters.</p>';
+    elements.curriculumShowMore.hidden = visibleRows.length >= rows.length;
+    elements.curriculumShowMore.textContent = `Show ${Math.min(200, rows.length - visibleRows.length).toLocaleString()} more · ${visibleRows.length.toLocaleString()}/${rows.length.toLocaleString()}`;
   }
 
   function renderVerbStats() {
@@ -842,6 +932,11 @@
       if (!candidate?.conjugation || !candidate?.vocabulary || !Array.isArray(candidate.vocabulary.decks)) throw new Error("This is not a De Memoria backup.");
       if (!window.confirm("Replace the progress and vocabulary currently saved in this browser with this backup?")) return;
       savedState = normalizeState(candidate);
+      Object.assign(curriculumLabState, {
+        scope: savedState.settings.curriculumScope,
+        cutoff: savedState.settings.curriculumCutoff,
+        visible: 200,
+      });
       saveState();
       elements.backupMessage.textContent = "Backup imported successfully.";
       renderConjugationHome();
@@ -883,6 +978,26 @@
       savedState.settings.verbCount = Number(verbCountButton.dataset.verbCount);
       saveState();
       renderConjugationHome();
+      return;
+    }
+
+    const curriculumScopeButton = event.target.closest("[data-curriculum-scope]");
+    if (curriculumScopeButton) {
+      curriculumLabState.scope = Number(curriculumScopeButton.dataset.curriculumScope);
+      curriculumLabState.visible = 200;
+      savedState.settings.curriculumScope = curriculumLabState.scope;
+      saveState();
+      renderCurriculumLab();
+      return;
+    }
+
+    const histogramBar = event.target.closest("[data-histogram-cutoff]");
+    if (histogramBar) {
+      curriculumLabState.cutoff = Number(histogramBar.dataset.histogramCutoff);
+      curriculumLabState.visible = 200;
+      savedState.settings.curriculumCutoff = curriculumLabState.cutoff;
+      saveState();
+      renderCurriculumLab();
       return;
     }
 
@@ -963,6 +1078,32 @@
   elements.wordSearch.addEventListener("input", renderWordList);
   elements.verbStatsSearch.addEventListener("input", renderVerbStats);
   elements.verbStatsSort.addEventListener("change", renderVerbStats);
+  elements.curriculumCutoff.addEventListener("input", () => {
+    curriculumLabState.cutoff = Number(elements.curriculumCutoff.value);
+    curriculumLabState.visible = 200;
+    savedState.settings.curriculumCutoff = curriculumLabState.cutoff;
+    saveState();
+    renderCurriculumLab();
+  });
+  elements.curriculumSearch.addEventListener("input", () => {
+    curriculumLabState.query = elements.curriculumSearch.value;
+    curriculumLabState.visible = 200;
+    renderCurriculumLab();
+  });
+  elements.curriculumSort.addEventListener("change", () => {
+    curriculumLabState.sort = elements.curriculumSort.value;
+    curriculumLabState.visible = 200;
+    renderCurriculumLab();
+  });
+  elements.curriculumAboveCutoff.addEventListener("change", () => {
+    curriculumLabState.aboveCutoff = elements.curriculumAboveCutoff.checked;
+    curriculumLabState.visible = 200;
+    renderCurriculumLab();
+  });
+  elements.curriculumShowMore.addEventListener("click", () => {
+    curriculumLabState.visible += 200;
+    renderCurriculumLab();
+  });
   elements.backupImport.addEventListener("change", () => {
     const [file] = elements.backupImport.files;
     if (file) importBackup(file);

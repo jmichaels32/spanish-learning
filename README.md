@@ -27,6 +27,8 @@ Questions are recall-only. An answer must include correct accent marks. Missing 
 
 The **Stats** screen exposes that working record: overall accuracy, attempted and solid combinations, the hardest practiced verb–cue–person combinations, and a searchable table of all 200 curriculum verbs with Tier 2 lock status.
 
+Its **Curriculum cutoff lab** scores 2,000 valid verb candidates with a transparent exploratory formula: multi-context frequency (35 points), CEFR-graded learner exposure (30), conjugation-pattern value (20), five-person drill suitability (10), and distinctiveness (5). An interactive histogram, score cutoff, source-scope toggle, component columns, and searchable candidate list support review before the actual 200-verb training order is changed.
+
 ## Vocabulary decks
 
 Create a deck and paste tab-separated pairs, one per line:
@@ -57,9 +59,12 @@ Node.js is only needed when regenerating or testing the checked-in dataset:
 ```bash
 npm install
 npm run build:data
+npm run build:curriculum
 npm test
 ```
 
 The generator uses the Latin American-compatible `canarias` person system from `@jirimracek/conjugate-esp`, then collapses identical `ustedes`/`ellos` forms into one learning group. Tests validate all 7,000 fields and spot-check high-risk irregular paradigms.
+
+The curriculum-analysis generator downloads its documented open research inputs and produces `data/curriculum-analysis.js`. It is an offline development step; the published app reads the checked-in result and makes no runtime data requests.
 
 See [DATA_AUDIT.md](DATA_AUDIT.md) for the accuracy checks and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for source details.

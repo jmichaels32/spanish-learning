@@ -60,6 +60,28 @@ assert.equal(document.querySelectorAll(".verb-stats-row.is-locked").length, 100)
 assert.match(document.querySelector("#stats-practiced-forms").textContent, /1\/7,000/);
 assert.match(document.querySelector("#hardest-combinations").textContent, new RegExp(verbId));
 assert.match(document.querySelector("#stats-tier-status").textContent, /Tier 2 locked/);
+assert.equal(dom.window.SPANISH_CURRICULUM_ANALYSIS.candidates.length, 2000);
+assert.equal(document.querySelectorAll(".histogram-bar").length, 20);
+assert.equal(document.querySelectorAll(".candidate-row").length, 200);
+assert.match(document.querySelector("#curriculum-lab-summary").textContent, /2,000candidate verbs/);
+
+const curriculumSearch = document.querySelector("#curriculum-search");
+curriculumSearch.value = "limpiar";
+curriculumSearch.dispatchEvent(new dom.window.Event("input", { bubbles: true }));
+assert.equal(document.querySelectorAll(".candidate-row").length, 1);
+assert.match(document.querySelector("#curriculum-candidate-list").textContent, /limpiar/);
+curriculumSearch.value = "";
+curriculumSearch.dispatchEvent(new dom.window.Event("input", { bubbles: true }));
+document.querySelector("[data-curriculum-scope='1000']").click();
+assert.match(document.querySelector("#curriculum-lab-summary").textContent, /1,000candidate verbs/);
+const curriculumCutoff = document.querySelector("#curriculum-cutoff");
+curriculumCutoff.value = "60";
+curriculumCutoff.dispatchEvent(new dom.window.Event("input", { bubbles: true }));
+assert.match(document.querySelector("#curriculum-cutoff-summary").textContent, /106 at or above/);
+const aboveCutoff = document.querySelector("#curriculum-above-cutoff");
+aboveCutoff.checked = true;
+aboveCutoff.dispatchEvent(new dom.window.Event("change", { bubbles: true }));
+assert.equal(document.querySelectorAll(".candidate-row").length, 106);
 
 const completedItems = {};
 for (const completedVerb of dom.window.SPANISH_CONJUGATIONS.verbs.slice(0, 100)) {
