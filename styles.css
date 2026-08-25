@@ -901,20 +901,22 @@ h2 {
 }
 
 .single-word-form {
-  display: grid;
-  grid-template-columns: 95px minmax(0, 1fr);
-  gap: 12px 18px;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: clamp(18px, 3vw, 28px);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  margin-bottom: 24px;
+  padding: clamp(20px, 3vw, 30px);
+  background:
+    radial-gradient(circle at 100% 0, rgb(226 167 53 / 13%), transparent 18rem),
+    var(--paper);
+  border: 1px solid rgb(201 76 47 / 22%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgb(65 45 23 / 7%);
 }
 
 .single-word-heading {
-  grid-column: 1 / -1;
-  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .single-word-heading h3,
@@ -925,51 +927,140 @@ h2 {
 .single-word-heading h3 {
   margin-top: 3px;
   font-family: Georgia, serif;
-  font-size: 24px;
+  font-size: clamp(24px, 3vw, 30px);
   font-weight: 500;
 }
 
-.single-word-form > input,
-.translation-field input {
+.word-count-pill {
+  flex: 0 0 auto;
+  padding: 7px 11px;
+  color: var(--olive);
+  background: var(--olive-soft);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.word-pair-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.word-entry-field label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.word-entry-field label strong {
+  font-size: 13px;
+}
+
+.word-entry-field label span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.word-entry-field input {
   width: 100%;
-  min-height: 48px;
-  padding: 10px 12px;
+  min-height: 58px;
+  padding: 13px 15px;
   color: var(--ink);
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  font: inherit;
+  border-radius: 13px;
+  font-size: 17px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 
-.translation-field {
+.word-entry-field input::placeholder {
+  color: #9b998f;
+}
+
+.word-entry-field input:focus {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 4px rgb(201 76 47 / 10%);
+}
+
+.word-pair-arrow {
   display: flex;
-  gap: 8px;
-}
-
-.translation-field .button {
-  flex: 0 0 auto;
-  min-height: 48px;
-}
-
-.translation-actions {
-  grid-column: 2;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px 14px;
+  width: 36px;
+  height: 58px;
   align-items: center;
+  justify-content: center;
+  margin-top: 27px;
+  color: var(--terracotta-dark);
+  font-size: 20px;
+  font-weight: 800;
 }
 
-.translation-actions span,
-#vocab-add-message {
+.quick-accent-row {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.quick-accent-row button {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 4px 8px;
+  color: var(--terracotta-dark);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.quick-accent-row button:hover {
+  background: var(--terracotta-soft);
+  border-color: rgb(201 76 47 / 32%);
+}
+
+.word-form-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.word-form-footer p {
+  max-width: 360px;
   margin: 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
-.single-word-form > .button,
+.add-word-button {
+  flex: 0 0 auto;
+  min-width: 190px;
+}
+
+.add-word-button span {
+  margin-right: 5px;
+  font-size: 17px;
+  line-height: 1;
+}
+
 #vocab-add-message {
-  grid-column: 2;
-  justify-self: start;
+  min-height: 18px;
+  margin: 12px 0 -6px;
+  color: var(--olive);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .compact-buttons {
@@ -1846,6 +1937,38 @@ h2 {
     margin-top: 20px;
   }
 
+  .word-pair-fields {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .word-pair-arrow {
+    width: 34px;
+    height: 26px;
+    margin: 0 auto;
+    transform: rotate(90deg);
+  }
+
+  .quick-accent-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .quick-accent-row button {
+    min-width: 0;
+    min-height: 40px;
+    padding-inline: 0;
+  }
+
+  .word-form-footer {
+    display: grid;
+  }
+
+  .add-word-button {
+    width: 100%;
+    min-height: 54px;
+  }
+
   .word-row {
     grid-template-columns: 1fr 1fr auto;
   }
@@ -2014,15 +2137,9 @@ h2 {
     display: grid;
   }
 
-  .single-word-form {
-    grid-template-columns: 1fr;
-  }
-
-  .single-word-form > *,
-  .translation-actions,
-  .single-word-form > .button,
-  #vocab-add-message {
-    grid-column: 1;
+  .single-word-heading {
+    align-items: flex-start;
+    margin-bottom: 20px;
   }
 
   .compact-buttons .button,

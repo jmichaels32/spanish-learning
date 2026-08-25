@@ -110,8 +110,8 @@
     vocabEnglish: document.querySelector("#vocab-english"),
     vocabSpanish: document.querySelector("#vocab-spanish"),
     vocabAddMessage: document.querySelector("#vocab-add-message"),
-    googleTranslateLink: document.querySelector("#google-translate-link"),
-    pasteTranslation: document.querySelector("#paste-translation"),
+    vocabFormWordCount: document.querySelector("#vocab-form-word-count"),
+    addWordButton: document.querySelector("#add-word-form button[type='submit']"),
     vocabImport: document.querySelector("#vocab-import"),
     vocabImportMessage: document.querySelector("#vocab-import-message"),
     wordSearch: document.querySelector("#word-search"),
@@ -792,6 +792,7 @@
     if (!deck) return;
     const mastered = deck.words.filter((word) => wordIsMastered(deck.id, word.id)).length;
     elements.selectedDeckSummary.textContent = `${deck.words.length} words · ${mastered} completed · ${deck.words.length - mastered} active`;
+    elements.vocabFormWordCount.textContent = `${deck.words.length.toLocaleString()} ${deck.words.length === 1 ? "word" : "words"} saved`;
     const practiceButton = elements.deckWorkspace.querySelector("[data-action='start-vocabulary']");
     practiceButton.disabled = deck.words.length === 0;
     practiceButton.textContent = deck.words.length && mastered === deck.words.length ? "Review completed words" : "Practice active words";
@@ -842,33 +843,14 @@
     saveState();
     elements.vocabEnglish.value = "";
     elements.vocabSpanish.value = "";
-    updateGoogleTranslateLink();
+    updateAddWordState();
     renderVocabularyHome();
     elements.vocabEnglish.focus();
     return true;
   }
 
-  function updateGoogleTranslateLink() {
-    const text = elements.vocabEnglish.value.trim();
-    const url = new URL("https://translate.google.com/");
-    url.searchParams.set("sl", "en");
-    url.searchParams.set("tl", "es");
-    if (text) url.searchParams.set("text", text);
-    url.searchParams.set("op", "translate");
-    elements.googleTranslateLink.href = url.toString();
-  }
-
-  async function pasteTranslation() {
-    try {
-      const text = await navigator.clipboard.readText();
-      if (!text.trim()) throw new Error("Clipboard is empty.");
-      elements.vocabSpanish.value = text.trim();
-      elements.vocabAddMessage.textContent = "Translation pasted. Check it, then add the card.";
-      elements.vocabSpanish.focus();
-    } catch {
-      elements.vocabAddMessage.textContent = "Clipboard access was unavailable. Press and hold in the Spanish field to paste.";
-      elements.vocabSpanish.focus();
-    }
+  function updateAddWordState() {
+    elements.addWordButton.disabled = !elements.vocabEnglish.value.trim() || !elements.vocabSpanish.value.trim();
   }
 
   function parseVocabulary(text) {
@@ -1168,6 +1150,13 @@
       return;
     }
 
+    const addWordAccentButton = event.target.closest("[data-add-word-accent]");
+    if (addWordAccentButton) {
+      insertAtCursor(elements.vocabSpanish, addWordAccentButton.dataset.addWordAccent);
+      updateAddWordState();
+      return;
+    }
+
     const filterButton = event.target.closest("[data-word-filter]");
     if (filterButton) {
       savedState.settings.wordFilter = filterButton.dataset.wordFilter;
@@ -1201,8 +1190,14 @@
   });
 
   elements.wordSearch.addEventListener("input", renderWordList);
-  elements.vocabEnglish.addEventListener("input", updateGoogleTranslateLink);
-  elements.pasteTranslation.addEventListener("click", pasteTranslation);
+  elements.vocabEnglish.addEventListener("input", updateAddWordState);
+  elements.vocabSpanish.addEventListener("input", updateAddWordState);
+  elements.vocabEnglish.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && elements.vocabEnglish.value.trim()) {
+      event.preventDefault();
+      elements.vocabSpanish.focus();
+    }
+  });
   elements.verbCountSelect.addEventListener("change", () => {
     const requested = Number(elements.verbCountSelect.value);
     if (requested <= savedState.conjugation.highestUnlockedTier * VERBS_PER_TIER) {

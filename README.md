@@ -31,7 +31,7 @@ Its **Curriculum cutoff lab** explains the ranking used by all 20 tiers with a t
 
 ## Vocabulary collection
 
-Add cards individually with an English prompt and the Spanish translation you want to learn. The Google Translate helper opens a prefilled English → Spanish translation in a new tab; copy the preferred result, return, and use the **Paste** button. The public app does not call Google Cloud Translation directly because its [official API requires project authentication/API credentials](https://docs.cloud.google.com/translate/docs/authentication) and [metered billing](https://cloud.google.com/products/translate/pricing), which should not be embedded in a public static site.
+Add cards individually with an English prompt and the Spanish translation you want to learn. The quick-add form is optimized for repeat entry: enter the English word, press Enter to move to Spanish, then press Enter again to save. One-tap Spanish accent keys are available below the answer field.
 
 The collapsible bulk importer also accepts tab-separated pairs, one per line:
 

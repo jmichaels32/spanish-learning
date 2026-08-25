@@ -10,10 +10,10 @@
     />
     <title>De Memoria — Spanish Recall</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=4" />
+    <link rel="stylesheet" href="styles.css?v=5" />
     <script src="data/conjugations.js?v=4" defer></script>
     <script src="data/curriculum-analysis.js?v=4" defer></script>
-    <script src="app.js?v=5" defer></script>
+    <script src="app.js?v=6" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to practice</a>
@@ -173,20 +173,34 @@
                 </div>
 
                 <form class="single-word-form" id="add-word-form">
-                  <div class="single-word-heading"><p class="eyebrow">Create a card</p><h3>Add one word</h3></div>
-                  <label for="vocab-english">English</label>
-                  <input id="vocab-english" name="english" type="text" autocomplete="off" placeholder="e.g. lighthouse" required />
-                  <label for="vocab-spanish">Spanish</label>
-                  <div class="translation-field">
-                    <input id="vocab-spanish" name="spanish" type="text" autocomplete="off" autocapitalize="none" placeholder="e.g. el faro" required />
-                    <button class="button button-secondary" id="paste-translation" type="button">Paste</button>
+                  <div class="single-word-heading">
+                    <div><p class="eyebrow">Quick add</p><h3>Add a word pair</h3></div>
+                    <span class="word-count-pill" id="vocab-form-word-count">0 words saved</span>
                   </div>
-                  <div class="translation-actions">
-                    <a class="text-button" id="google-translate-link" href="https://translate.google.com/?sl=en&amp;tl=es&amp;op=translate" target="_blank" rel="noreferrer">Translate with Google ↗</a>
-                    <span>Choose the translation you want, copy it, then paste it here.</span>
+
+                  <div class="word-pair-fields">
+                    <div class="word-entry-field">
+                      <label for="vocab-english"><strong>English</strong><span>Start here</span></label>
+                      <input id="vocab-english" name="english" type="text" autocomplete="off" enterkeyhint="next" placeholder="e.g. lighthouse" required />
+                    </div>
+                    <span class="word-pair-arrow" aria-hidden="true">→</span>
+                    <div class="word-entry-field">
+                      <label for="vocab-spanish"><strong>Spanish</strong><span>Translation</span></label>
+                      <input id="vocab-spanish" name="spanish" type="text" lang="es" autocomplete="off" autocapitalize="none" enterkeyhint="done" placeholder="e.g. el faro" required />
+                      <div class="quick-accent-row" role="group" aria-label="Insert a Spanish character">
+                        <button type="button" data-add-word-accent="á">á</button><button type="button" data-add-word-accent="é">é</button>
+                        <button type="button" data-add-word-accent="í">í</button><button type="button" data-add-word-accent="ó">ó</button>
+                        <button type="button" data-add-word-accent="ú">ú</button><button type="button" data-add-word-accent="ü">ü</button>
+                        <button type="button" data-add-word-accent="ñ">ñ</button>
+                      </div>
+                    </div>
                   </div>
-                  <button class="button button-primary" type="submit">Add card</button>
-                  <p id="vocab-add-message" role="status"></p>
+
+                  <div class="word-form-footer">
+                    <p>Need alternatives? Separate accepted answers with semicolons.</p>
+                    <button class="button button-primary add-word-button" type="submit" disabled><span aria-hidden="true">＋</span> Add to vocabulary</button>
+                  </div>
+                  <p id="vocab-add-message" role="status" aria-live="polite"></p>
                 </form>
 
                 <details class="import-box">
