@@ -10,10 +10,10 @@
     />
     <title>De Memoria — Spanish Recall</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=3" />
-    <script src="data/conjugations.js?v=3" defer></script>
-    <script src="data/curriculum-analysis.js?v=3" defer></script>
-    <script src="app.js?v=3" defer></script>
+    <link rel="stylesheet" href="styles.css?v=4" />
+    <script src="data/conjugations.js?v=4" defer></script>
+    <script src="data/curriculum-analysis.js?v=4" defer></script>
+    <script src="app.js?v=4" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to practice</a>
@@ -48,25 +48,20 @@
               <div><strong id="verb-answer-total">0</strong><span>answers</span></div>
               <div><strong id="verb-accuracy">—</strong><span>accuracy</span></div>
               <div><strong id="solid-form-total">0</strong><span>forms at 3+</span></div>
-              <div><strong id="total-form-total">7,000</strong><span>total forms</span></div>
+              <div><strong id="total-form-total">70,000</strong><span>total forms</span></div>
             </div>
 
             <div class="setup-layout">
               <section class="panel setup-panel" aria-labelledby="setup-title">
                 <div class="panel-heading">
                   <div><p class="eyebrow">Choose the field</p><h2 id="setup-title">Start a recall session</h2></div>
-                  <span class="verified-data" id="verified-verb-total">200 audited verbs</span>
+                  <span class="verified-data" id="verified-verb-total">2,000 audited verbs</span>
                 </div>
 
                 <fieldset class="control-group">
                   <legend>Verb set</legend>
-                  <div class="segmented four-options" id="verb-count-options">
-                    <button class="is-selected" type="button" data-verb-count="20">Core 20</button>
-                    <button type="button" data-verb-count="50">Top 50</button>
-                    <button type="button" data-verb-count="100">Tier 1</button>
-                    <button type="button" data-verb-count="200" disabled>All 200 🔒</button>
-                  </div>
-                  <p class="tier-status" id="tier-2-status"></p>
+                  <select class="tier-select" id="verb-count-select" aria-label="Cumulative verb tier"></select>
+                  <p class="tier-status" id="tier-status"></p>
                 </fieldset>
 
                 <fieldset class="control-group">
@@ -258,14 +253,13 @@
           <section class="panel coverage-panel" aria-labelledby="coverage-title">
             <div>
               <p class="eyebrow">Curriculum coverage</p>
-              <h2 id="coverage-title">200 practical verbs · about 78% of verb use</h2>
+              <h2 id="coverage-title">Twenty tiers · 100 verbs at a time</h2>
               <p>
-                In an open subtitle-derived frequency corpus, this curated set accounts for roughly 78% of verb tokens.
-                A strict corpus top 200 reaches about 85%, but includes auxiliaries and verbs that produce misleading person-by-person drills. Results vary by country, medium, and topic.
+                Tier 1 starts with the highest-ranked 100. Each permanent unlock adds another 100 while retaining difficult earlier forms in the practice pool, through a theoretical maximum of 2,000 verbs.
               </p>
               <p class="stats-tier-status" id="stats-tier-status"></p>
             </div>
-            <div class="coverage-number"><strong>200</strong><span>audited verbs</span></div>
+            <div class="coverage-number"><strong>2K</strong><span>audited verbs</span></div>
           </section>
 
           <section class="panel curriculum-lab" aria-labelledby="curriculum-lab-title">
@@ -273,7 +267,7 @@
               <div>
                 <p class="eyebrow">Exploratory ranking</p>
                 <h2 id="curriculum-lab-title">Curriculum cutoff lab</h2>
-                <p class="lab-intro">Explore 2,000 valid verb candidates before changing the training curriculum. Scores are evidence-backed estimates, not objective language facts.</p>
+                <p class="lab-intro">Explore the 2,000 verbs that now define the permanent Tier 1–20 curriculum. Scores are evidence-backed estimates, not objective language facts.</p>
               </div>
               <div class="segmented small-segmented curriculum-scope" aria-label="Candidate pool size">
                 <button type="button" data-curriculum-scope="1000">Top 1,000</button>
@@ -306,7 +300,7 @@
               <summary>How the score is calculated</summary>
               <div>
                 <p><strong>Frequency:</strong> conversational subtitle frequency plus the ESCOW web corpus. <strong>Learner exposure:</strong> early-weighted A1–C1 appearances in ELELex textbooks and simplified readers.</p>
-                <p><strong>Conjugation value:</strong> measured differences from a regular paradigm. <strong>Drill fit:</strong> explicit penalties for auxiliaries, impersonal verbs, and verbs normally used in special constructions. <strong>Distinctiveness:</strong> a small penalty for manually documented near-synonyms.</p>
+                <p><strong>Conjugation value:</strong> measured differences from a regular paradigm. <strong>Drill fit:</strong> auxiliaries, impersonal/defective verbs, and verbs normally used in special constructions are excluded from this full-grid trainer. <strong>Distinctiveness:</strong> a small penalty for manually documented near-synonyms.</p>
                 <p>Candidate scope is based on <a href="https://github.com/doozan/spanish_data" target="_blank" rel="noreferrer">subtitle frequency</a>. Learner evidence comes from <a href="https://cental.uclouvain.be/cefrlex/elelex/" target="_blank" rel="noreferrer">ELELex</a>; web frequency comes from <a href="https://github.com/LCR-ADS-Lab/TAALES_ES" target="_blank" rel="noreferrer">TAALES Español / ESCOW</a>. Missing learner evidence scores zero. The complete generated dataset and formula are inspectable in the repository.</p>
               </div>
             </details>
@@ -336,9 +330,10 @@
 
           <section class="panel stats-panel" aria-labelledby="verb-curriculum-title">
             <div class="stats-heading verb-stats-heading">
-              <div><p class="eyebrow">Complete curriculum</p><h2 id="verb-curriculum-title">All 200 verbs</h2></div>
+              <div><p class="eyebrow">Complete curriculum</p><h2 id="verb-curriculum-title">All 2,000 verbs</h2></div>
               <div class="stats-tools">
                 <input id="verb-stats-search" type="search" placeholder="Search verbs" aria-label="Search verbs" />
+                <select id="verb-stats-tier" aria-label="Filter verbs by tier"></select>
                 <select id="verb-stats-sort" aria-label="Sort verbs">
                   <option value="curriculum">Curriculum order</option>
                   <option value="difficulty">Hardest first</option>
@@ -349,6 +344,7 @@
             </div>
             <div class="verb-table-header" aria-hidden="true"><span>Verb</span><span>Practiced</span><span>Accuracy</span><span>Solid forms</span></div>
             <div class="verb-stats-list" id="verb-stats-list"></div>
+            <button class="button button-secondary curriculum-more" id="verb-stats-show-more" type="button">Show 200 more</button>
           </section>
         </div>
       </section>

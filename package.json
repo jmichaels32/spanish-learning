@@ -4,6 +4,7 @@
   "private": true,
   "description": "A local-first Spanish conjugation and vocabulary recall trainer.",
   "scripts": {
+    "build": "npm run build:curriculum && npm run build:data",
     "build:data": "node scripts/build-conjugations.mjs",
     "build:curriculum": "node scripts/build-curriculum-analysis.mjs",
     "test": "node scripts/validate-data.mjs && node scripts/smoke-test.mjs"

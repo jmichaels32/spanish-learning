@@ -1089,6 +1089,19 @@ h2 {
   box-shadow: none;
 }
 
+.tier-select {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 42px 10px 14px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .coverage-panel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -1552,6 +1565,10 @@ h2 {
 
 .stats-tools input {
   width: 180px;
+}
+
+#verb-stats-tier {
+  width: 120px;
 }
 
 .verb-table-header,

@@ -1,219 +1,45 @@
 #!/usr/bin/env node
 
 import { createRequire } from "node:module";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import vm from "node:vm";
 
 const require = createRequire(import.meta.url);
 const { Conjugator } = require("@jirimracek/conjugate-esp");
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const outputPath = resolve(scriptDirectory, "../data/conjugations.js");
+const curriculumPath = resolve(scriptDirectory, "../data/curriculum-analysis.js");
+const TRAINING_VERB_COUNT = 2000;
+const SENSE_RESULT_INDEX = new Map([
+  ["aforar", 1],
+  ["apostar", 1],
+  ["atentar", 1],
+  ["atorar", 1],
+  ["auxiliar", 1],
+  ["derrocar", 1],
+  ["follar", 1],
+]);
+const ACCEPTED_VARIANT_INDEXES = new Map([
+  ["adecuar", [0, 1]],
+  ["erguir", [0, 1]],
+  ["evacuar", [0, 1]],
+  ["freír", [0, 1]],
+  ["paliar", [0, 1]],
+  ["placer", [0, 1]],
+  ["predecir", [0, 1]],
+  ["pudrir", [0, 1]],
+  ["roer", [0, 1, 2]],
+  ["yacer", [0, 1, 2]],
+]);
 
-// Ordered by practical learning priority. The first 20 and first 50 are
-// intentionally useful starter sets; the full list provides broad coverage.
-const VERBS = [
-  ["ser", "to be (identity)"],
-  ["estar", "to be (state/location)"],
-  ["tener", "to have"],
-  ["hacer", "to do / make"],
-  ["poder", "to be able to / can"],
-  ["decir", "to say / tell"],
-  ["ir", "to go"],
-  ["ver", "to see"],
-  ["dar", "to give"],
-  ["saber", "to know (facts/how)"],
-  ["querer", "to want / love"],
-  ["llegar", "to arrive"],
-  ["pasar", "to pass / happen"],
-  ["deber", "to owe / should"],
-  ["poner", "to put"],
-  ["parecer", "to seem"],
-  ["quedar", "to remain / meet"],
-  ["creer", "to believe / think"],
-  ["hablar", "to speak"],
-  ["llevar", "to carry / wear"],
-  ["dejar", "to leave / let"],
-  ["seguir", "to follow / continue"],
-  ["encontrar", "to find"],
-  ["llamar", "to call"],
-  ["venir", "to come"],
-  ["pensar", "to think"],
-  ["salir", "to leave / go out"],
-  ["volver", "to return"],
-  ["tomar", "to take / drink"],
-  ["conocer", "to know / meet"],
-  ["vivir", "to live"],
-  ["sentir", "to feel"],
-  ["tratar", "to try / treat"],
-  ["mirar", "to look / watch"],
-  ["contar", "to count / tell"],
-  ["empezar", "to begin"],
-  ["esperar", "to wait / hope"],
-  ["buscar", "to look for"],
-  ["existir", "to exist"],
-  ["entrar", "to enter"],
-  ["trabajar", "to work"],
-  ["escribir", "to write"],
-  ["perder", "to lose"],
-  ["producir", "to produce"],
-  ["decidir", "to decide"],
-  ["entender", "to understand"],
-  ["pedir", "to ask for / order"],
-  ["recibir", "to receive"],
-  ["recordar", "to remember"],
-  ["terminar", "to finish"],
-  ["permitir", "to allow"],
-  ["aparecer", "to appear"],
-  ["conseguir", "to get / achieve"],
-  ["comenzar", "to begin"],
-  ["servir", "to serve"],
-  ["sacar", "to take out"],
-  ["necesitar", "to need"],
-  ["mantener", "to maintain / keep"],
-  ["comer", "to eat"],
-  ["leer", "to read"],
-  ["caer", "to fall"],
-  ["cambiar", "to change"],
-  ["presentar", "to present"],
-  ["crear", "to create"],
-  ["abrir", "to open"],
-  ["considerar", "to consider"],
-  ["oír", "to hear"],
-  ["acabar", "to finish / end"],
-  ["convertir", "to convert / become"],
-  ["ganar", "to win / earn"],
-  ["dormir", "to sleep"],
-  ["traer", "to bring"],
-  ["partir", "to leave / divide"],
-  ["morir", "to die"],
-  ["aceptar", "to accept"],
-  ["beber", "to drink"],
-  ["suponer", "to suppose"],
-  ["comprender", "to understand"],
-  ["lograr", "to achieve"],
-  ["explicar", "to explain"],
-  ["preguntar", "to ask"],
-  ["tocar", "to touch / play"],
-  ["reconocer", "to recognize"],
-  ["estudiar", "to study"],
-  ["aprender", "to learn"],
-  ["nacer", "to be born"],
-  ["dirigir", "to direct"],
-  ["correr", "to run"],
-  ["utilizar", "to use"],
-  ["pagar", "to pay"],
-  ["ayudar", "to help"],
-  ["andar", "to walk / go around"],
-  ["jugar", "to play"],
-  ["escuchar", "to listen"],
-  ["cumplir", "to fulfill / turn (age)"],
-  ["ofrecer", "to offer"],
-  ["descubrir", "to discover"],
-  ["levantar", "to lift / raise"],
-  ["intentar", "to try / attempt"],
-  ["usar", "to use"],
-  ["matar", "to kill"],
-  ["valer", "to be worth / be valid"],
-  ["olvidar", "to forget"],
-  ["enviar", "to send"],
-  ["acercar", "to bring closer / approach"],
-  ["mover", "to move"],
-  ["comprar", "to buy"],
-  ["regresar", "to return"],
-  ["echar", "to throw / put / send away"],
-  ["meter", "to put in"],
-  ["detener", "to stop / detain"],
-  ["funcionar", "to work / function"],
-  ["mostrar", "to show"],
-  ["subir", "to go up / upload"],
-  ["sentar", "to seat"],
-  ["salvar", "to save"],
-  ["asegurar", "to assure / ensure"],
-  ["quitar", "to remove / take away"],
-  ["amar", "to love"],
-  ["disparar", "to shoot / fire"],
-  ["disculpar", "to excuse"],
-  ["vender", "to sell"],
-  ["perdonar", "to forgive"],
-  ["casar", "to marry / wed"],
-  ["robar", "to steal"],
-  ["prometer", "to promise"],
-  ["enseñar", "to teach / show"],
-  ["sonar", "to sound / ring"],
-  ["imaginar", "to imagine"],
-  ["realizar", "to carry out / accomplish"],
-  ["confiar", "to trust"],
-  ["cerrar", "to close"],
-  ["bajar", "to go down / lower"],
-  ["desear", "to wish / desire"],
-  ["callar", "to be quiet / silence"],
-  ["cuidar", "to care for"],
-  ["preparar", "to prepare"],
-  ["elegir", "to choose"],
-  ["desaparecer", "to disappear"],
-  ["mentir", "to lie"],
-  ["romper", "to break"],
-  ["invitar", "to invite"],
-  ["obtener", "to obtain / get"],
-  ["parar", "to stop"],
-  ["tirar", "to throw"],
-  ["despertar", "to wake / awaken"],
-  ["continuar", "to continue"],
-  ["responder", "to answer / respond"],
-  ["arreglar", "to fix / arrange"],
-  ["probar", "to try / test / taste"],
-  ["evitar", "to avoid / prevent"],
-  ["escapar", "to escape"],
-  ["mandar", "to order / send"],
-  ["temer", "to fear"],
-  ["llorar", "to cry"],
-  ["actuar", "to act / perform"],
-  ["preferir", "to prefer"],
-  ["conducir", "to drive / lead"],
-  ["cantar", "to sing"],
-  ["proteger", "to protect"],
-  ["sufrir", "to suffer"],
-  ["golpear", "to hit / strike"],
-  ["abandonar", "to abandon / leave"],
-  ["caminar", "to walk"],
-  ["recoger", "to pick up / collect"],
-  ["ocupar", "to occupy / take up"],
-  ["volar", "to fly"],
-  ["reunir", "to gather / bring together"],
-  ["crecer", "to grow"],
-  ["alcanzar", "to reach / catch up"],
-  ["devolver", "to return / give back"],
-  ["destruir", "to destroy"],
-  ["entregar", "to deliver / hand over"],
-  ["acompañar", "to accompany"],
-  ["demostrar", "to demonstrate / show"],
-  ["recuperar", "to recover / get back"],
-  ["merecer", "to deserve"],
-  ["bailar", "to dance"],
-  ["incluir", "to include"],
-  ["reír", "to laugh"],
-  ["cortar", "to cut"],
-  ["formar", "to form / train"],
-  ["resolver", "to solve / resolve"],
-  ["guardar", "to keep / save"],
-  ["observar", "to observe"],
-  ["negar", "to deny / refuse"],
-  ["averiguar", "to find out / investigate"],
-  ["esconder", "to hide"],
-  ["soltar", "to let go / release"],
-  ["gritar", "to shout"],
-  ["agradecer", "to thank / be grateful"],
-  ["disfrutar", "to enjoy"],
-  ["odiar", "to hate"],
-  ["acordar", "to agree / decide"],
-  ["construir", "to build"],
-  ["manejar", "to drive / manage"],
-  ["compartir", "to share"],
-  ["repetir", "to repeat"],
-  ["viajar", "to travel"],
-  ["limpiar", "to clean"],
-];
+const curriculumSandbox = { window: {} };
+vm.runInNewContext(await readFile(curriculumPath, "utf8"), curriculumSandbox);
+const candidates = curriculumSandbox.window.SPANISH_CURRICULUM_ANALYSIS?.candidates;
+if (!Array.isArray(candidates) || candidates.length !== TRAINING_VERB_COUNT) {
+  throw new Error("Build curriculum analysis first; expected exactly 2,000 tier-ready candidates.");
+}
 
 const TENSE_PATHS = {
   now: ["Indicativo", "Presente"],
@@ -235,10 +61,12 @@ function getMainResult(infinitive) {
   if (typeof results === "string" || !Array.isArray(results) || !results.length) {
     throw new Error(`Could not conjugate ${infinitive}: ${String(results)}`);
   }
-  return results.find((result) => !result.info.defective) ?? results[0];
+  return results[SENSE_RESULT_INDEX.get(infinitive) ?? 0]
+    ?? results.find((result) => !result.info.defective)
+    ?? results[0];
 }
 
-const verbs = VERBS.map(([infinitive, meaning], index) => {
+const verbs = candidates.map(({ lemma: infinitive, meaning }, index) => {
   const result = getMainResult(infinitive);
   const forms = Object.fromEntries(
     Object.entries(TENSE_PATHS).map(([tenseId, [mood, tense]]) => {
@@ -246,10 +74,30 @@ const verbs = VERBS.map(([infinitive, meaning], index) => {
       if (!Array.isArray(table) || table.length !== 6) {
         throw new Error(`${infinitive} is missing ${mood}.${tense}.`);
       }
-      return [tenseId, PERSON_INDEXES.map((personIndex) => table[personIndex])];
+      const selected = PERSON_INDEXES.map((personIndex) => table[personIndex]);
+      if (selected.some((form) => !form || form === "-")) {
+        throw new Error(`${infinitive} has an unavailable ${mood}.${tense} form.`);
+      }
+      return [tenseId, selected];
     }),
   );
-  return { id: infinitive, infinitive, meaning, rank: index + 1, forms };
+  const variantIndexes = ACCEPTED_VARIANT_INDEXES.get(infinitive) ?? [];
+  const variantResults = variantIndexes.map((variantIndex) => conjugator.conjugateSync(infinitive, "canarias")[variantIndex]).filter(Boolean);
+  const accepted = {};
+  if (variantResults.length > 1) {
+    for (const [tenseId, [mood, tense]] of Object.entries(TENSE_PATHS)) {
+      const byPerson = PERSON_INDEXES.map((personIndex) => [...new Set(variantResults.map((variant) => variant.conjugation[mood][tense][personIndex]).filter((form) => form && form !== "-"))]);
+      if (byPerson.some((choices) => choices.length > 1)) accepted[tenseId] = byPerson;
+    }
+  }
+  return {
+    id: infinitive,
+    infinitive,
+    meaning,
+    rank: index + 1,
+    forms,
+    ...(Object.keys(accepted).length ? { accepted } : {}),
+  };
 });
 
 const payload = {
@@ -259,6 +107,7 @@ const payload = {
     orthography: "RAE 2010",
     source: "@jirimracek/conjugate-esp 2.3.6",
     sourceUrl: "https://github.com/jirimracek/conjugate-esp",
+    curriculum: "20 cumulative tiers of 100 pedagogically scored verbs",
     generated: new Date().toISOString().slice(0, 10),
   },
   persons: [

@@ -7,9 +7,9 @@ A dependency-free, local-first Spanish recall trainer. It has two focused modes:
 
 ## Conjugation curriculum
 
-The app contains 200 practical verbs and 7,000 explicit forms: seven meaning cues × five Latin American person groups × 200 verbs.
+The app contains 2,000 scored, full-grid-compatible verbs and 70,000 explicit forms: seven meaning cues × five Latin American person groups × 2,000 verbs.
 
-Verbs 1–100 are Tier 1. Tier 2 (verbs 101–200) is already installed but remains locked until every Tier 1 verb–cue–person combination has a streak of three correct answers. The unlock is permanent; **All 200** then introduces Tier 2 while retaining difficult Tier 1 forms for review.
+The curriculum has 20 cumulative tiers of 100. Tier 1 is the top 100, Tier 2 is the top 200, and so on through Tier 20 (top 2,000). The next tier unlocks when every verb–cue–person combination in the current 100-verb block has a streak of three correct answers. Unlocks are permanent; each larger pool retains difficult earlier forms for review.
 
 | Meaning cue | Grammatical form |
 | --- | --- |
@@ -25,9 +25,9 @@ The cues are memory anchors, not complete definitions of tense usage. Practice u
 
 Questions are recall-only. An answer must include correct accent marks. Missing accents receive a specific “almost” message but count as incorrect. Selection prioritizes unseen forms and misses, then gradually reduces repetition as streaks improve.
 
-The **Stats** screen exposes that working record: overall accuracy, attempted and solid combinations, the hardest practiced verb–cue–person combinations, and a searchable table of all 200 curriculum verbs with Tier 2 lock status.
+The **Stats** screen exposes that working record: overall accuracy, attempted and solid combinations, the hardest practiced verb–cue–person combinations, and a searchable, tier-filterable table of all 2,000 curriculum verbs with lock status.
 
-Its **Curriculum cutoff lab** scores 2,000 valid verb candidates with a transparent exploratory formula: multi-context frequency (35 points), CEFR-graded learner exposure (30), conjugation-pattern value (20), five-person drill suitability (10), and distinctiveness (5). An interactive histogram, score cutoff, source-scope toggle, component columns, and searchable candidate list support review before the actual 200-verb training order is changed.
+Its **Curriculum cutoff lab** explains the ranking used by all 20 tiers with a transparent exploratory formula: multi-context frequency (35 points), CEFR-graded learner exposure (30), conjugation-pattern value (20), five-person drill suitability (10), and distinctiveness (5). Special-construction or defective verbs that would make the complete grid misleading are recorded as exclusions and replaced by the next eligible scored verbs.
 
 ## Vocabulary decks
 
@@ -58,12 +58,11 @@ Node.js is only needed when regenerating or testing the checked-in dataset:
 
 ```bash
 npm install
-npm run build:data
-npm run build:curriculum
+npm run build
 npm test
 ```
 
-The generator uses the Latin American-compatible `canarias` person system from `@jirimracek/conjugate-esp`, then collapses identical `ustedes`/`ellos` forms into one learning group. Tests validate all 7,000 fields and spot-check high-risk irregular paradigms.
+The generator uses the Latin American-compatible `canarias` person system from `@jirimracek/conjugate-esp`, then collapses identical `ustedes`/`ellos` forms into one learning group. Sense-specific overrides resolve homographic verbs such as `apostar`, and the grader accepts documented alternative paradigms such as `adecuo`/`adecúo`. Tests validate all 70,000 fields and spot-check high-risk irregular paradigms.
 
 The curriculum-analysis generator downloads its documented open research inputs and produces `data/curriculum-analysis.js`. It is an offline development step; the published app reads the checked-in result and makes no runtime data requests.
 

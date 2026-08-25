@@ -33,11 +33,13 @@ await new Promise((resolveLoad, rejectLoad) => {
 });
 
 const { document } = dom.window;
-assert.equal(dom.window.SPANISH_CONJUGATIONS.verbs.length, 200);
+assert.equal(dom.window.SPANISH_CONJUGATIONS.verbs.length, 2000);
 assert.equal(document.querySelectorAll("[data-tense]").length, 7);
 assert.equal(document.querySelectorAll("[data-person]").length, 5);
-assert.equal(document.querySelector("[data-verb-count='200']").disabled, true);
-assert.match(document.querySelector("#tier-2-status").textContent, /0\/3,500 solid/);
+assert.equal(document.querySelectorAll("#verb-count-select option").length, 22);
+assert.equal(document.querySelector("#verb-count-select option[value='200']").disabled, true);
+assert.equal(document.querySelectorAll("#verb-count-select option:disabled").length, 19);
+assert.match(document.querySelector("#tier-status").textContent, /0\/3,500 solid/);
 
 document.querySelector("[data-action='toggle-all-tenses']").click();
 document.querySelector("[data-tense='would']").click();
@@ -57,9 +59,9 @@ document.querySelector("[data-action='exit-conjugation']").click();
 document.querySelector(".main-nav [data-screen='stats']").click();
 assert.equal(document.querySelectorAll(".verb-stats-row").length, 200);
 assert.equal(document.querySelectorAll(".verb-stats-row.is-locked").length, 100);
-assert.match(document.querySelector("#stats-practiced-forms").textContent, /1\/7,000/);
+assert.match(document.querySelector("#stats-practiced-forms").textContent, /1\/70,000/);
 assert.match(document.querySelector("#hardest-combinations").textContent, new RegExp(verbId));
-assert.match(document.querySelector("#stats-tier-status").textContent, /Tier 2 locked/);
+assert.match(document.querySelector("#stats-tier-status").textContent, /Tier 1 unlocked permanently/);
 assert.equal(dom.window.SPANISH_CURRICULUM_ANALYSIS.candidates.length, 2000);
 assert.equal(document.querySelectorAll(".histogram-bar").length, 20);
 assert.equal(document.querySelectorAll(".candidate-row").length, 200);
@@ -77,11 +79,11 @@ assert.match(document.querySelector("#curriculum-lab-summary").textContent, /1,0
 const curriculumCutoff = document.querySelector("#curriculum-cutoff");
 curriculumCutoff.value = "60";
 curriculumCutoff.dispatchEvent(new dom.window.Event("input", { bubbles: true }));
-assert.match(document.querySelector("#curriculum-cutoff-summary").textContent, /106 at or above/);
+assert.match(document.querySelector("#curriculum-cutoff-summary").textContent, /108 at or above/);
 const aboveCutoff = document.querySelector("#curriculum-above-cutoff");
 aboveCutoff.checked = true;
 aboveCutoff.dispatchEvent(new dom.window.Event("change", { bubbles: true }));
-assert.equal(document.querySelectorAll(".candidate-row").length, 106);
+assert.equal(document.querySelectorAll(".candidate-row").length, 108);
 
 const completedItems = {};
 for (const completedVerb of dom.window.SPANISH_CONJUGATIONS.verbs.slice(0, 100)) {
@@ -102,18 +104,40 @@ const backupInput = document.querySelector("#backup-import");
 Object.defineProperty(backupInput, "files", { configurable: true, value: [{ text: async () => JSON.stringify(completedBackup) }] });
 backupInput.dispatchEvent(new dom.window.Event("change", { bubbles: true }));
 await new Promise((resolveImport) => setTimeout(resolveImport, 20));
-assert.equal(document.querySelector("[data-verb-count='200']").disabled, false);
-assert.match(document.querySelector("#tier-2-status").textContent, /Tier 2 is unlocked/);
+assert.equal(document.querySelector("#verb-count-select option[value='200']").disabled, false);
+assert.match(document.querySelector("#tier-status").textContent, /Tier 3 unlocks permanently/);
 document.querySelector(".main-nav [data-screen='stats']").click();
 assert.match(document.querySelector("#stats-tier-status").textContent, /Tier 2 unlocked permanently/);
 
 document.querySelector(".main-nav [data-screen='conjugation']").click();
-document.querySelector("[data-verb-count='200']").click();
+const verbCountSelect = document.querySelector("#verb-count-select");
+verbCountSelect.value = "200";
+verbCountSelect.dispatchEvent(new dom.window.Event("change", { bubbles: true }));
 document.querySelector("[data-action='start-conjugation']").click();
 const tier2VerbId = document.querySelector("#conjugation-question-title").textContent;
 const tier2Verb = dom.window.SPANISH_CONJUGATIONS.verbs.find((candidate) => candidate.id === tier2VerbId);
 assert.ok(tier2Verb.rank > 100, "Unlocked practice should introduce an unseen Tier 2 verb before solid Tier 1 forms.");
 document.querySelector("[data-action='exit-conjugation']").click();
+
+const completedTwoTierItems = { ...completedItems };
+for (const completedVerb of dom.window.SPANISH_CONJUGATIONS.verbs.slice(100, 200)) {
+  for (const tense of dom.window.SPANISH_CONJUGATIONS.tenses) {
+    for (const person of dom.window.SPANISH_CONJUGATIONS.persons) {
+      completedTwoTierItems[`${completedVerb.id}:${tense.id}:${person.id}`] = { attempts: 3, correct: 3, streak: 3, lastSeen: 1 };
+    }
+  }
+}
+const completedTwoTierBackup = {
+  ...completedBackup,
+  conjugation: { items: completedTwoTierItems, totalAnswers: 21000, totalCorrect: 21000, highestUnlockedTier: 2 },
+  settings: { ...completedBackup.settings, verbCount: 200 },
+};
+Object.defineProperty(backupInput, "files", { configurable: true, value: [{ text: async () => JSON.stringify(completedTwoTierBackup) }] });
+backupInput.dispatchEvent(new dom.window.Event("change", { bubbles: true }));
+await new Promise((resolveImport) => setTimeout(resolveImport, 20));
+assert.equal(document.querySelector("#verb-count-select option[value='300']").disabled, false);
+assert.equal(document.querySelector("#verb-count-select option[value='400']").disabled, true);
+assert.match(document.querySelector("#tier-status").textContent, /Tier 4 unlocks permanently/);
 
 document.querySelector(".main-nav [data-screen='vocabulary']").click();
 const deckName = document.querySelector("#new-deck-name");

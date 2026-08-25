@@ -16,8 +16,8 @@ const data = sandbox.window.SPANISH_CONJUGATIONS;
 const analysis = sandbox.window.SPANISH_CURRICULUM_ANALYSIS;
 
 assert.ok(data, "Conjugation data did not load.");
-assert.equal(data.verbs.length, 200, "Expected exactly 200 verbs.");
-assert.equal(new Set(data.verbs.map((verb) => verb.id)).size, 200, "Verb ids must be unique.");
+assert.equal(data.verbs.length, 2000, "Expected exactly 2,000 verbs.");
+assert.equal(new Set(data.verbs.map((verb) => verb.id)).size, 2000, "Verb ids must be unique.");
 assert.equal(data.persons.length, 5, "Expected five Latin American person groups.");
 assert.equal(data.tenses.length, 7, "Expected seven meaning-based tenses.");
 
@@ -31,6 +31,13 @@ for (const verb of data.verbs) {
       assert.ok(form.trim() && form !== "-", `${verb.id}.${tense.id}[${index}] is empty.`);
       assert.equal(/<[^>]+>/.test(form), false, `${verb.id}.${tense.id}[${index}] contains markup.`);
     });
+    const accepted = verb.accepted?.[tense.id];
+    if (accepted) {
+      assert.equal(accepted.length, 5, `${verb.id}.${tense.id} alternatives must cover five person groups.`);
+      accepted.forEach((choices, index) => {
+        assert.ok(choices.includes(forms[index]), `${verb.id}.${tense.id}[${index}] alternatives must include the canonical form.`);
+      });
+    }
   }
 }
 
@@ -73,19 +80,32 @@ for (const [key, expected] of Object.entries(checks)) {
   assert.deepEqual(Array.from(byVerb[verb][tense]), expected, `Unexpected forms for ${key}.`);
 }
 
+const acceptedChecks = {
+  "freír.has_happened.0": "he frito",
+  "predecir.would.0": "predeciría",
+  "adecuar.now.0": "adecúo",
+  "paliar.hope.0": "palíe",
+};
+for (const [key, expected] of Object.entries(acceptedChecks)) {
+  const [verb, tense, personIndex] = key.split(".");
+  assert.ok(data.verbs.find(({ id }) => id === verb).accepted[tense][Number(personIndex)].includes(expected), `${key} should accept ${expected}.`);
+}
+
 assert.ok(analysis, "Curriculum analysis data did not load.");
 assert.equal(analysis.candidates.length, 2000, "Expected exactly 2,000 scored candidates.");
 assert.equal(new Set(analysis.candidates.map((candidate) => candidate.lemma)).size, 2000, "Candidate lemmas must be unique.");
-assert.deepEqual([...analysis.candidates.map((candidate) => candidate.sourceRank)].sort((left, right) => left - right), Array.from({ length: 2000 }, (_, index) => index + 1));
+assert.deepEqual(Array.from(analysis.candidates, (candidate) => candidate.scoreRank), Array.from({ length: 2000 }, (_, index) => index + 1));
 for (const candidate of analysis.candidates) {
   assert.ok(candidate.meaning && candidate.meaning !== "meaning unavailable", `${candidate.lemma} must have an English gloss.`);
   assert.ok(candidate.score >= 0 && candidate.score <= 100, `${candidate.lemma} score is outside 0–100.`);
   const componentTotal = Object.values(candidate.scores).reduce((sum, value) => sum + value, 0);
   assert.ok(Math.abs(componentTotal - candidate.score) <= 0.21, `${candidate.lemma} components do not sum to its score.`);
+  assert.equal(candidate.scores.fit, 10, `${candidate.lemma} must be suitable for the complete recall grid.`);
 }
 const scoredByLemma = Object.fromEntries(analysis.candidates.map((candidate) => [candidate.lemma, candidate]));
 assert.ok(scoredByLemma.viajar.score > scoredByLemma.averiguar.score, "Learner evidence should prioritize viajar over averiguar.");
 assert.ok(scoredByLemma.limpiar.score > scoredByLemma.disculpar.score, "The combined score should prioritize limpiar over disculpar.");
-assert.ok(scoredByLemma.haber.scores.fit < scoredByLemma.hablar.scores.fit, "Special-construction verbs should receive a drill-fit penalty.");
+assert.ok(analysis.meta.excludedSpecialConstructions.some(({ lemma }) => lemma === "haber"), "Special-construction verbs should be explicitly excluded from the standard grid.");
+assert.ok(analysis.meta.excludedSpecialConstructions.some(({ lemma }) => lemma === "gustar"), "Indirect-object construction verbs should be explicitly excluded from the standard grid.");
 
 console.log(`Validated ${data.verbs.length} training verbs, ${data.verbs.length * 7 * 5} forms, and ${analysis.candidates.length} scored candidates.`);

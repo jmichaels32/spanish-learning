@@ -9,7 +9,8 @@ const require = createRequire(import.meta.url);
 const { Conjugator } = require("@jirimracek/conjugate-esp");
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const outputPath = resolve(scriptDirectory, "../data/curriculum-analysis.js");
-const conjugationsPath = resolve(scriptDirectory, "../data/conjugations.js");
+const TRAINING_VERB_COUNT = 2000;
+const RAW_CANDIDATE_COUNT = 2200;
 
 const SOURCES = {
   subtitles: "https://raw.githubusercontent.com/doozan/spanish_data/master/frequency.csv",
@@ -31,6 +32,17 @@ const PERSON_INDEXES = [0, 1, 2, 3, 5];
 const AUX_PRESENT = ["he", "has", "ha", "hemos", "han"];
 const AUX_IMPERFECT = ["había", "habías", "había", "habíamos", "habían"];
 const EARLY_LEVEL_WEIGHTS = [1, 0.8, 0.55, 0.3, 0.15];
+// Some identical infinitives have different paradigms by meaning. These indexes
+// select the DLE paradigm matching the English gloss used by this curriculum.
+const SENSE_RESULT_INDEX = new Map([
+  ["aforar", 1],      // gauge/measure, not grant a charter
+  ["apostar", 1],     // bet, not post/place
+  ["atentar", 1],     // attack, not feel by touch
+  ["atorar", 1],      // clog, not cut wood into logs
+  ["auxiliar", 1],    // help, not the obsolete stressed-i variant
+  ["derrocar", 1],    // overthrow, not the obsolete stem-changing variant
+  ["follar", 1],      // have sex, not operate bellows
+]);
 const DRILL_PENALTIES = new Map([
   ["haber", [10, "auxiliary and often impersonal"]],
   ["gustar", [45, "usually used with an indirect object"]],
@@ -51,6 +63,9 @@ const DRILL_PENALTIES = new Map([
   ["anochecer", [25, "often impersonal"]],
   ["atardecer", [25, "often impersonal"]],
   ["soler", [35, "defective verb with restricted tense use"]],
+  ["atañer", [20, "defective verb normally restricted to third person"]],
+  ["incumbir", [20, "normally restricted to third person"]],
+  ["placer", [25, "normally third-person in its frequent sense"]],
   ["arrepentir", [35, "normally pronominal: arrepentirse"]],
   ["quejar", [30, "normally pronominal: quejarse"]],
   ["atrever", [35, "normally pronominal: atreverse"]],
@@ -151,12 +166,11 @@ function parseGlosses(text, wanted) {
   return glosses;
 }
 
-const [subtitleText, learnerText, webText, dictionaryText, conjugationsText] = await Promise.all([
+const [subtitleText, learnerText, webText, dictionaryText] = await Promise.all([
   download(SOURCES.subtitles),
   download(SOURCES.learner),
   download(SOURCES.web),
   download(SOURCES.dictionary),
-  import("node:fs/promises").then(({ readFile }) => readFile(conjugationsPath, "utf8")),
 ]);
 
 const subtitleRows = subtitleText.trim().split("\n").slice(1).map((line) => {
@@ -169,7 +183,9 @@ const candidates = [];
 for (const row of subtitleRows) {
   const results = conjugator.conjugateSync(row.lemma, "canarias");
   if (!Array.isArray(results) || !results.length) continue;
-  const result = results.find((candidate) => !candidate.info.defective) ?? results[0];
+  const result = results[SENSE_RESULT_INDEX.get(row.lemma) ?? 0]
+    ?? results.find((candidate) => !candidate.info.defective)
+    ?? results[0];
   try {
     const forms = generatedForms(result);
     if (Object.values(forms).some((values) => values.some((value) => !value || value === "-"))) continue;
@@ -177,9 +193,9 @@ for (const row of subtitleRows) {
   } catch {
     continue;
   }
-  if (candidates.length === 2000) break;
+  if (candidates.length === RAW_CANDIDATE_COUNT) break;
 }
-if (candidates.length !== 2000) throw new Error(`Expected 2,000 valid candidates, found ${candidates.length}.`);
+if (candidates.length !== RAW_CANDIDATE_COUNT) throw new Error(`Expected ${RAW_CANDIDATE_COUNT.toLocaleString()} valid candidates, found ${candidates.length}.`);
 
 const candidateSet = new Set(candidates.map(({ lemma }) => lemma));
 const webCounts = new Map();
@@ -213,10 +229,6 @@ const learnerRawValues = candidates.map(({ lemma }) => {
   const data = learnerData.get(lemma);
   return data ? data.frequencies.reduce((sum, frequency, index) => sum + frequency * EARLY_LEVEL_WEIGHTS[index], 0) : 0;
 });
-const currentSandbox = { window: {} };
-(await import("node:vm")).runInNewContext(conjugationsText, currentSandbox);
-const currentRanks = new Map(currentSandbox.window.SPANISH_CONJUGATIONS.verbs.map(({ id, rank }) => [id, rank]));
-
 const scored = candidates.map((candidate, index) => {
   const learner = learnerData.get(candidate.lemma);
   const learnerRaw = learnerRawValues[index];
@@ -232,7 +244,6 @@ const scored = candidates.map((candidate, index) => {
     lemma: candidate.lemma,
     meaning: glosses.get(candidate.lemma) ?? "meaning unavailable",
     sourceRank: index + 1,
-    currentRank: currentRanks.get(candidate.lemma) ?? null,
     subtitleCount: candidate.count,
     webCount,
     cefr: earliestLevelIndex >= 0 ? ["A1", "A2", "B1", "B2", "C1"][earliestLevelIndex] : null,
@@ -272,20 +283,32 @@ scored.forEach((candidate) => {
   candidate.score = rounded(Object.values(candidate.scores).reduce((sum, value) => sum + value, 0));
 });
 scored.sort((left, right) => right.score - left.score || left.sourceRank - right.sourceRank);
-scored.forEach((candidate, index) => { candidate.scoreRank = index + 1; });
+const excludedSpecialConstructions = scored
+  .filter((candidate) => candidate.scores.fit < 10)
+  .map(({ lemma, fitNote, sourceRank, score }) => ({ lemma, fitNote, sourceRank, score }));
+const trainingCandidates = scored
+  .filter((candidate) => candidate.scores.fit === 10)
+  .slice(0, TRAINING_VERB_COUNT);
+if (trainingCandidates.length !== TRAINING_VERB_COUNT) {
+  throw new Error(`Expected ${TRAINING_VERB_COUNT.toLocaleString()} standard-grid candidates, found ${trainingCandidates.length}.`);
+}
+trainingCandidates.forEach((candidate, index) => {
+  candidate.scoreRank = index + 1;
+});
 
 const payload = {
   meta: {
     generated: new Date().toISOString().slice(0, 10),
-    candidatePool: 2000,
-    candidateBasis: "Top 2,000 valid verb lemmas in the subtitle source",
+    candidatePool: TRAINING_VERB_COUNT,
+    candidateBasis: "Top 2,000 scored verbs suitable for a complete five-person, seven-tense recall grid",
     formula: { frequency: 35, learner: 30, pattern: 20, fit: 10, distinct: 5 },
     caveat: "Exploratory pedagogical score, not an objective language ranking.",
     sources: SOURCES,
+    excludedSpecialConstructions,
   },
-  candidates: scored,
+  candidates: trainingCandidates,
 };
 
 await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(outputPath, `// Generated by scripts/build-curriculum-analysis.mjs. Do not edit by hand.\nwindow.SPANISH_CURRICULUM_ANALYSIS = ${JSON.stringify(payload, null, 2)};\n`, "utf8");
-console.log(`Wrote ${scored.length} scored verb candidates to ${outputPath}`);
+console.log(`Wrote ${trainingCandidates.length} tier-ready candidates to ${outputPath}; excluded ${excludedSpecialConstructions.length} special-construction verbs from the standard grid.`);
